@@ -9,10 +9,12 @@ public class OppositeDirectionTile {
 	private String _e;
 	private String _s;
 	private String _w;
+	public  int TileNum ;
 
 	public OppositeDirectionTile() {
 		initializeDirectionArray();
 		initializeDirectionalIdentity();
+		/*
 		System.out.println(_identityDirection);
 		rotateClockwise();
 		System.out.println(_identityDirection);
@@ -20,7 +22,7 @@ public class OppositeDirectionTile {
 		System.out.println(_identityDirection);
 		rotateClockwise();
 		System.out.println(_identityDirection);
-		
+		*/
 		
 	}
 
@@ -65,4 +67,15 @@ public class OppositeDirectionTile {
 		
 
 	}
+	public void rotateClockwise2x() {
+		rotateClockwise();
+		rotateClockwise();
+	}
+	public void rotateClockwise3x() {
+		rotateClockwise();
+		rotateClockwise();
+		rotateClockwise();
+	}
+
 }
+

@@ -58,4 +58,13 @@ public class ThreeDirectionTile extends Tile {
 		
 		
 	}
+	public void rotateClockwise2x() {
+		rotateClockwise();
+		rotateClockwise();
+	}
+	public void rotateClockwise3x() {
+		rotateClockwise();
+		rotateClockwise();
+		rotateClockwise();
+	}
 }

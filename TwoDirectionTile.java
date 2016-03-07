@@ -14,6 +14,9 @@ public class TwoDirectionTile extends Tile {
 		initializeDirectionArray();
 		initializeDirectionalIdentity();
 		
+		
+		
+		
 	
 
 	}
@@ -56,6 +59,15 @@ public class TwoDirectionTile extends Tile {
 		}
 		initializeDirectionalIdentity();
 		
+	}
+	public void rotateClockwise2x() {
+		rotateClockwise();
+		rotateClockwise();
+	}
+	public void rotateClockwise3x() {
+		rotateClockwise();
+		rotateClockwise();
+		rotateClockwise();
 	}
 
 }

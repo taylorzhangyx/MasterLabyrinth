@@ -30,5 +30,11 @@ public abstract class Tile {
 	public void rotateClockwise() {
 
 	}
+	public void rotateClockwise2x() {
+
+	}
+	public void rotateClockwise3x() {
+
+	}
 
 }

@@ -1,8 +1,8 @@
-package tile;
+package code.Parent;
 
 import java.util.ArrayList;
 
-public class TwoDirectionTile extends Tile {
+public class OppositeDirectionTile extends Tile {
 	private ArrayList<String> _direction;
 	private ArrayList<String> _identityDirection;
 	private String _n;
@@ -10,25 +10,26 @@ public class TwoDirectionTile extends Tile {
 	private String _s;
 	private String _w;
 
-	public TwoDirectionTile() {
+	public OppositeDirectionTile() {
 		initializeDirectionArray();
 		initializeDirectionalIdentity();
 		
-		
-		
-		
-	
 
+		
+		
 	}
 
 	public void initializeDirectionalIdentity() {
 		_identityDirection = new ArrayList<String>();
 		_identityDirection.add(_direction.get(0));
-		_identityDirection.add(_direction.get(1));
+		_identityDirection.add(_direction.get(2));
 		
 	}
+		
+		
+	
+	public 	 void initializeDirectionArray() {
 
-	public void initializeDirectionArray() {
 		_direction = new ArrayList<String>();
 		_n = "N";
 		_e = "E";
@@ -38,7 +39,7 @@ public class TwoDirectionTile extends Tile {
 		_direction.add(_e);
 		_direction.add(_s);
 		_direction.add(_w);
-		System.out.println(_direction);
+		
 
 	}
 
@@ -47,18 +48,26 @@ public class TwoDirectionTile extends Tile {
 	}
 	
 	public void rotateClockwise(){
-
-		String temp = "";
-		for (int i  = 0; i<_direction.size(); i++){
-			temp = temp + _direction.get(i);
-		}
-		temp = temp.substring(1, 4)+ temp.substring(0,1);
+		String s = "";
+		for(int i = 0; i<_direction.size();i++){
+			s = s+(_direction.get(i));}
+		s = s.substring(1, 4)+s.substring(0,1);
 		_direction.clear();
-		for (int k = 0; k<temp.length(); k++){
-			_direction.add(""+temp.charAt(k));
-		}
+		for(int j = 0; j<s.length();j++){
+			_direction.add(""+s.charAt(j));}
 		initializeDirectionalIdentity();
 		
-	}
+		
 
+	}
+	public void rotateClockwiseTwoTimes() {
+		rotateClockwise();
+		rotateClockwise();
+	}
+	public void rotateClockwiseThreeTimes() {
+		rotateClockwise();
+		rotateClockwise();
+		rotateClockwise();
+	
+	}
 }

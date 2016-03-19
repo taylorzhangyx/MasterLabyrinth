@@ -34,7 +34,19 @@ public abstract class Tile {
 	public void initializeDirectionArray() {
 
 	}
-
+	
+	public boolean isNopen(){
+		return _n;
+	}
+	public boolean isEopen(){
+		return _e;
+	}
+	public boolean isSopen(){
+		return _s;
+	}
+	public boolean isWopen(){
+		return _w;
+	}
 	
 	/*************************************************************/
 	/*************************************************************/

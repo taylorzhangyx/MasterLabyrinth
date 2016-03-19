@@ -1,5 +1,8 @@
 package game;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import gameBoard.*;
 import pawn.*;
 import tile.*;
@@ -17,10 +20,89 @@ public class MainGame {
 		//to avoid a reinsertion in the same place
 		private int lastPosition_x = 7;
 		private int lastPosition_y = 7;
+		private static Pawn[] _pawnlist ;
+		private static int currentPlayer = 0;
 		
 		public MainGame(){
 			
 		}
+		
+		public void initializaition(){
+			createPawn
+		}
+		
+		/**this method creates all four pawns**/
+		public void createPawn(){
+			//this array stores 4 pawn, red[3,3], yellow[3,5], blue[5,3], white[5,5]
+			//also we can use linked list instead of array
+			_pawnlist = new Pawn[4];
+			
+			int cardnum[] = generateXuniqueNumber(4, 21);
+			
+			_pawnlist[0] = new Pawn("red", 3, 3, cardnum[0]);
+			_pawnlist[1] = new Pawn("yellow", 3, 5, cardnum[1]);
+			_pawnlist[2] = new Pawn("blue", 5, 3, cardnum[2]);
+			_pawnlist[3] = new Pawn("white", 5, 5, cardnum[3]);
+		}
+		
+		//get unique number from 1 to x
+		private int[] generateXuniqueNumber(int n, int x){
+			int uniqueint[] = new int[n];
+			ArrayList<Integer> list = new ArrayList<Integer>();
+	        for (int i=1; i<=x; i++) {
+	            list.add(new Integer(i));
+	        }
+	        Collections.shuffle(list);
+	        for (int i=0; i<n; i++) {
+	            uniqueint[i] = list.get(i);
+	        }
+	        return uniqueint;
+		}
+		
+		public void oneSetpMovement(String toward){
+			switch (toward.toUpperCase()){
+				case "N":
+					if(_pawnlist[currentPlayer].getXpos() < 6){
+						if(_gameBoard[_pawnlist[currentPlayer].getXpos()+1 ][ _pawnlist[currentPlayer].getYpos()].isSopen()){
+							_gameBoard[_pawnlist[currentPlayer].getXpos()][ _pawnlist[currentPlayer].getYpos()].pawnMoveAway();
+							_pawnlist[currentPlayer].setPos(_pawnlist[currentPlayer].getXpos()+1, _pawnlist[currentPlayer].getYpos());
+							_gameBoard[_pawnlist[currentPlayer].getXpos()][ _pawnlist[currentPlayer].getYpos()].pawnMoveIn();
+						}
+					}
+				break;
+				case "E":
+					if(_pawnlist[currentPlayer].getYpos() < 6){
+						if(_gameBoard[_pawnlist[currentPlayer].getXpos() ][ _pawnlist[currentPlayer].getYpos()+1].isSopen()){
+							_gameBoard[_pawnlist[currentPlayer].getXpos()][ _pawnlist[currentPlayer].getYpos()].pawnMoveAway();
+							_pawnlist[currentPlayer].setPos(_pawnlist[currentPlayer].getXpos(), _pawnlist[currentPlayer].getYpos()+1);
+							_gameBoard[_pawnlist[currentPlayer].getXpos()][ _pawnlist[currentPlayer].getYpos()].pawnMoveIn();
+						}
+					}
+				break;
+				case "S":
+					if(_pawnlist[currentPlayer].getXpos() >0){
+						if(_gameBoard[_pawnlist[currentPlayer].getXpos()-1 ][ _pawnlist[currentPlayer].getYpos()].isSopen()){
+							_gameBoard[_pawnlist[currentPlayer].getXpos()][ _pawnlist[currentPlayer].getYpos()].pawnMoveAway();
+							_pawnlist[currentPlayer].setPos(_pawnlist[currentPlayer].getXpos()-1, _pawnlist[currentPlayer].getYpos());
+							_gameBoard[_pawnlist[currentPlayer].getXpos()][ _pawnlist[currentPlayer].getYpos()].pawnMoveIn();
+						}
+					}
+				break;
+				case "W":
+					if(_pawnlist[currentPlayer].getYpos() >0){
+						if(_gameBoard[_pawnlist[currentPlayer].getXpos() ][ _pawnlist[currentPlayer].getYpos()-1].isSopen()){
+							_gameBoard[_pawnlist[currentPlayer].getXpos()][ _pawnlist[currentPlayer].getYpos()].pawnMoveAway();
+							_pawnlist[currentPlayer].setPos(_pawnlist[currentPlayer].getXpos(), _pawnlist[currentPlayer].getYpos()-1);
+							_gameBoard[_pawnlist[currentPlayer].getXpos()][ _pawnlist[currentPlayer].getYpos()].pawnMoveIn();
+						}
+					}
+				break;
+				default:
+					break;
+				}
+			}
+		
+		
 		
 		//this will be the method that creates the first board
 		public void createGameBoard(){
@@ -136,10 +218,7 @@ public class MainGame {
 		
 		
 		public static void main(String[] args) {
-			// public gameBoard() {
-			
-			// creates a new 2D array board object
-			
+					
 			
 		}
 			
@@ -176,7 +255,16 @@ public class MainGame {
 						_gameBoard[1][insert_j] = _gameBoard[0][insert_j];
 						//copy everything except tile from pushed-out point to inserting point
 						_gameBoard[insert_i][insert_j] = TEMP;
-						_gameBoard[insert_i][insert_j].assigntile(_freetile);						
+						_gameBoard[insert_i][insert_j].assigntile(_freetile);	
+						_freetile = TEMP.currenttile();
+						
+						//change pawn's position if this pawn on the changing line
+						for(/*for all pawn*/){
+							Pawn TEMP = /*current pawn*/;
+							if((TEMP.getYpos() ==1) || (TEMP.getYpos()==3) || (TEMP.getYpos()==5)){
+								TEMP.setPos(TEMP.getXpos()+1, TEMP.getYpos());
+							}
+						}
 					}
 					//insertion occurred at bottom row
 					else if((insert_i == 6) && (insert_j == 1 || insert_j == 3 || insert_j == 5)){
@@ -191,7 +279,16 @@ public class MainGame {
 						_gameBoard[5][insert_j] = _gameBoard[6][insert_j];
 						//copy everything except tile from pushed-out point to inserting point
 						_gameBoard[insert_i][insert_j] = TEMP;
-						_gameBoard[insert_i][insert_j].assigntile(_freetile);						
+						_gameBoard[insert_i][insert_j].assigntile(_freetile);
+						_freetile = TEMP.currenttile();
+						
+						//change pawn's position if this pawn on the changing line
+						for(/*for all pawn*/){
+							Pawn TEMP = /*current pawn*/;
+							if((TEMP.getYpos() ==1) || (TEMP.getYpos()==3) || (TEMP.getYpos()==5)){
+								TEMP.setPos(TEMP.getXpos()-1, TEMP.getYpos());
+							}
+						}
 					}
 					//insertion occurred at left column
 					else if((insert_j == 0) && (insert_i == 1 || insert_i == 3 || insert_i == 5)){
@@ -206,7 +303,16 @@ public class MainGame {
 						_gameBoard[insert_i][1] = _gameBoard[insert_i][0];
 						//copy everything except tile from pushed-out point to inserting point
 						_gameBoard[insert_i][insert_j] = TEMP;
-						_gameBoard[insert_i][insert_j].assigntile(_freetile);						
+						_gameBoard[insert_i][insert_j].assigntile(_freetile);	
+						_freetile = TEMP.currenttile();
+						
+						//change pawn's position if this pawn on the changing line
+						for(/*for all pawn*/){
+							Pawn TEMP = /*current pawn*/;
+							if((TEMP.getXpos() ==1) || (TEMP.getXpos()==3) || (TEMP.getXpos()==5)){
+								TEMP.setPos(TEMP.getXpos(), TEMP.getYpos()+1);
+							}
+						}
 					}
 					//insertion occurred at right column
 					else if((insert_j == 6) && (insert_i == 1 || insert_i == 3 || insert_i == 5)){
@@ -221,7 +327,16 @@ public class MainGame {
 						_gameBoard[insert_i][5] = _gameBoard[insert_i][6];
 						//copy everything except tile from pushed-out point to inserting point
 						_gameBoard[insert_i][insert_j] = TEMP;
-						_gameBoard[insert_i][insert_j].assigntile(_freetile);					
+						_gameBoard[insert_i][insert_j].assigntile(_freetile);	
+						_freetile = TEMP.currenttile();
+						
+						//change pawn's position if this pawn on the changing line
+						for(/*for all pawn*/){
+							Pawn TEMP = /*current pawn*/;
+							if((TEMP.getXpos() ==1) || (TEMP.getXpos()==3) || (TEMP.getXpos()==5)){
+								TEMP.setPos(TEMP.getXpos(), TEMP.getYpos()-1);
+							}
+						}
 					}
 					else {
 						System.out.println("Error: Invalid position! \n");
@@ -259,6 +374,7 @@ public class MainGame {
 			_freetile.showDirection();
 			//print pawn info
 			/**this area need more work**/
+			
 		}
 
 }

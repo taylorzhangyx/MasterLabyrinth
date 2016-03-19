@@ -15,7 +15,7 @@ public class Pawn {
 		_x = xPos;
 		_y = yPos;
 		_score = 0;
-		_onBoard = true;
+		_onBoard = false;
 		_myTurn = false;
 		
 		//the number of wand is fixed at the beginning of game, which is initialized as 3
@@ -55,6 +55,10 @@ public class Pawn {
 		else {return false;}
 	}
 	public void setPos(int x,int y){
+		if(x<0){x=6;}
+		if(x>6){x=0;}
+		if(y<0){y=6;}
+		if(y>6){y=0;}
 		_x = x;
 		_y = y;
 	}
@@ -63,8 +67,5 @@ public class Pawn {
 		//add functionality later that calculates if the token is a part of the secret formula
 		
 	}
-	
-	
-	
-	
+		
 }

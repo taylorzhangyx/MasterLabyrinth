@@ -10,10 +10,15 @@ public class Boardpoint {
 	private boolean _istoken;
 	private Token _token;
 	private boolean _reachable;
+	private boolean _haspawn;
+	private int _currentPawnNum ;
+	private Pawn _pawn;
 	
 	public Boardpoint(){
 		_istoken = false;
-		_reachable = false;		
+		_reachable = false;	
+		_haspawn = false;
+		_currentPawnNum =0;
 	}
 	
 	/**void assigntile (Tile _newtile)**/
@@ -28,11 +33,46 @@ public class Boardpoint {
 		return _tile == null;
 	}
 	
+	public boolean isNopen(){
+		return _tile.isNopen();
+	}
+	public boolean isEopen(){
+		return _tile.isEopen();
+	}
+	public boolean isSopen(){
+		return _tile.isSopen();
+	}
+	public boolean isWopen(){
+		return _tile.isWopen();
+	}
+	
 	public void printPoint(){
 		_tile.showDirection();
 		if (_istoken){
 			System.out.println(" ");
 			_token.showyourself();
 		}
+		if(_haspawn){
+			System.out.println(" Pawn: ");
+			System.out.println(_pawn.getColor());
+		}
+	}
+	public void pawnMoveAway(){
+		_currentPawnNum--;
+		if(_currentPawnNum<=0){
+		_haspawn = false;}
+		//_pawn = null;
+	}
+	
+	public void pawnMoveIn(){
+		_currentPawnNum++;
+		_haspawn = true;
+		//_pawn = null;
+	}
+	
+	/**Tile currenttile()**/
+	/**This method gives the tile info on this board point**/
+	public Tile currenttile(){
+		return _tile;
 	}
 }

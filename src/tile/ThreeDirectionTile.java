@@ -1,73 +1,112 @@
 package tile;
 
-import java.util.ArrayList;
-
+/* 
+ * This class is a sub class of Tile. It has a constructor method to 
+ * create a 3 direction tile, and getter/setter methods to return/modify
+ * values of objects in this class
+ * 
+ * 
+ * */
 public class ThreeDirectionTile extends Tile {
-	private ArrayList<String> _direction;
-	private ArrayList<String> _identityDirection;
-	private String _n;
-	private String _e;
-	private String _s;
-	private String _w;
+	private boolean _n;
+	private boolean _e;
+	private boolean _s;
+	private boolean _w;
 
+	// Constructor for ThreeDirectionTile that takes in 3 arguments for
+	// which directions the tile has available. Initially the directions are set to 
+	//false and the method initialization is invoked to set specific values to true
 	public ThreeDirectionTile(int x, int y, int z) {
-		initializeDirectionArray();
-		
-		initializeDirectionalIdentity(x,y, z);
-		//rotateClockwiseThreeTimes();
-		//System.out.println(_identityDirection);
-		
-	}
-
-	public void initializeDirectionalIdentity(int x, int y, int z) {
-
-		_identityDirection = new ArrayList<String>();
-		_identityDirection.add(_direction.get(x));
-		_identityDirection.add(_direction.get(y));
-		_identityDirection.add(_direction.get(z));
-		
-	}
-	
-	public void initializeDirectionArray() {
-
-		_direction = new ArrayList<String>();
-		_n = "N";
-		_e = "E";
-		_s = "S";
-		_w = "W";
-		_direction.add(_n);
-		_direction.add(_e);
-		_direction.add(_s);
-		_direction.add(_w);
-		
+		_n = false;
+		_e = false;
+		_s = false;
+		_w = false;
+		initialization(x);
+		initialization(y);
+		initialization(z);
 
 	}
 
-	public boolean hasDirection(String direction) {
-		return false;
-	}
-	
-	public void rotateClockwise(){
-		String s = "";
-		for(int i = 0; i<_direction.size();i++){
-			s = s+_direction.get(i);}
-		s = s.substring(1,4)+s.substring(0,1);
-		_direction.clear();
-		for(int j = 0; j<s.length();j++){
-			_direction.add(""+s.charAt(j));
+	// method to initialize direction of tile
+	public void initialization(int d) {
+		// d represents the direction of this tile
+		switch (d) {
+		case 0:
+			_n = true;
+			break;
+		case 1:
+			_e = true;
+			break;
+		case 2:
+			_s = true;
+
+			break;
+		case 3:
+			_w = true;
+			break;
+		default:
+			break;
 		}
-		initializeDirectionalIdentity();
-		
-		
 	}
+
+	/** void showDirection() **/
+
+	/**
+	 * This function gives the current status of this tile, output as String, in
+	 * the form of
+	 **/
+	/**
+	 * "[N 'status'] [E 'status'] [S 'status'] [W 'status'] " where status
+	 * replaced by false/true
+	 **/
+	public void showDirection() {
+		System.out.println("[N " + _n + "] [E " + _e + "] [S " + _s + "] [W " + _w);
+
+	}
+
+	/** void rotateClockwise() **/
+	/** This function rotate this tile by one step clockwise **/
+	public void rotateClockwise() {
+		boolean TEMP;
+		TEMP = _w;
+		_w = _s;
+		_s = _e;
+		_e = _n;
+		_n = TEMP;
+	}
+
+	// Rotates tile piece around 2 clockwise
 	public void rotateClockwiseTwoTimes() {
 		rotateClockwise();
 		rotateClockwise();
 	}
+
+	// rotates tile piece around clockwise 3 times
 	public void rotateClockwiseThreeTimes() {
 		rotateClockwise();
 		rotateClockwise();
 		rotateClockwise();
-	
+	}
+
+	/** void rotate anticlockwiseClockwise() **/
+	/** This function rotate this tile by one step counterclockwise **/
+	public void rotateCounterClockwise() {
+		boolean TEMP;
+		TEMP = _e;
+		_e = _s;
+		_s = _w;
+		_w = _n;
+		_n = TEMP;
+	}
+
+	public void rotateCounterClockwiseTwoTimes() {
+		rotateCounterClockwise();
+		rotateCounterClockwise();
+	}
+
+	public void rotateCounterClockwiseThreeTimes() {
+		rotateCounterClockwise();
+		rotateCounterClockwise();
+		rotateCounterClockwise();
 	}
 }

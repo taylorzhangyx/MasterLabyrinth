@@ -3,6 +3,11 @@ package token;
 public class Token {
 	final int _tokenValue; //this should never be modified
 	private boolean _isPicked;
+	
+	/****************************************************/
+	//once the board is initialized, the token is moving with tile, specifically BoardPoint
+	//I doubt if we need to use x y in token to show position again
+	/****************************************************/
 	private int _xPos;
 	private int _yPos;
 
@@ -22,5 +27,9 @@ public class Token {
 	}
 	public void changeYpos(int y){
 		_yPos = y;
+	}
+	
+	public void showyourself(){
+		System.out.println("Token" + _tokenValue);
 	}
 }

@@ -1,71 +1,103 @@
 package tile;
 
-import java.util.ArrayList;
-
+/*
+ * This class is a sub class of Tile. It has a constructor method to 
+ * create a two direction tile, and getter/setter methods to return/modify
+ * values of objects in this class
+ */
 public class TwoDirectionTile extends Tile {
-	private ArrayList<String> _direction;
-	private ArrayList<String> _identityDirection;
-	private String _n;
-	private String _e;
-	private String _s;
-	private String _w;
+	private boolean _n;
+	private boolean _e;
+	private boolean _s;
+	private boolean _w;
 
 	public TwoDirectionTile(int x, int y) {
-		initializeDirectionArray();
-		initializeDirectionalIdentity(x,y);
-		
-
+		_n = false;
+		_e = false;
+		_s = false;
+		_w = false;
+		initialization(x);
+		initialization(y);
 	}
 
-	public void initializeDirectionalIdentity(int x, int y) {
-		_identityDirection = new ArrayList<String>();
-		_identityDirection.add(_direction.get(x));
-		_identityDirection.add(_direction.get(y));
-		
-	}
-
-	public void initializeDirectionArray() {
-		_direction = new ArrayList<String>();
-		_n = "N";
-		_e = "E";
-		_s = "S";
-		_w = "W";
-		_direction.add(_n);
-		_direction.add(_e);
-		_direction.add(_s);
-		_direction.add(_w);
-		
-
-	}
-
-	public boolean hasDirection(String direction) {
-		
-		return false;
-	}
-	
-	public void rotateClockwise(){
-
-		String temp = "";
-		for (int i  = 0; i<_direction.size(); i++){
-			temp = temp + _direction.get(i);
+	// method to set the direction of the tile
+	public void initialization(int d) {
+		// d represents the orientation of this tile
+		switch (d) {
+		case 0:
+			_n = true;
+			break;
+		case 1:
+			_e = true;
+			break;
+		case 2:
+			_s = true;
+			break;
+		case 3:
+			_w = true;
+			break;
+		default:
+			break;
 		}
-		temp = temp.substring(1, 4)+ temp.substring(0,1);
-		_direction.clear();
-		for (int k = 0; k<temp.length(); k++){
-			_direction.add(""+temp.charAt(k));
-		}
-		initializeDirectionalIdentity();
-		
 	}
+
+	/** void showDirection() **/
+
+	/**
+	 * This function gives the current status of this tile, output as String, in
+	 * the form of
+	 **/
+	/**
+	 * "[N 'status'] [E 'status'] [S 'status'] [W 'status'] " where status
+	 * replaced by false/true
+	 **/
+	public void showDirection() {
+		System.out.println("[N " + _n + "] [E " + _e + "] [S " + _s + "] [W " + _w);
+
+	}
+
+	/** void rotateClockwise() **/
+	/** This function rotate this tile by one step clockwise **/
+	public void rotateClockwise() {
+		boolean TEMP;
+		TEMP = _w;
+		_w = _s;
+		_s = _e;
+		_e = _n;
+		_n = TEMP;
+	}
+
 	public void rotateClockwiseTwoTimes() {
 		rotateClockwise();
 		rotateClockwise();
 	}
+
 	public void rotateClockwiseThreeTimes() {
 		rotateClockwise();
 		rotateClockwise();
 		rotateClockwise();
-	
+	}
+
+	/** void rotate anticlockwiseClockwise() **/
+	/** This function rotate this tile by one step counter clockwise **/
+	public void rotateCounterClockwise() {
+		boolean TEMP;
+		TEMP = _e;
+		_e = _s;
+		_s = _w;
+		_w = _n;
+		_n = TEMP;
+	}
+
+	public void rotateCounterClockwiseTwoTimes() {
+		rotateCounterClockwise();
+		rotateCounterClockwise();
+	}
+
+	public void rotateCounterClockwiseThreeTimes() {
+		rotateCounterClockwise();
+		rotateCounterClockwise();
+		rotateCounterClockwise();
 	}
 
 }

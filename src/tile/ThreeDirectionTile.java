@@ -8,11 +8,7 @@ package tile;
  * 
  * */
 public class ThreeDirectionTile extends Tile {
-	private boolean _n;
-	private boolean _e;
-	private boolean _s;
-	private boolean _w;
-
+	
 	// Constructor for ThreeDirectionTile that takes in 3 arguments for
 	// which directions the tile has available. Initially the directions are set to 
 	//false and the method initialization is invoked to set specific values to true
@@ -75,6 +71,8 @@ public class ThreeDirectionTile extends Tile {
 		_n = TEMP;
 	}
 
+	/*
+	
 	// Rotates tile piece around 2 clockwise
 	public void rotateClockwiseTwoTimes() {
 		rotateClockwise();
@@ -87,6 +85,8 @@ public class ThreeDirectionTile extends Tile {
 		rotateClockwise();
 		rotateClockwise();
 	}
+	
+	*/
 
 	/** void rotate anticlockwiseClockwise() **/
 	/** This function rotate this tile by one step counterclockwise **/
@@ -99,6 +99,8 @@ public class ThreeDirectionTile extends Tile {
 		_n = TEMP;
 	}
 
+	/*
+	
 	public void rotateCounterClockwiseTwoTimes() {
 		rotateCounterClockwise();
 		rotateCounterClockwise();
@@ -109,4 +111,7 @@ public class ThreeDirectionTile extends Tile {
 		rotateCounterClockwise();
 		rotateCounterClockwise();
 	}
+	
+	*/
+	
 }

@@ -3,24 +3,33 @@ package tile;
 import java.util.ArrayList;
 
 import pawn.Pawn;
+import token.Token;
 
 public abstract class Tile {
-	private boolean _n;
-	private boolean _e;
-	private boolean _s;
-	private boolean _w;
-	private String _color;
-	private boolean _hasToken;
-	private int[] _tokensOnTile;
 	
-	private int _x;
-	private int _y;
+	protected boolean _n;
+	protected boolean _e;
+	protected boolean _s;
+	protected boolean _w;
+	protected boolean _hasPawn;
+	protected int numOfPawns;
+	protected String[] _pawnColors;
+	protected boolean _hasToken;
+	protected int _tokenOnTile;
+	
+	
+	protected int _x;
+	protected int _y;
 
 	public Tile() {
 		_n = false;
 		_e = false;
 		_s = false;
 		_w = false;
+		_hasPawn = false;
+		_pawnColors = null;
+		_hasToken = false;
+		_tokenOnTile = 0;
 
 	}
 

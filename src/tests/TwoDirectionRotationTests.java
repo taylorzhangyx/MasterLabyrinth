@@ -1,6 +1,8 @@
 package tests;
 
 import static org.junit.Assert.assertTrue;
+
+import org.junit.Assert;
 import org.junit.Test;
 
 import tile.TwoDirectionTile;
@@ -11,29 +13,60 @@ public class TwoDirectionRotationTests {
     @Test public void test01() {
     	
 		TwoDirectionTile tdt = new TwoDirectionTile(0, 1);
-		int input = ;
-		int expected = ;
-		int actual = tdt.rotateClockwise();
-		assertTrue("I expected the rotation of "+input+" to be "+expected+", but is was "+actual+".", expected == actual);
+		boolean[] expected = {false,true,true,false};
+		tdt.rotateClockwise();
+		boolean[] actual = tdt.tileOrientation();
+		Assert.assertArrayEquals(expected, actual);
 		
 	}
 	
     @Test public void test02() {
     	
 		TwoDirectionTile tdt = new TwoDirectionTile(0, 1);
-		int input = ;
-		int expected = ;
-		int actual = tdt.rotateClockwiseTwoTimes();
-		assertTrue("I expected the rotation of "+input+" to be "+expected+", but is was "+actual+".", expected == actual);
+		boolean [] expected = {false,false,true,true} ;
+		tdt.rotateClockwiseTwoTimes();
+		boolean [] actual = tdt.tileOrientation();
+		Assert.assertArrayEquals(expected, actual);
 		
 	}
+    
     @Test public void test03() {
     	
-		TwoDirectionTile tdt = new TwoDirectionTile(0, 1);
-		int input = ;
-		int expected = ;
-		int actual = tdt.rotateClockwiseThreeTimes();
-		assertTrue("I expected the rotation of "+input+" to be "+expected+", but is was "+actual+".", expected == actual);
+    	TwoDirectionTile tdt = new TwoDirectionTile(0, 1);
+		boolean [] expected = {true,false,false,true} ;
+		tdt.rotateClockwiseThreeTimes();
+		boolean [] actual = tdt.tileOrientation();
+		Assert.assertArrayEquals(expected, actual);
+		
+	}
+    
+    @Test public void test04() {
+    	
+    	TwoDirectionTile tdt = new TwoDirectionTile(0, 1);
+		boolean [] expected = {true,false,false,true} ;
+		tdt.rotateCounterClockwise();
+		boolean [] actual = tdt.tileOrientation();
+		Assert.assertArrayEquals(expected, actual);
+		
+	}
+    
+    @Test public void test05() {
+    	
+    	TwoDirectionTile tdt = new TwoDirectionTile(0, 1);
+		boolean [] expected = {false,false,true,true} ;
+		tdt.rotateCounterClockwiseTwoTimes();
+		boolean [] actual = tdt.tileOrientation();
+		Assert.assertArrayEquals(expected, actual);
+		
+	}
+    
+    @Test public void test06() {
+    	
+    	TwoDirectionTile tdt = new TwoDirectionTile(0, 1);
+		boolean [] expected = {false,true,true,false} ;
+		tdt.rotateCounterClockwiseThreeTimes();
+		boolean [] actual = tdt.tileOrientation();
+		Assert.assertArrayEquals(expected, actual);
 		
 	}
     

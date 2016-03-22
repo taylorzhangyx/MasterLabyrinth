@@ -7,11 +7,6 @@ package tile;
  */
 public class OppositeDirectionTile extends Tile {
 
-	private boolean _n;
-	private boolean _e;
-	private boolean _s;
-	private boolean _w;
-
 	// constructor OppositeDirectionTile, takes in 2 parameters- the two
 	// directions that are available
 	public OppositeDirectionTile(int x, int y) {
@@ -72,6 +67,8 @@ public class OppositeDirectionTile extends Tile {
 		_n = TEMP;
 	}
 
+	/*
+	
 	public void rotateClockwiseTwoTimes() {
 		rotateClockwise();
 		rotateClockwise();
@@ -82,6 +79,8 @@ public class OppositeDirectionTile extends Tile {
 		rotateClockwise();
 		rotateClockwise();
 	}
+	
+	*/
 
 	/** void rotateClockwise() **/
 	/** This function rotate this tile by one step counterclockwise **/
@@ -94,7 +93,8 @@ public class OppositeDirectionTile extends Tile {
 		_n = TEMP;
 	}
 
-	public void rotateCounterClockwiseTwoTimes() {
+	/*
+
 		rotateCounterClockwise();
 		rotateCounterClockwise();
 	}
@@ -104,5 +104,7 @@ public class OppositeDirectionTile extends Tile {
 		rotateCounterClockwise();
 		rotateCounterClockwise();
 	}
+	
+	*/
 
 }

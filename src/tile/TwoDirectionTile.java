@@ -6,10 +6,6 @@ package tile;
  * values of objects in this class
  */
 public class TwoDirectionTile extends Tile {
-	private boolean _n;
-	private boolean _e;
-	private boolean _s;
-	private boolean _w;
 
 	public TwoDirectionTile(int x, int y) {
 		_n = false;
@@ -67,6 +63,8 @@ public class TwoDirectionTile extends Tile {
 		_n = TEMP;
 	}
 
+	/*
+	
 	public void rotateClockwiseTwoTimes() {
 		rotateClockwise();
 		rotateClockwise();
@@ -77,6 +75,8 @@ public class TwoDirectionTile extends Tile {
 		rotateClockwise();
 		rotateClockwise();
 	}
+
+*/
 
 	/** void rotate anticlockwiseClockwise() **/
 	/** This function rotate this tile by one step counter clockwise **/
@@ -89,6 +89,8 @@ public class TwoDirectionTile extends Tile {
 		_n = TEMP;
 	}
 
+	/*
+	
 	public void rotateCounterClockwiseTwoTimes() {
 		rotateCounterClockwise();
 		rotateCounterClockwise();
@@ -99,5 +101,7 @@ public class TwoDirectionTile extends Tile {
 		rotateCounterClockwise();
 		rotateCounterClockwise();
 	}
+	
+	*/
 
 }

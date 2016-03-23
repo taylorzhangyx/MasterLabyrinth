@@ -46,6 +46,7 @@ public class Board {
 		// This creates the 2nd row fixed pieces
 		_gameBoard[2][0].assigntile(new ThreeDirectionTile(0, 1, 2));
 		_gameBoard[2][2].assigntile(new ThreeDirectionTile(0, 1, 2));
+		//_gameBoard[2][2].currentTile().setPawns("red");
 		_gameBoard[2][4].assigntile(new ThreeDirectionTile(1, 2, 3));
 		_gameBoard[2][6].assigntile(new ThreeDirectionTile(0, 2, 3));
 
@@ -128,9 +129,13 @@ public class Board {
 				currentTile().setCoordinates(i, j);
 			}
 		}
-
+		//make the pawns on the board
+		Pawn pawn1 = new Pawn("red", 2, 2, 0);
+		Pawn pawn2 = new Pawn("yellow", 2, 4, 0);
+		Pawn pawn3 = new Pawn("blue", 4, 2, 0);
+		Pawn pawn4 = new Pawn("white", 2, 2, 0);
+		//_gameBoard[2][2].
 		// This free tile will be passed off to the player to begin the game
-		// int freeTile;
 		if (_twoDirectionLeft == 1) {
 
 			_freetile = new TwoDirectionTile(0, 1);
@@ -221,13 +226,15 @@ public class Board {
 	public Tile currentTile() {
 		return _tile;
 	}
-	
-	// InsertTile method that inserts a tile onto the board. First it checks if
-	// the insertion is valid, then
-	// it checks if it's the same position as last insertion as last time.
-	// Then it replaces the tiles one by one.
 
-	public void InsertTile(int insert_i, int insert_j) {
+	/*
+	 * InsertTile method that inserts a tile onto the board. First it checks if
+	 * the insertion is valid, then it checks if it's the same position as last
+	 * insertion as last time. Then it replaces the tiles one by one.
+	 * 
+	 */
+	public Tile InsertTile(int insert_i, int insert_j, Tile tileInserted) {
+		// checks if its on the board
 		if (insert_i >= 0 && insert_i <= 6 && insert_j >= 0 && insert_j <= 6)
 
 		{
@@ -236,18 +243,91 @@ public class Board {
 
 				// insertion occurred at top row ;// move point downward
 				if ((insert_i == 0) && (insert_j == 1 || insert_j == 3 || insert_j == 5)) {
-
-					Tile TEMP = _gameBoard[6][insert_j].currentTile();
-					_gameBoard[6][insert_j].assigntile(_gameBoard[5][insert_j].currentTile()); 
+					_freetile = _gameBoard[6][insert_j].currentTile();
+					_gameBoard[6][insert_j].assigntile(_gameBoard[5][insert_j].currentTile());
 					_gameBoard[5][insert_j].assigntile(_gameBoard[4][insert_j].currentTile());
 					_gameBoard[4][insert_j].assigntile(_gameBoard[3][insert_j].currentTile());
 					_gameBoard[3][insert_j].assigntile(_gameBoard[2][insert_j].currentTile());
 					_gameBoard[2][insert_j].assigntile(_gameBoard[1][insert_j].currentTile());
-					_gameBoard[1][insert_j].assigntile(_gameBoard[0][insert_j].currentTile()); 
-					_gameBoard[0][insert_j].assigntile(TEMP);
+					_gameBoard[1][insert_j].assigntile(_gameBoard[0][insert_j].currentTile());
+					_gameBoard[0][insert_j].assigntile(tileInserted);
+
+				} // left side insertion
+				else if ((insert_j == 0) && (insert_i == 1 || insert_i == 3 || insert_i == 5)) {
+					_freetile = _gameBoard[insert_i][6].currentTile();
+					_gameBoard[insert_i][6].assigntile(_gameBoard[insert_i][5].currentTile());
+					_gameBoard[insert_i][5].assigntile(_gameBoard[insert_i][4].currentTile());
+					_gameBoard[insert_i][4].assigntile(_gameBoard[insert_i][3].currentTile());
+					_gameBoard[insert_i][3].assigntile(_gameBoard[insert_i][2].currentTile());
+					_gameBoard[insert_i][2].assigntile(_gameBoard[insert_i][1].currentTile());
+					_gameBoard[insert_i][1].assigntile(_gameBoard[insert_i][0].currentTile());
+					_gameBoard[insert_i][0].assigntile(tileInserted);
+
+				} // right side insertion
+				else if ((insert_j == 6) && (insert_i == 1 || insert_i == 3 || insert_i == 5)) {
+					_freetile = _gameBoard[insert_i][0].currentTile();
+					_gameBoard[insert_i][0].assigntile(_gameBoard[insert_i][1].currentTile());
+					_gameBoard[insert_i][1].assigntile(_gameBoard[insert_i][2].currentTile());
+					_gameBoard[insert_i][2].assigntile(_gameBoard[insert_i][3].currentTile());
+					_gameBoard[insert_i][3].assigntile(_gameBoard[insert_i][4].currentTile());
+					_gameBoard[insert_i][4].assigntile(_gameBoard[insert_i][5].currentTile());
+					_gameBoard[insert_i][5].assigntile(_gameBoard[insert_i][6].currentTile());
+					_gameBoard[insert_i][6].assigntile(tileInserted);
+
+				} // bottom row insertion
+				else if ((insert_i == 6) && (insert_j == 1 || insert_j == 3 || insert_j == 5)) {
+					_freetile = _gameBoard[0][insert_j].currentTile();
+					_gameBoard[0][insert_j].assigntile(_gameBoard[1][insert_j].currentTile());
 					
+					_gameBoard[1][insert_j].assigntile(_gameBoard[2][insert_j].currentTile());
+					_gameBoard[2][insert_j].assigntile(_gameBoard[3][insert_j].currentTile());
+					_gameBoard[3][insert_j].assigntile(_gameBoard[4][insert_j].currentTile());
+					_gameBoard[4][insert_j].assigntile(_gameBoard[5][insert_j].currentTile());
+					_gameBoard[5][insert_j].assigntile(_gameBoard[6][insert_j].currentTile());
+					_gameBoard[6][insert_j].assigntile(tileInserted);
+
 				}
+				//resets the tiles locations
+				for(int i = 0; i < _gameBoard.length; i++){
+					for(int j = 0; j < _gameBoard.length; j++){
+						_gameBoard[i][j].currentTile().setCoordinates(i,j);
+						if(_gameBoard[i][j].currentTile().hasPawn()){
+							
+							
+						}
+					}
+				}
+				
+				
+				
+				
+				
+				// if the freetile has a pawn on it, then copy that value(s)
+				// over to the opposite
+				// side, then delete it
+				if (_freetile.hasPawn()) {
+					ArrayList<String> temp = _freetile.pawnsOnTile();
+					for(int i = 0; i<temp.size(); i++){
+					_gameBoard[insert_i][insert_j].currentTile().setPawns(temp.get(i));
+					}
+					_freetile.erasePawn("red");
+					_freetile.erasePawn("yellow");
+					_freetile.erasePawn("blue");
+					_freetile.erasePawn("white");
+				}
+				// if the freetile has a token on it, then copy that value over
+				// to
+				// the opposite side, then delete it from freetile
+				if (_freetile.hasToken()) {
+					int temp = _freetile.tokenOnTile();
+					_freetile.eraseToken();
+					_gameBoard[0][insert_j].currentTile().setToken(temp);
+				}
+				lastPosition_x = insert_i;
+				lastPosition_y = insert_j;
 			}
 		}
+		return _freetile;
 	}
+
 }

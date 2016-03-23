@@ -6,20 +6,18 @@ import pawn.Pawn;
 import token.Token;
 
 public abstract class Tile {
-	
+
 	protected boolean _n;
 	protected boolean _e;
 	protected boolean _s;
 	protected boolean _w;
 	protected boolean _hasPawn;
-	protected int numOfPawns;
-	protected String[] _pawnColors;
+	protected int _numOfPawns;
 	protected boolean _hasToken;
 	protected int _tokenOnTile;
-	
-	
 	protected int _x;
 	protected int _y;
+	ArrayList<String> pawnsOnTile = new ArrayList<String>(4);
 
 	public Tile() {
 		_n = false;
@@ -27,7 +25,57 @@ public abstract class Tile {
 		_s = false;
 		_w = false;
 		_hasPawn = false;
-		_pawnColors = null;
+		// _pawnColors = null;
+		_hasToken = false;
+		_tokenOnTile = 0;
+	}
+
+	// getter method that returns if a tile has a pawn on it
+	public boolean hasPawn() {
+		return _hasPawn;
+	}
+
+	// getter method that returns how many pawns a tile has on it
+	public int numOfPawns() {
+		return pawnsOnTile.size();
+	}
+
+	// getter method that returns an array of String that lists the pawns on the
+	// tile
+	public ArrayList<String> pawnsOnTile() {
+		return pawnsOnTile;
+	}
+
+	// Setter method that adds a pawn to the tile, sets true
+	public void setPawns(String pawn) {
+		pawnsOnTile.add(pawn);
+		_hasPawn = true;
+	}
+//Setter method to erase a pawn off of a tile
+	public void erasePawn(String pawn) {
+		pawnsOnTile.remove(pawn);
+		if(pawnsOnTile.size() == 0){
+			_hasPawn = false;
+		}
+	}
+
+	// Getter method that returns if a tile has a token on it
+	public boolean hasToken() {
+		return _hasToken;
+	}
+
+	// Getter method that returns the value of the token on the tile
+	public int tokenOnTile() {
+		return _tokenOnTile;
+	}
+
+	// Setter method that sets the value of the token on the tile, sets true
+	public void setToken(int token) {
+		_hasToken = true;
+		_tokenOnTile = token;
+	}
+
+	public void eraseToken() {
 		_hasToken = false;
 		_tokenOnTile = 0;
 	}
@@ -58,19 +106,6 @@ public abstract class Tile {
 		return _w;
 	}
 
-	/*************************************************************/
-	/*************************************************************/
-	/******
-	 * The following methods are the same in all tile class, maybe we can use
-	 * only one in the tile?
-	 ******/
-	/******
-	 * Cause the other three are extends. However I don't know how to do this
-	 ******/
-	/****** Change it and make it simple, if you can ******/
-	/*************************************************************/
-	/*************************************************************/
-
 	/** void showDirection() **/
 
 	/**
@@ -85,19 +120,12 @@ public abstract class Tile {
 		System.out.println("[N " + _n + "] [E " + _e + "] [S " + _s + "] [W " + _w);
 
 	}
-	
-	
-	
-	
-/////TODO 
+
+	///// TODO
 	public void setCoordinates(int x, int y) {
 		_x = x;
 		_y = y;
 	}
-	
-	
-	
-	
 
 	/** void rotateClockwise() **/
 	/** This function rotate this tile by one step clockwise **/
@@ -144,9 +172,9 @@ public abstract class Tile {
 	}
 
 	public boolean[] hasNeighbor() {
-boolean[] neighbor = new boolean[4];
-//if()
-	
+		boolean[] neighbor = new boolean[4];
+		// if()
+
 		return null;
 	}
 

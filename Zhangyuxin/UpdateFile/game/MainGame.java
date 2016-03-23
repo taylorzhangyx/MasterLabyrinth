@@ -39,10 +39,10 @@ public class MainGame {
 			
 			int cardnum[] = generateXuniqueNumber(4, 21);
 			
-			_pawnlist[0] = new Pawn("red", 3, 3, cardnum[0]);
-			_pawnlist[1] = new Pawn("yellow", 3, 5, cardnum[1]);
-			_pawnlist[2] = new Pawn("blue", 5, 3, cardnum[2]);
-			_pawnlist[3] = new Pawn("white", 5, 5, cardnum[3]);
+			_pawnlist[0] = new Pawn("red", 2, 2, cardnum[0]);
+			_pawnlist[1] = new Pawn("yellow", 2, 4, cardnum[1]);
+			_pawnlist[2] = new Pawn("blue", 4, 2, cardnum[2]);
+			_pawnlist[3] = new Pawn("white", 4, 4, cardnum[3]);
 		}
 		
 		//get unique number from 1 to x

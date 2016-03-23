@@ -32,6 +32,12 @@ public class Pawn {
 	public boolean myTurn(){
 		return _myTurn;
 	}
+	public void isMyTurn(){
+		_myTurn = true;
+	}
+	public void notMyTurn(){
+		_myTurn = false;
+	}
 	public int getScore(){
 		return _score;
 	}
@@ -62,9 +68,18 @@ public class Pawn {
 		_x = x;
 		_y = y;
 	}
+	
+	public void setOnBoard(){
+		_onBoard = true;
+	}
 	public void setScore(int tokenValue){
 		_score = _score + tokenValue;
 		//add functionality later that calculates if the token is a part of the secret formula
+		
+	}
+	public void printPawn(){
+		
+		System.out.printf("%s [%d,%d] wand:%d score:%d formularcard:%d isYourTurn:" + _myTurn +"\n", _color,_x,_y,_wand,_score,_formulaCard);
 		
 	}
 		

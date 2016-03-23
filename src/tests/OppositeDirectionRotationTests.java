@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import tile.OppositeDirectionTile;
+import tile.Tile;
 
 
 
@@ -13,7 +14,7 @@ public class OppositeDirectionRotationTests {
 
     @Test public void test01() {
     	
-		OppositeDirectionTile tdt = new OppositeDirectionTile(0, 2);
+		Tile tdt = new OppositeDirectionTile(0, 2);
 		boolean[] expected = {false,true,false,true};
 		tdt.rotateClockwise();
 		boolean[] actual = tdt.tileOrientation();

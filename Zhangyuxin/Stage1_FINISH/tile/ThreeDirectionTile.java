@@ -1,58 +1,75 @@
 package tile;
 
-public class TwoDirectionTile extends Tile {
+public class ThreeDirectionTile extends Tile {
+	//private ArrayList<String> _direction;
+	//private ArrayList<String> _identityDirection;
 	private boolean _n;
 	private boolean _e;
 	private boolean _s;
 	private boolean _w;
 
-	public TwoDirectionTile(int x) {
+	public ThreeDirectionTile(int x) {
 		initialization(x);
-			
+		//rotateClockwiseThreeTimes();
+		//System.out.println(_identityDirection);
+		
 	}
 
 	public void initialization(int x) {
-				//	x represents the type of this tile
-				// 	x = 0 represents, N & E is open
-				//	x = 1 represents, E & S is open
-				//	x = 2 represents, S & W is open
-				//	x = 3 represents, W & N is open
-			switch (x){
-				case 0:
-					_n = true;
-					_e = true;
-					_s = false;
-					_w = false;
-					break;
-				case 1:
-					_n = false;
-					_e = true;
-					_s = true;
-					_w = false;
-					break;
-				case 2:
-					_n = false;
-					_e = false;
-					_s = true;
-					_w = true;
-					break;
-				case 3:
-					_n = true;
-					_e = false;
-					_s = false;
-					_w = true;
-					break;
-				default:
-					break;
-			}
+			//	x represents the type of this tile
+			// 	x = 0 represents, W & N & E is open
+			//	x = 1 represents, N & E & S is open
+			//	x = 2 represents, E & S & W is open
+			//	x = 3 represents, S & W & N is open
+		switch (x){
+			case 0:
+				_n = true;
+				_e = true;
+				_s = false;
+				_w = true;
+				break;
+			case 1:
+				_n = true;
+				_e = true;
+				_s = true;
+				_w = false;
+				break;
+			case 2:
+				_n = false;
+				_e = true;
+				_s = true;
+				_w = true;
+				break;
+			case 3:
+				_n = true;
+				_e = false;
+				_s = true;
+				_w = true;
+				break;
+			default:
+				break;
+		}
 	}
-
+	
+	
+	public boolean isNopen(){
+		return _n;
+	}
+	public boolean isEopen(){
+		return _e;
+	}
+	public boolean isSopen(){
+		return _s;
+	}
+	public boolean isWopen(){
+		return _w;
+	}
 
 	/**void showDirection()**/
 	/**This function gives the current status of this tile, output as String, in the form of **/
 	/**"[N 'status'] [E 'status'] [S 'status'] [W 'status'] " where status replaced by false/true**/
 	public void showDirection() {
-		System.out.println("[N " + _n + "] [E " + _e + "] [S " + _s +"] [W " + _w);
+		System.out.printf("[N " + _n + "] [E " + _e + "] [S " + _s +"] [W " + _w + "]");
 		
 	}
 	
@@ -97,5 +114,4 @@ public class TwoDirectionTile extends Tile {
 		rotateAntiClockwise();
 		rotateAntiClockwise();
 	}
-
 }

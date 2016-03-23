@@ -1,38 +1,38 @@
 package tile;
 
-import java.util.ArrayList;
-
-
-import pawn.Pawn;
-
-public abstract class Tile {
+public class OppositeDirectionTile extends Tile {
+	
 	private boolean _n;
 	private boolean _e;
 	private boolean _s;
 	private boolean _w;
-	//private boolean _hasPawn;
-	//private Pawn _player;
-	private String _color;
-	//private boolean _hasToken;
-	//private int x;
-	//private int y;
-	
-	
 
-	public Tile() {
-		_n = false;
-		_e = false;
-		_s = false;
-		_w = false;
-
+	public OppositeDirectionTile(int x) {
+		initialization(x);				
 	}
-
-	public void initializeDirectionalIdentity() {
-
-	}
-
-	public void initializeDirectionArray() {
-
+	
+	public 	 void initialization( int x ) {
+		//	x represents the type of this tile
+		// 	x = 0 represents, N & S is open
+		// 	x = 1 represents, E & W is open
+		
+		switch (x){
+			case 0:
+				_n = true;
+				_e = false;
+				_s = true;
+				_w = false;
+				break;
+			case 1:
+				_n = false;
+				_e = true;
+				_s = false;
+				_w = true;
+				break;
+			default:
+				break;
+		}
+		
 	}
 	
 	public boolean isNopen(){
@@ -48,19 +48,11 @@ public abstract class Tile {
 		return _w;
 	}
 	
-	/*************************************************************/
-	/*************************************************************/
-	/******The following methods are the same in all tile class, maybe we can use only one in the tile?******/
-	/******Cause the other three are extends. However I don't know how to do this******/
-	/******Change it and make it simple, if you can******/
-	/*************************************************************/
-	/*************************************************************/
-	
 	/**void showDirection()**/
 	/**This function gives the current status of this tile, output as String, in the form of **/
 	/**"[N 'status'] [E 'status'] [S 'status'] [W 'status'] " where status replaced by false/true**/
 	public void showDirection() {
-		System.out.println("[N " + _n + "] [E " + _e + "] [S " + _s +"] [W " + _w);
+		System.out.printf("[N " + _n + "] [E " + _e + "] [S " + _s +"] [W " + _w + "]");
 		
 	}
 	
@@ -85,7 +77,7 @@ public abstract class Tile {
 		rotateClockwise();
 	}
 	
-	/**void rotate anticlockwiseClockwise()**/
+	/**void rotateClockwise()**/
 	/**This function rotate this tile by one step anticlockwise**/
 	public void rotateAntiClockwise(){
 		boolean TEMP;
@@ -105,5 +97,5 @@ public abstract class Tile {
 		rotateAntiClockwise();
 		rotateAntiClockwise();
 	}
-
+	
 }

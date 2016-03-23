@@ -30,7 +30,6 @@ public abstract class Tile {
 		_pawnColors = null;
 		_hasToken = false;
 		_tokenOnTile = 0;
-
 	}
 
 	// Method that returns a boolean array of the tile it is called on

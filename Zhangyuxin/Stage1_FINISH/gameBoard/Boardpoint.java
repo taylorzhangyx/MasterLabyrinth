@@ -12,7 +12,7 @@ public class Boardpoint {
 	private boolean _reachable;
 	private boolean _haspawn;
 	private int _currentPawnNum ;
-	private Pawn _pawn;
+	//private Pawn _pawn;
 	
 	public Boardpoint(){
 		_istoken = false;
@@ -48,17 +48,20 @@ public class Boardpoint {
 	
 	public void printPoint(){
 		_tile.showDirection();
+		
 		if (_istoken){
 			System.out.println(" ");
 			_token.showyourself();
 		}
 		if(_haspawn){
-			System.out.println(" Pawn: ");
-			System.out.println(_pawn.getColor());
+			System.out.printf(" PawnNum: %d" , _currentPawnNum);		
 		}
+		System.out.printf(" Reachable: "+ _reachable);
+		
 	}
 	public void pawnMoveAway(){
 		_currentPawnNum--;
+		_reachable = false;
 		if(_currentPawnNum<=0){
 		_haspawn = false;}
 		//_pawn = null;
@@ -68,6 +71,17 @@ public class Boardpoint {
 		_currentPawnNum++;
 		_haspawn = true;
 		//_pawn = null;
+	}
+	
+	public boolean isReachable(){
+		return _reachable;
+	}
+	
+	/**
+	 * 
+	 **/
+	public void resetReachable(){
+		_reachable = true;
 	}
 	
 	/**Tile currenttile()**/

@@ -29,7 +29,7 @@ public abstract class Tile {
 		_hasToken = false;
 		_tokenOnTile = 0;
 	}
-
+	
 	// getter method that returns if a tile has a pawn on it
 	public boolean hasPawn() {
 		return _hasPawn;
@@ -177,5 +177,16 @@ public abstract class Tile {
 
 		return null;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

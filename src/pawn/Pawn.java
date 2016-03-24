@@ -34,10 +34,10 @@ public class Pawn {
 
 		int cardNum[] = generateXuniqueNumber(4, 21);
 
-		_pawnlist[0] = new Pawn("red", 3, 3, cardNum[0]);
-		_pawnlist[1] = new Pawn("yellow", 3, 5, cardNum[1]);
-		_pawnlist[2] = new Pawn("blue", 5, 3, cardNum[2]);
-		_pawnlist[3] = new Pawn("white", 5, 5, cardNum[3]);
+		_pawnlist[0] = new Pawn("red", 2, 2, cardNum[0]);
+		_pawnlist[1] = new Pawn("yellow", 2, 4, cardNum[1]);
+		_pawnlist[2] = new Pawn("blue", 4, 2, cardNum[2]);
+		_pawnlist[3] = new Pawn("white", 4, 4, cardNum[3]);
 	}
 
 	// get unique number from 1 to x
@@ -79,6 +79,12 @@ public class Pawn {
 	public int getYpos(){
 		return _y;
 	}
+	public void setCoordinates(int x, int y){
+		_x = x;
+		_y = y;
+	}
+	
+	
 	public int getWandLeft(){
 		return _wand;
 	}
@@ -92,6 +98,7 @@ public class Pawn {
 		}
 		else {return false;}
 	}
+	/*
 	public void setPos(int x,int y){
 		if(x<0){x=6;}
 		if(x>6){x=0;}
@@ -100,6 +107,7 @@ public class Pawn {
 		_x = x;
 		_y = y;
 	}
+	*/
 	public void setScore(int tokenValue){
 		_score = _score + tokenValue;
 		//add functionality later that calculates if the token is a part of the secret formula

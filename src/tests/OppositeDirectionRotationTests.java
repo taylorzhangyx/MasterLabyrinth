@@ -26,7 +26,7 @@ public class OppositeDirectionRotationTests {
     	
     	OppositeDirectionTile tdt = new OppositeDirectionTile(0, 2);
 		boolean [] expected = {true,false,true,false} ;
-		tdt.rotateClockwiseTwoTimes();
+		//tdt.rotateClockwiseTwoTimes();
 		boolean [] actual = tdt.tileOrientation();
 		Assert.assertArrayEquals(expected, actual);
 		
@@ -35,7 +35,7 @@ public class OppositeDirectionRotationTests {
     	
     	OppositeDirectionTile tdt = new OppositeDirectionTile(0, 2);
 		boolean [] expected = {false,true,false,true} ;
-		tdt.rotateClockwiseThreeTimes();
+		//tdt.rotateClockwiseThreeTimes();
 		boolean [] actual = tdt.tileOrientation();
 		Assert.assertArrayEquals(expected, actual);
 		

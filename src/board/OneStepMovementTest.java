@@ -1,0 +1,51 @@
+package board;
+
+import tile.*;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import pawn.Pawn;
+
+import static org.hamcrest.CoreMatchers.instanceOf;
+
+public class OneStepMovementTest {
+	
+	private Pawn _pawn1 = new Pawn("red", 2, 2, 0);
+	private Pawn _pawn2 = new Pawn("yellow", 2, 4, 0);
+	private Pawn _pawn3 = new Pawn("blue", 4, 2, 0);
+	private Pawn _pawn4 = new Pawn("white", 2, 2, 0);
+	
+	public void OneStepMovementCommonTest(Pawn currentpawn, String Direction, boolean expected) {
+		Board b = new Board();
+		b.createGameBoard();
+		b.populateTestBoard();
+		boolean actrual = b.moveOneStep(Direction, currentpawn);
+		
+		assertTrue("", expected == actrual);
+	}
+	
+	//current tile N is open but target tile S is close
+	@Test public void MoveNtest1(){OneStepMovementCommonTest(_pawn1,"N",false);}
+	//current tile N is close but target tile S is open
+	@Test public void MoveNtest2(){OneStepMovementCommonTest(_pawn2,"N",false);}
+	//current tile N is open but target tile S is open
+	@Test public void MoveNtest3(){OneStepMovementCommonTest(_pawn3,"N",true);}
+	
+	//current tile S is open but target tile N is close
+	@Test public void MoveStest4(){OneStepMovementCommonTest(_pawn2,"S",false);}
+	//current tile S is close but target tile N is open
+	@Test public void MoveStest5(){OneStepMovementCommonTest(_pawn3,"S",false);}
+	//current tile S is open but target tile N is open
+	@Test public void MoveStest6(){OneStepMovementCommonTest(_pawn4,"S",true);}
+	
+	//current tile E is open but target tile W is close
+	@Test public void MoveStest7(){OneStepMovementCommonTest(_pawn2,"S",true);}
+	//current tile E is close but target tile W is open
+	@Test public void MoveStest8(){OneStepMovementCommonTest(_pawn4,"S",false);}
+	//current tile E is open but target tile W is open
+	@Test public void MoveStest9(){OneStepMovementCommonTest(_pawn4,"S",true);}
+	
+	
+}

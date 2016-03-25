@@ -20,7 +20,6 @@ public class OppositeDirectionTile extends Tile {
 		_s = false;
 		_w = false;
 		initialization(x);
-		
 	}
 
 

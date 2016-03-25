@@ -42,77 +42,7 @@ public class TwoDirectionTile extends Tile {
 		}
 	}
 
-	/** void showDirection() **/
 
-	/**
-	 * This function gives the current status of this tile, output as String, in
-	 * the form of
-	 **/
-	/**
-	 * "[N 'status'] [E 'status'] [S 'status'] [W 'status'] " where status
-	 * replaced by false/true
-	 **/
-	public void showDirection() {
-		System.out.println("[N " + _n + "] [E " + _e + "] [S " + _s + "] [W " + _w);
-
-	}
-
-//	/** void rotateClockwise() **/
-//	/** This function rotate this tile by one step clockwise **/
-//	public void rotateClockwise() {
-//		boolean TEMP;
-//		TEMP = _w;
-//		_w = _s;
-//		_s = _e;
-//		_e = _n;
-//		_n = TEMP;
-//	}
-
-	/*
 	
-	public void rotateClockwiseTwoTimes() {
-		rotateClockwise();
-		rotateClockwise();
-	}
-
-	public void rotateClockwiseThreeTimes() {
-		rotateClockwise();
-		rotateClockwise();
-		rotateClockwise();
-	}
-
-*/
-
-	/**
-	 * 
-	/** This function rotate this tile by one step counter clockwise **/
-	public void rotateCounterClockwise() {
-		boolean TEMP;
-		TEMP = _e;
-		_e = _s;
-		_s = _w;
-		_w = _n;
-		_n = TEMP;
-	}
-
-	public boolean[] tileOrientation() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/*
-	
-	public void rotateCounterClockwiseTwoTimes() {
-		rotateCounterClockwise();
-		rotateCounterClockwise();
-	}
-
-	public void rotateCounterClockwiseThreeTimes() {
-		rotateCounterClockwise();
-		rotateCounterClockwise();
-		rotateCounterClockwise();
-	}
-	
-	*/
 
 }

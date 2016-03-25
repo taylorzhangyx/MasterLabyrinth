@@ -246,7 +246,6 @@ public class Board {
 	 * 
 	 * @return boolean true if open. false otherwise.
 	 */
-	
 	public boolean isEopen(int x, int y) {
 		return _gameBoard[x][y].isEopen();// method uses a different class' method with the
 								// same name

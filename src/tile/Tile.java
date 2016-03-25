@@ -5,6 +5,13 @@ import java.util.ArrayList;
 import pawn.Pawn;
 import token.Token;
 
+/**
+ * This class is the parent class called Tile. It has a constructor method to 
+ * set references to the instance variables. It has booleans that tell us if the tile
+ * has a pawn, token, and its directions. There are instance variables of type integer
+ * to keep track of the number of pawns and the token number. The tile class also has x and y
+ * positions.
+ */
 public abstract class Tile {
 
 	protected boolean _n;
@@ -17,9 +24,14 @@ public abstract class Tile {
 	protected int _tokenOnTile;
 	protected int _x;
 	protected int _y;
-	ArrayList<String> pawnsOnTile = new ArrayList<String>(4);
-
+	private ArrayList<String> pawnsOnTile;
+	
+	/**
+	 * This is the constructor of the tile class. It assigns values to the instance variables.
+	 * 
+	 */	
 	public Tile() {
+		pawnsOnTile = new ArrayList<String>(4);
 		_n = false;
 		_e = false;
 		_s = false;
@@ -28,59 +40,152 @@ public abstract class Tile {
 		// _pawnColors = null;
 		_hasToken = false;
 		_tokenOnTile = 0;
+		_numOfPawns = 0;
+		_x=0;
+		_y=0;
 	}
 	
-	// getter method that returns if a tile has a pawn on it
+
+	/**
+	 * Getter method that returns a boolean indicating if a tile has a pawn on it.
+	 * 
+	 * @return Boolean is true if tile has pawn. False otherwise.
+	 */
 	public boolean hasPawn() {
 		return _hasPawn;
 	}
 
-	// getter method that returns how many pawns a tile has on it
+	/**
+	 * Getter method that returns how many pawns a tile has on it.
+	 * 
+	 * @return int which represents how many pawns are on the tile.
+	 */
 	public int numOfPawns() {
 		return pawnsOnTile.size();
 	}
 
-	// getter method that returns an array of String that lists the pawns on the
-	// tile
+	/**
+	 * Getter method that returns an arraylist of string that contains the color strings of the pawn.
+	 * 
+	 * @return ArrayList<String> an arraylist that has color strings representing the pawns.
+	 */
+	
 	public ArrayList<String> pawnsOnTile() {
 		return pawnsOnTile;
 	}
 
-	// Setter method that adds a pawn to the tile, sets true
+	/**
+	 * Setter method that adds a pawn to the tile, sets _hasPawn to true.
+	 * 
+	 * @param pawn a color string that represents the pawn.
+	 */
 	public void setPawns(String pawn) {
-		pawnsOnTile.add(pawn);
+		pawnsOnTile.add(pawn.toLowerCase());
 		_hasPawn = true;
 	}
-//Setter method to erase a pawn off of a tile
+	
+	/**
+	 * Setter method to erase a pawn off of a tile. Sets the _hasPawn as false if the pawnsOnTile arraylist is empty.
+	 * 
+	 * @param pawn a color string that represents the pawn.
+	 */
 	public void erasePawn(String pawn) {
-		pawnsOnTile.remove(pawn);
+		
+		pawnsOnTile.remove(pawn.toLowerCase());
 		if(pawnsOnTile.size() == 0){
 			_hasPawn = false;
 		}
 	}
 
-	// Getter method that returns if a tile has a token on it
+	/**
+	 * Getter method that checks if the tile has a token.
+	 * 
+	 * @return boolean which tells us if the tile has a token.
+	 */
 	public boolean hasToken() {
 		return _hasToken;
 	}
 
-	// Getter method that returns the value of the token on the tile
+	/**
+	 * Getter method that returns the value of the token on the tile.
+	 * 
+	 * @return int value representing the value of the token.
+	 */
 	public int tokenOnTile() {
 		return _tokenOnTile;
 	}
 
-	// Setter method that sets the value of the token on the tile, sets true
+	/**
+	 * Setter method that sets the value of the token on the tile, sets the has token boolean to true.
+	 * 
+	 * @param token sets the token on the tile to the integer in the parameter.
+	 */
 	public void setToken(int token) {
 		_hasToken = true;
 		_tokenOnTile = token;
 	}
-
+	
+	/**
+	 * Setter method that sets the value of the token to 0 and the boolean of the has token to false.
+	 * 
+	 */
 	public void eraseToken() {
 		_hasToken = false;
 		_tokenOnTile = 0;
 	}
 
-	// Method that returns a boolean array of the tile it is called on
+	
+	/**
+	 * This method gives situation of N direction in this tile
+	 * 
+	 * @return boolean true means N is open, false otherwise
+	 */
+	public boolean isNopen() {
+		return _n;
+	}
+
+	/**
+	 * This method gives situation of E direction in this tile
+	 * 
+	 * @return boolean true means E is open, false otherwise
+	 */
+	public boolean isEopen() {
+		return _e;
+	}
+
+	/**
+	 * This method gives situation of S direction in this tile
+	 * 
+	 * @return boolean true means S is open, false otherwise
+	 */
+	public boolean isSopen() {
+		return _s;
+	}
+
+	/**
+	 * This method gives situation of W direction in this tile
+	 * 
+	 * @return boolean true means W is open, false otherwise
+	 */
+	public boolean isWopen() {
+		return _w;
+	}
+
+	/**
+	 * USED IN DEBUGGING
+	 * Print out current direction of this tile
+	 * 
+	 */
+	public void showDirection() {
+		System.out.println("[N " + _n + "] [E " + _e + "] [S " + _s + "] [W " + _w);
+
+	}
+	
+	/**
+	 * This method returns an array of boolean that contains direction of N, E, S, W, respectively
+	 * 
+	 * @return boolean[] size of 4 indicate the directions of current tile, N, E, S, W
+	 */
 	public boolean[] tileOrientation() {
 		boolean[] orientation = new boolean[4];
 		orientation[0] = _n;
@@ -90,45 +195,36 @@ public abstract class Tile {
 		return orientation;
 	}
 
-	public boolean isNopen() {
-		return _n;
-	}
-
-	public boolean isEopen() {
-		return _e;
-	}
-
-	public boolean isSopen() {
-		return _s;
-	}
-
-	public boolean isWopen() {
-		return _w;
-	}
-
-	/** void showDirection() **/
-
 	/**
-	 * This function gives the current status of this tile, output as String, in
-	 * the form of
-	 **/
-	/**
-	 * "[N 'status'] [E 'status'] [S 'status'] [W 'status'] " where status
-	 * replaced by false/true
-	 **/
-	public void showDirection() {
-		System.out.println("[N " + _n + "] [E " + _e + "] [S " + _s + "] [W " + _w);
-
-	}
-
-	///// TODO
+	 * Store current location of this tile. 
+	 * 
+	 * @param x the row index of this tile
+	 * @param y the column index of this tile
+	 */
 	public void setCoordinates(int x, int y) {
 		_x = x;
 		_y = y;
 	}
+	
+	/**
+	 * this method returns the x index of current location of this tile
+	 * @return
+	 */
+	public int getX(){
+		return _x;
+	}
+	
+	/**
+	 * this method returns the y index of current location of this tile
+	 * @return
+	 */
+	public int getY(){
+		return _y;
+	}
 
-	/** void rotateClockwise() **/
-	/** This function rotate this tile by one step clockwise **/
+	/** 
+	 * This function rotate this tile by one step clockwise 
+	 */
 	public void rotateClockwise() {
 		boolean TEMP;
 		TEMP = _w;
@@ -138,19 +234,27 @@ public abstract class Tile {
 		_n = TEMP;
 	}
 
+	/** 
+	 * This function rotate this tile by two step clockwise 
+	 */
 	public void rotateClockwiseTwoTimes() {
 		rotateClockwise();
 		rotateClockwise();
 	}
 
+	/** 
+	 * This function rotate this tile by three step clockwise 
+	 */
 	public void rotateClockwiseThreeTimes() {
 		rotateClockwise();
 		rotateClockwise();
 		rotateClockwise();
 	}
 
-	/** void rotate anticlockwiseClockwise() **/
-	/** This function rotate this tile by one step counterclockwise **/
+	/** 
+	 * This function rotate this tile by one step counterclockwise 
+	 *
+	 */
 	public void rotateCounterClockwise() {
 		boolean TEMP;
 		TEMP = _e;
@@ -160,33 +264,23 @@ public abstract class Tile {
 		_n = TEMP;
 	}
 
+	/** 
+	 * This function rotate this tile by two step counterclockwise 
+	 *
+	 */
 	public void rotateCounterClockwiseTwoTimes() {
 		rotateCounterClockwise();
 		rotateCounterClockwise();
 	}
 
+	/** 
+	 * This function rotate this tile by three step counterclockwise 
+	 *
+	 */
 	public void rotateCounterClockwiseThreeTimes() {
 		rotateCounterClockwise();
 		rotateCounterClockwise();
 		rotateCounterClockwise();
 	}
-
-	public boolean[] hasNeighbor() {
-		boolean[] neighbor = new boolean[4];
-		// if()
-
-		return null;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

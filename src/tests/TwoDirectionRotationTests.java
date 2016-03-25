@@ -15,7 +15,7 @@ public class TwoDirectionRotationTests {
 		TwoDirectionTile tdt = new TwoDirectionTile(0, 1);
 		boolean[] expected = {false,true,true,false};
 		tdt.rotateClockwise();
-		boolean[] actual = tdt.tileOrientation();
+		boolean[] actual = tdt.tileOrientation(); tdt.rotateClockwise();
 		Assert.assertArrayEquals(expected, actual);
 		
 	}

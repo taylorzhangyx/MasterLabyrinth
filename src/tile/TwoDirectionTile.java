@@ -1,6 +1,6 @@
 package tile;
 
-/*
+/**
  * This class is a sub class of Tile. It has a constructor method to 
  * create a two direction tile, and getter/setter methods to return/modify
  * values of objects in this class
@@ -16,7 +16,12 @@ public class TwoDirectionTile extends Tile {
 		initialization(y);
 	}
 
-	// method to set the direction of the tile
+	/**
+	 * This method accepts one integer and opens the direction that the integer represents
+	 * 0 means open north, 1 means open east, 2 means open south, 3 means open west
+	 * 
+	 * @param d the direction you want to open
+	 */
 	public void initialization(int d) {
 		// d represents the orientation of this tile
 		switch (d) {
@@ -52,16 +57,16 @@ public class TwoDirectionTile extends Tile {
 
 	}
 
-	/** void rotateClockwise() **/
-	/** This function rotate this tile by one step clockwise **/
-	public void rotateClockwise() {
-		boolean TEMP;
-		TEMP = _w;
-		_w = _s;
-		_s = _e;
-		_e = _n;
-		_n = TEMP;
-	}
+//	/** void rotateClockwise() **/
+//	/** This function rotate this tile by one step clockwise **/
+//	public void rotateClockwise() {
+//		boolean TEMP;
+//		TEMP = _w;
+//		_w = _s;
+//		_s = _e;
+//		_e = _n;
+//		_n = TEMP;
+//	}
 
 	/*
 	
@@ -78,7 +83,8 @@ public class TwoDirectionTile extends Tile {
 
 */
 
-	/** void rotate anticlockwiseClockwise() **/
+	/**
+	 * 
 	/** This function rotate this tile by one step counter clockwise **/
 	public void rotateCounterClockwise() {
 		boolean TEMP;
@@ -87,6 +93,11 @@ public class TwoDirectionTile extends Tile {
 		_s = _w;
 		_w = _n;
 		_n = TEMP;
+	}
+
+	public boolean[] tileOrientation() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/*

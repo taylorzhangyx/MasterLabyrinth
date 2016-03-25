@@ -108,27 +108,18 @@ public class Pawn {
 		_y = y;
 	}
 	*/
+	
 	public void setScore(int tokenValue){
 		_score = _score + tokenValue;
 		//add functionality later that calculates if the token is a part of the secret formula
 		
 	}
 	
-	/*
-	public class movePawn {
-		*
-		 * NEEDS TO BE WORKED ON !!!!
-		 * 
-		 * 
-		 *  
-		 
-		public boolean moveOneStep(Tile currentTile) {
-			
-			boolean[] neighborList = currentTile.hasNeighbor();
-			
-			
-			return false;
-		}*/
+	
 	
 		
+		 
 }
+	
+		
+

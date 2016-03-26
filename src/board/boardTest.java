@@ -15,7 +15,7 @@ public class boardTest {
 	 * populateBoard returns a tile that is a subclass of type tile.
 	 * 
 	 */
-	public void populateBoardTest() {
+	public void populateBoardTest1() {
 
 		Board b = new Board();
 		b.createGameBoard();
@@ -35,6 +35,20 @@ public class boardTest {
 		 * populateBoardTest passes.
 		 */
 	}
+	
+	
+	@Test
+		/*
+		 * Test for the populateBoard(), makes sure that the method populateBoard
+		 * returns a tile that is a subclass of type tile.
+		 * 
+		 */
+		public void populateBoardTest2() {
+	
+			Board test = new Board();
+			test.createGameBoard();
+			assertThat(test.populateBoard(), instanceOf(Tile.class));
+		}
 
 	@Test
 	public void shiftTestForIndex10() {

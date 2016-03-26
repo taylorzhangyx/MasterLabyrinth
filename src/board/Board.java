@@ -312,6 +312,25 @@ public class Board {
 		return _gameBoard[x][y].isWopen();// method uses a different class' method with the
 								// same name
 	}
+	
+	/**
+	 * Method to check if the tile at location x and y has pawn.
+	 * 
+	 * @return boolean true if has. false otherwise.
+	 */
+	public boolean hasPown(int x, int y){
+		return _gameBoard[x][y].hasPawn();
+	}
+	
+	/**
+	 * Method to check if the tile at location x and y has pawn.
+	 * 
+	 * @return boolean true if has. false otherwise.
+	 */
+	public ArrayList<String> pawnsOnTile(int x, int y){
+		return _gameBoard[x][y].pawnsOnTile();
+	}
+	
 	/**
 	 * This method loops through the 2D array and assigns new x and y coordinates.
 	 */
@@ -645,5 +664,91 @@ public class Board {
 			 
 			_freetile=new TwoDirectionTile(2,3);
 		}
+
+	/**
+	 * This method is used only to test one step movement method.
+	 */
+	public void populateTestBoardAfterMove() {
+
+		
+		this.assigntile(0, 0, new TwoDirectionTile(1, 2));
+		this.assigntile(0, 6, new TwoDirectionTile(2, 3));
+		this.assigntile(6, 6, new TwoDirectionTile(0, 3));
+		this.assigntile(6, 0, new TwoDirectionTile(0, 1));
+
+		// This creates the 2 top row fixed pieces
+		this.assigntile(0, 2, new ThreeDirectionTile(1, 2, 3));
+		this.assigntile(0, 4, new ThreeDirectionTile(1, 2, 3));
+
+		// This creates the 2nd row fixed pieces
+		this.assigntile(2, 0, new ThreeDirectionTile(0, 1, 2));
+		this.assigntile(2, 2, new ThreeDirectionTile(0, 1, 2));
+		this.assigntile(2, 4, new ThreeDirectionTile(1, 2, 3));
+		this.assigntile(2, 6, new ThreeDirectionTile(0, 2, 3));
+
+		// This creates the 4th row fixed pieces
+		this.assigntile(4, 0, new ThreeDirectionTile(0, 1, 2));
+		this.assigntile(4, 2, new ThreeDirectionTile(0, 1, 3));
+		this.assigntile(4, 4, new ThreeDirectionTile(0, 2, 3));
+		this.assigntile(4, 6, new ThreeDirectionTile(0, 2, 3));
+
+		// This creates the 6th row fixed pieces
+		this.assigntile(6, 2, new ThreeDirectionTile(0, 1, 3));
+		this.assigntile(6, 4, new ThreeDirectionTile(0, 1, 3));
+		
+		this.assigntile(0, 1, new OppositeDirectionTile(0));
+		this.assigntile(0, 3, new OppositeDirectionTile(0));
+		this.assigntile(0, 5, new OppositeDirectionTile(0));
+		
+		this.assigntile(1, 0, new OppositeDirectionTile(1));
+		this.assigntile(1, 1, new ThreeDirectionTile(1,2,3));
+		this.assigntile(1, 2, new OppositeDirectionTile(1));
+		this.assigntile(1, 3, new ThreeDirectionTile(0,2,3));
+		this.assigntile(1, 4, new OppositeDirectionTile(0));
+		this.assigntile(1, 5, new ThreeDirectionTile(0,2,3));
+		this.assigntile(1, 6, new TwoDirectionTile(2,3));
+
+		this.assigntile(2, 1, new OppositeDirectionTile(1));
+		this.assigntile(2, 3, new OppositeDirectionTile(1));
+		this.assigntile(2, 5, new OppositeDirectionTile(1));
+
+		this.assigntile(3, 0, new TwoDirectionTile(2, 3));
+		this.assigntile(3, 1, new OppositeDirectionTile(0));
+		this.assigntile(3, 2, new OppositeDirectionTile(0));
+		this.assigntile(3, 3, new ThreeDirectionTile(0,1,3));
+		this.assigntile(3, 4, new TwoDirectionTile(1,2));
+		this.assigntile(3, 5, new TwoDirectionTile(0,1));
+		this.assigntile(3, 6, new ThreeDirectionTile(0,2,3));
+
+		this.assigntile(4, 1, new TwoDirectionTile(0, 1));
+		this.assigntile(4, 3, new OppositeDirectionTile(1));
+		this.assigntile(4, 5, new TwoDirectionTile(2,3));
+	
+		this.assigntile(5, 0, new TwoDirectionTile(2, 3));
+		this.assigntile(5, 1, new ThreeDirectionTile(1,2,3));
+		this.assigntile(5, 2, new TwoDirectionTile(0, 1));
+		this.assigntile(5, 3, new TwoDirectionTile(2,3));
+		this.assigntile(5, 4, new ThreeDirectionTile(0,1,2));
+		this.assigntile(5, 5, new OppositeDirectionTile(0));
+		this.assigntile(5, 6, new TwoDirectionTile(0,3));
+
+		this.assigntile(6, 1, new TwoDirectionTile(0, 1));
+		this.assigntile(6, 3, new TwoDirectionTile(0, 3));
+		this.assigntile(6, 5, new TwoDirectionTile(0,3));
+		
+		// make the pawns on the board
+		_pawn1 = new Pawn("red", 2, 3, 0);
+		_pawn2 = new Pawn("yellow", 2, 4, 0);
+		_pawn3 = new Pawn("blue", 4, 2, 0);
+		_pawn4 = new Pawn("white", 2, 2, 0);
+		
+		_gameBoard[2][3].setPawns("red");
+		_gameBoard[2][4].setPawns("yellow");
+		_gameBoard[4][2].setPawns("blue");
+		_gameBoard[4][4].setPawns("white");
+		
+		 
+		_freetile=new TwoDirectionTile(2,3);
+	}
 
 }

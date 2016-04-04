@@ -10,6 +10,7 @@ import tile.*;
 
 public class GameBoardGui extends JFrame{
 	
+	@SuppressWarnings("deprecation")
 	public GameBoardGui() {
 		
 		Board b = new Board();
@@ -23,6 +24,7 @@ public class GameBoardGui extends JFrame{
 	    for(int i = 0; i < 7; i++){
 	    	for(int j = 0; j < 7; j++){
 	    		JButton tileShown = new JButton();
+	    		//tileShown.setLabel("Stupid");
 	    		
 	    		f.add(tileShown);
 	
@@ -31,7 +33,7 @@ public class GameBoardGui extends JFrame{
 	    
 	    f.setSize(1000, 1000);
 	    f.setLocationRelativeTo(null);
-	    f.setLocation(100, 100);
+	   // f.setLocation(100, 100);
 	    f.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	  }
 	

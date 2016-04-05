@@ -61,7 +61,7 @@ public class OneStepMovementTest {
 		_bStep.createGameBoard();
 		_bStep.populateTestBoardAfterMove();
 		
-		assertTrue("", _bStep.hasPown(2, 2) == b.hasPown(2, 2));
+		assertTrue("", _bStep.hasPawn(2, 2) == b.hasPawn(2, 2));
 	}
 	
 	@Test public void setPawnOnBoardTest(){
@@ -74,7 +74,7 @@ public class OneStepMovementTest {
 		_bStep.createGameBoard();
 		_bStep.populateTestBoardAfterMove();
 		
-		assertTrue("", _bStep.hasPown(2, 3) == b.hasPown(2, 3));
+		assertTrue("", _bStep.hasPawn(2, 3) == b.hasPawn(2, 3));
 	}
 	
 	@Test public void checkPawnOnBoardTest(){

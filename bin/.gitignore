@@ -1,2 +1,6 @@
-/gui/
 /board/
+/gui/
+/pawn/
+/tests/
+/tile/
+/token/

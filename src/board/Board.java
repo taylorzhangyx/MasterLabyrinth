@@ -222,12 +222,12 @@ public class Board {
 
 	/*
 	 * Adds initial tokens to board. The indexes of tokenToAdded are mapped to
-	 * the indexes of the correct starting board indexes. 
+	 * the indexes of the correct starting board indexes.
 	 * 
 	 * @return void
 	 */
-	
-	public void addTokensToBoard(){
+
+	public void addTokensToBoard() {
 		int[] tokensToBeAdded = uniqueTokens();
 		_gameBoard[1][1].setToken(tokensToBeAdded[0]);
 		_gameBoard[1][2].setToken(tokensToBeAdded[1]);
@@ -250,13 +250,9 @@ public class Board {
 		_gameBoard[5][3].setToken(tokensToBeAdded[18]);
 		_gameBoard[5][4].setToken(tokensToBeAdded[19]);
 		_gameBoard[5][5].setToken(tokensToBeAdded[20]);
-		
+
 	}
-	
-	
-	
-	
-	
+
 	/**
 	 * Gets an array with size of n in the range from 0 to x-1
 	 * 
@@ -383,7 +379,7 @@ public class Board {
 	 * 
 	 * @return boolean true if has. false otherwise.
 	 */
-	public boolean hasPown(int x, int y) {
+	public boolean hasPawn(int x, int y) {
 		return _gameBoard[x][y].hasPawn();
 	}
 
@@ -425,7 +421,7 @@ public class Board {
 	 *            is the y index.
 	 * @param tileInserted
 	 *            original free tile that was inserted.
-	 * @return Tile which is the new free tile.
+	 * @return _freeTile, Type Tile that will be passed to the user.
 	 */
 	public Tile InsertTile(int insert_i, int insert_j, Tile tileInserted) {
 		// checks if its on the board
@@ -520,6 +516,8 @@ public class Board {
 
 	/**
 	 * This method loops through the 2D array and updates all the pawns location
+	 * 
+	 * @return void
 	 */
 
 	public void updatePawnXYPosition() {
@@ -651,6 +649,8 @@ public class Board {
 	/**
 	 * This method is used only to test the shift method and one step movement
 	 * method.
+	 * 
+	 * @return void
 	 */
 	public void populateTestBoard() {
 
@@ -735,8 +735,10 @@ public class Board {
 
 	/**
 	 * This method is used only to test one step movement method.
+	 * 
+	 * @return void
 	 */
-	public void populateTestBoardAfterMove() {
+	public void populateTestBoardAfterMove(String name1, String name2, String name3, String name4) {
 
 		this.assigntile(0, 0, new TwoDirectionTile(1, 2));
 		this.assigntile(0, 6, new TwoDirectionTile(2, 3));
@@ -804,15 +806,15 @@ public class Board {
 		this.assigntile(6, 5, new TwoDirectionTile(0, 3));
 
 		// make the pawns on the board
-		_pawn1 = new Pawn("red", 2, 3, 0);
-		_pawn2 = new Pawn("yellow", 2, 4, 0);
-		_pawn3 = new Pawn("blue", 4, 2, 0);
-		_pawn4 = new Pawn("white", 2, 2, 0);
+		_pawn1 = new Pawn(name1, 2, 3, 0);
+		_pawn2 = new Pawn(name2, 2, 4, 0);
+		_pawn3 = new Pawn(name3, 4, 2, 0);
+		_pawn4 = new Pawn(name4, 2, 2, 0);
 
-		_gameBoard[2][3].setPawns("red");
-		_gameBoard[2][4].setPawns("yellow");
-		_gameBoard[4][2].setPawns("blue");
-		_gameBoard[4][4].setPawns("white");
+		_gameBoard[2][3].setPawns(name1);
+		_gameBoard[2][4].setPawns(name2);
+		_gameBoard[4][2].setPawns(name3);
+		_gameBoard[4][4].setPawns(name4);
 
 		_freetile = new TwoDirectionTile(2, 3);
 	}

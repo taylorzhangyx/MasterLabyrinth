@@ -2,6 +2,8 @@ package tile;
 
 import java.util.ArrayList;
 
+import javax.swing.JLabel;
+
 import pawn.Pawn;
 import token.Token;
 
@@ -26,6 +28,7 @@ public abstract class Tile {
 	protected int _x;
 	protected int _y;
 	private ArrayList<String> pawnsOnTile;
+	protected JLabel _image = new JLabel();
 
 	/**
 	 * This is the constructor of the tile class. It assigns values to the
@@ -132,6 +135,8 @@ public abstract class Tile {
 	public void setToken(int tokenValue) {
 		_hasToken = true;
 		_token = new Token(tokenValue);
+		//after adding the Value, set the Image
+		_token.setImage();
 	}
 
 	public Token getToken() {
@@ -281,6 +286,20 @@ public abstract class Tile {
 		if (this.hasToken()) {
 			p.setScore(this.getToken().getTokenValue());
 			this.eraseToken();
+		}
+	}
+	
+	public JLabel getImage(){
+		return _image;
+	}
+	
+	/**
+	 * TODO 
+	 * refresh the token image and pawn image on tile
+	 */
+	public void addComponent(){
+		if(_hasPawn == true){
+			
 		}
 	}
 

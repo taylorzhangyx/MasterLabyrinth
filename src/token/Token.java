@@ -1,15 +1,18 @@
 package token;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
 public class Token {
 	final int _tokenValue; // this should never be modified
 	private boolean _isPicked;
 	private int _xPos;
 	private int _yPos;
+	private JLabel _image = new JLabel();
 
 	public Token(int tokenValue) {
 		_tokenValue = tokenValue;
 		_isPicked = true;
-
 	}
 
 	public int getTokenValue() {
@@ -30,6 +33,23 @@ public class Token {
 
 	public boolean isPicked() {
 		return _isPicked;
+	}
+	
+	/**
+	 * set image into the JLabel for further use
+	 */
+	public void setImage(){
+		String path = new String();
+		path = "/image/token/token" + _tokenValue + ".png";
+		_image.setIcon(new ImageIcon(getClass().getResource(path)));
+	}
+	
+	/**
+	 * 
+	 * @return get current icon on this Token
+	 */
+	public JLabel getImage(){
+		return _image;
 	}
 
 }

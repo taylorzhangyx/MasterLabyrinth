@@ -3,9 +3,13 @@ package pawn;
 import java.util.ArrayList;
 
 import java.util.Collections;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
 import tile.*;
 
-/*
+/**
  * Class for the Pawn that the player will use.
  * 
  *@author Aaron Schwab, Samuel White
@@ -21,6 +25,7 @@ public class Pawn {
 	private int _wand;
 	private int _formulaCard;
 	private static Pawn[] _pawnlist;
+	private JLabel _image = new JLabel();
 
 	/*
 	 * Constructor for a Pawn.
@@ -29,7 +34,7 @@ public class Pawn {
 	 * 
 	 */
 	public Pawn(String color, int xPos, int yPos, int _formulaCard) {
-		_color = color;
+		_color = color.toLowerCase();
 		_x = xPos;
 		_y = yPos;
 		_score = 0;
@@ -39,6 +44,11 @@ public class Pawn {
 		// the number of wand is fixed at the beginning of game, which is
 		// initialized as 3
 		_wand = 3;
+		
+		//set the image of this pawn, once the color is given, the image is fixed
+		String path = new String();
+		path = "/image/pawn/pawn" + _color + ".png";
+		_image.setIcon(new ImageIcon(getClass().getResource(path)));
 	}
 
 	/*
@@ -176,6 +186,10 @@ public class Pawn {
 		// add functionality later that calculates if the token is a part of the
 		// secret formula
 
+	}
+	
+	public JLabel getImage(){
+		return _image;
 	}
 
 }

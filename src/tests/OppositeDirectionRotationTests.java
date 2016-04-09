@@ -22,26 +22,9 @@ public class OppositeDirectionRotationTests {
 		
 	}
 	
-    @Test public void test02() {
-    	
-    	OppositeDirectionTile tdt = new OppositeDirectionTile(0);
-		boolean [] expected = {true,false,true,false} ;
-		tdt.rotateClockwiseTwoTimes();
-		boolean [] actual = tdt.tileOrientation();
-		Assert.assertArrayEquals(expected, actual);
-		
-	}
-    @Test public void test03() {
-    	
-    	OppositeDirectionTile tdt = new OppositeDirectionTile(0);
-		boolean [] expected = {false,true,false,true} ;
-		tdt.rotateClockwiseThreeTimes();
-		boolean [] actual = tdt.tileOrientation();
-		Assert.assertArrayEquals(expected, actual);
-		
-	}
+
 	
-    @Test public void test04() {
+    @Test public void test02() {
     	
     	OppositeDirectionTile tdt = new OppositeDirectionTile(0);
 		boolean [] expected = {false,true,false,true} ;
@@ -51,23 +34,5 @@ public class OppositeDirectionRotationTests {
 		
 	}
     
-    @Test public void test05() {
-    	
-    	OppositeDirectionTile tdt = new OppositeDirectionTile(0);
-		boolean [] expected = {true,false,true,false} ;
-		tdt.rotateCounterClockwiseTwoTimes();
-		boolean [] actual = tdt.tileOrientation();
-		Assert.assertArrayEquals(expected, actual);
-		
-	}
-    
-    @Test public void test06() {
-    	
-    	OppositeDirectionTile tdt = new OppositeDirectionTile(0);
-		boolean [] expected = {false,true,false,true} ;
-		tdt.rotateCounterClockwiseThreeTimes();
-		boolean [] actual = tdt.tileOrientation();
-		Assert.assertArrayEquals(expected, actual);
-		
-	}
+
 }

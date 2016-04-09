@@ -16,7 +16,7 @@ public class TileclassmethodTest {
 
 	@Test
 	public void hasPawnMethodTest2() {
-		Tile t = new TwoDirectionTile(0, 1);
+		Tile t = new TwoDirectionTile(0);
 		t.setPawns("red");
 		boolean expected = true;
 		boolean actual = t.hasPawn();
@@ -46,7 +46,7 @@ public class TileclassmethodTest {
 
 	@Test
 	public void erasePawnMethodTest2() {
-		Tile t = new TwoDirectionTile(0, 1);
+		Tile t = new TwoDirectionTile(0);
 		t.setPawns("red");
 		t.erasePawn("red");
 		boolean expected = false;
@@ -56,7 +56,7 @@ public class TileclassmethodTest {
 
 	@Test
 	public void erasePawnMethodTest3() {
-		Tile t = new TwoDirectionTile(0, 1);
+		Tile t = new TwoDirectionTile(0);
 		t.setPawns("red");
 		t.erasePawn("red");
 		boolean expected = false;
@@ -75,7 +75,7 @@ public class TileclassmethodTest {
 
 	@Test
 	public void setPawnMethodTest2() {
-		Tile t = new TwoDirectionTile(0, 1);
+		Tile t = new TwoDirectionTile(0);
 		t.setPawns("red");
 		boolean expected = true;
 		boolean actual = t.hasPawn();
@@ -153,7 +153,7 @@ public class TileclassmethodTest {
 	@Test
 	public void tileOrientationMethodTest3() {
 		boolean actual = false;
-		Tile t = new TwoDirectionTile(1,2);
+		Tile t = new TwoDirectionTile(1);
 		boolean[] oreintation = new boolean[4];
 		boolean n = false;
 		oreintation[0] = n;

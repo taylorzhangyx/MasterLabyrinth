@@ -1,5 +1,7 @@
 package tile;
 
+import javax.swing.ImageIcon;
+
 /**
  * This class is a sub class of Tile. It has a constructor method to 
  * create a 3 direction tile, and getter/setter methods to return/modify
@@ -26,6 +28,11 @@ public class ThreeDirectionTile extends Tile {
 		initialization(x);
 		initialization(y);
 		initialization(z);
+		
+		//the sum of 0,1,2,3 is fixed which is equal to 6, 
+		//if three of them are passed to x,y,z
+		//the remainder 6-x-y-z will give the direction that will not open
+		setImage(6-x-y-z);
 
 	}
 
@@ -46,7 +53,6 @@ public class ThreeDirectionTile extends Tile {
 			break;
 		case 2:
 			_s = true;
-
 			break;
 		case 3:
 			_w = true;
@@ -55,8 +61,27 @@ public class ThreeDirectionTile extends Tile {
 			break;
 		}
 	}
-
-
+	
+/**
+ * This method used to set image for three direction tile 
+ * @param n indicate which direction is remained to be closed
+ */
+	private void setImage(int n){
+		switch(n){
+		case 0:
+			_image.setIcon(new ImageIcon(getClass().getResource("/image/tile/T123.png")));
+			break;
+		case 1:
+			_image.setIcon(new ImageIcon(getClass().getResource("/image/tile/T023.png")));
+			break;
+		case 2:
+			_image.setIcon(new ImageIcon(getClass().getResource("/image/tile/T013.png")));
+			break;
+		case 3:
+			_image.setIcon(new ImageIcon(getClass().getResource("/image/tile/T012.png")));
+			break;
+		}
+	}
 
 	
 }

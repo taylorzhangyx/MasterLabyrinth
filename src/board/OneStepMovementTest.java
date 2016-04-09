@@ -17,7 +17,6 @@ public class OneStepMovementTest {
 	private Pawn _pawn3 = new Pawn("blue", 4, 2, 0);
 	private Pawn _pawn4 = new Pawn("white", 4, 4, 0);
 	
-	
 	public void OneStepMovementCommonTest(Pawn currentpawn, String Direction, boolean expected) {
 		Board b = new Board();
 		b.createGameBoard();
@@ -59,7 +58,7 @@ public class OneStepMovementTest {
 		b.moveOneStep("E", _pawn1);
 		Board _bStep = new Board();
 		_bStep.createGameBoard();
-		_bStep.populateTestBoardAfterMove();
+		_bStep.populateTestBoardAfterMove("red", "yellow", "blue", "white");
 		
 		assertTrue("", _bStep.hasPawn(2, 2) == b.hasPawn(2, 2));
 	}
@@ -72,7 +71,7 @@ public class OneStepMovementTest {
 		b.moveOneStep("E", _pawn1);
 		Board _bStep = new Board();
 		_bStep.createGameBoard();
-		_bStep.populateTestBoardAfterMove();
+		_bStep.populateTestBoardAfterMove("red", "yellow", "blue", "white");
 		
 		assertTrue("", _bStep.hasPawn(2, 3) == b.hasPawn(2, 3));
 	}
@@ -85,7 +84,7 @@ public class OneStepMovementTest {
 		b.moveOneStep("E", _pawn1);
 		Board _bStep = new Board();
 		_bStep.createGameBoard();
-		_bStep.populateTestBoardAfterMove();
+		_bStep.populateTestBoardAfterMove("red", "yellow", "blue", "white");
 		
 		assertTrue("", _bStep.pawnsOnTile(2, 3).equals(b.pawnsOnTile(2, 3)));
 	}

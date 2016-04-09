@@ -71,10 +71,10 @@ public class Board {
 
 		// This creates the 4 corner pieces
 
-		this.assigntile(0, 0, new TwoDirectionTile(1, 2));
-		this.assigntile(0, 6, new TwoDirectionTile(2, 3));
-		this.assigntile(6, 6, new TwoDirectionTile(0, 3));
-		this.assigntile(6, 0, new TwoDirectionTile(0, 1));
+		this.assigntile(0, 0, new TwoDirectionTile(1));
+		this.assigntile(0, 6, new TwoDirectionTile(2));
+		this.assigntile(6, 6, new TwoDirectionTile(3));
+		this.assigntile(6, 0, new TwoDirectionTile(0));
 
 		// This creates the 2 top row fixed pieces
 		this.assigntile(0, 2, new ThreeDirectionTile(1, 2, 3));
@@ -131,7 +131,7 @@ public class Board {
 							if (_twoDirectionLeft > 0) {
 								// the current object is assigned the value of a
 								// randomized twoDirectionTile
-								this.assigntile(i, j, new TwoDirectionTile(x, y));
+								this.assigntile(i, j, new TwoDirectionTile(x));
 
 								_twoDirectionLeft--;
 
@@ -181,7 +181,7 @@ public class Board {
 		// This free tile will be passed off to the player to begin the game
 		if (_twoDirectionLeft == 1) {
 
-			_freetile = new TwoDirectionTile(0, 1);
+			_freetile = new TwoDirectionTile(0);
 		} else if (_oppositeDirectionLeft == 1) {
 
 			_freetile = new OppositeDirectionTile(0);
@@ -196,7 +196,7 @@ public class Board {
 
 			}
 		}
-		_freetile = new TwoDirectionTile(2, 3);
+		_freetile = new TwoDirectionTile(2);
 		return _freetile;
 
 	}
@@ -654,10 +654,10 @@ public class Board {
 	 */
 	public void populateTestBoard() {
 
-		this.assigntile(0, 0, new TwoDirectionTile(1, 2));
-		this.assigntile(0, 6, new TwoDirectionTile(2, 3));
-		this.assigntile(6, 6, new TwoDirectionTile(0, 3));
-		this.assigntile(6, 0, new TwoDirectionTile(0, 1));
+		this.assigntile(0, 0, new TwoDirectionTile(1));
+		this.assigntile(0, 6, new TwoDirectionTile(2));
+		this.assigntile(6, 6, new TwoDirectionTile(3));
+		this.assigntile(6, 0, new TwoDirectionTile(0));
 
 		// This creates the 2 top row fixed pieces
 		this.assigntile(0, 2, new ThreeDirectionTile(1, 2, 3));
@@ -689,35 +689,35 @@ public class Board {
 		this.assigntile(1, 3, new ThreeDirectionTile(0, 2, 3));
 		this.assigntile(1, 4, new OppositeDirectionTile(0));
 		this.assigntile(1, 5, new ThreeDirectionTile(0, 2, 3));
-		this.assigntile(1, 6, new TwoDirectionTile(2, 3));
+		this.assigntile(1, 6, new TwoDirectionTile(2));
 
 		this.assigntile(2, 1, new OppositeDirectionTile(1));
 		this.assigntile(2, 3, new OppositeDirectionTile(1));
 		this.assigntile(2, 5, new OppositeDirectionTile(1));
 
-		this.assigntile(3, 0, new TwoDirectionTile(2, 3));
+		this.assigntile(3, 0, new TwoDirectionTile(2));
 		this.assigntile(3, 1, new OppositeDirectionTile(0));
 		this.assigntile(3, 2, new OppositeDirectionTile(0));
 		this.assigntile(3, 3, new ThreeDirectionTile(0, 1, 3));
-		this.assigntile(3, 4, new TwoDirectionTile(1, 2));
-		this.assigntile(3, 5, new TwoDirectionTile(0, 1));
+		this.assigntile(3, 4, new TwoDirectionTile(1));
+		this.assigntile(3, 5, new TwoDirectionTile(0));
 		this.assigntile(3, 6, new ThreeDirectionTile(0, 2, 3));
 
-		this.assigntile(4, 1, new TwoDirectionTile(0, 1));
+		this.assigntile(4, 1, new TwoDirectionTile(0));
 		this.assigntile(4, 3, new OppositeDirectionTile(1));
-		this.assigntile(4, 5, new TwoDirectionTile(2, 3));
+		this.assigntile(4, 5, new TwoDirectionTile(2));
 
-		this.assigntile(5, 0, new TwoDirectionTile(2, 3));
+		this.assigntile(5, 0, new TwoDirectionTile(2));
 		this.assigntile(5, 1, new ThreeDirectionTile(1, 2, 3));
-		this.assigntile(5, 2, new TwoDirectionTile(0, 1));
-		this.assigntile(5, 3, new TwoDirectionTile(2, 3));
+		this.assigntile(5, 2, new TwoDirectionTile(0));
+		this.assigntile(5, 3, new TwoDirectionTile(2));
 		this.assigntile(5, 4, new ThreeDirectionTile(0, 1, 2));
 		this.assigntile(5, 5, new OppositeDirectionTile(0));
-		this.assigntile(5, 6, new TwoDirectionTile(0, 3));
+		this.assigntile(5, 6, new TwoDirectionTile(3));
 
-		this.assigntile(6, 1, new TwoDirectionTile(0, 1));
-		this.assigntile(6, 3, new TwoDirectionTile(0, 3));
-		this.assigntile(6, 5, new TwoDirectionTile(0, 3));
+		this.assigntile(6, 1, new TwoDirectionTile(0));
+		this.assigntile(6, 3, new TwoDirectionTile(3));
+		this.assigntile(6, 5, new TwoDirectionTile(3));
 
 		// make the pawns on the board
 		_pawn1 = new Pawn("red", 2, 2, 0);
@@ -730,7 +730,7 @@ public class Board {
 		// _gameBoard[4][2].setPawns("blue");
 		// _gameBoard[4][4].setPawns("white");
 
-		_freetile = new TwoDirectionTile(2, 3);
+		_freetile = new TwoDirectionTile(2);
 	}
 
 	/**
@@ -740,10 +740,10 @@ public class Board {
 	 */
 	public void populateTestBoardAfterMove(String name1, String name2, String name3, String name4) {
 
-		this.assigntile(0, 0, new TwoDirectionTile(1, 2));
-		this.assigntile(0, 6, new TwoDirectionTile(2, 3));
-		this.assigntile(6, 6, new TwoDirectionTile(0, 3));
-		this.assigntile(6, 0, new TwoDirectionTile(0, 1));
+		this.assigntile(0, 0, new TwoDirectionTile(1));
+		this.assigntile(0, 6, new TwoDirectionTile(2));
+		this.assigntile(6, 6, new TwoDirectionTile(3));
+		this.assigntile(6, 0, new TwoDirectionTile(0));
 
 		// This creates the 2 top row fixed pieces
 		this.assigntile(0, 2, new ThreeDirectionTile(1, 2, 3));
@@ -775,35 +775,35 @@ public class Board {
 		this.assigntile(1, 3, new ThreeDirectionTile(0, 2, 3));
 		this.assigntile(1, 4, new OppositeDirectionTile(0));
 		this.assigntile(1, 5, new ThreeDirectionTile(0, 2, 3));
-		this.assigntile(1, 6, new TwoDirectionTile(2, 3));
+		this.assigntile(1, 6, new TwoDirectionTile(2));
 
 		this.assigntile(2, 1, new OppositeDirectionTile(1));
 		this.assigntile(2, 3, new OppositeDirectionTile(1));
 		this.assigntile(2, 5, new OppositeDirectionTile(1));
 
-		this.assigntile(3, 0, new TwoDirectionTile(2, 3));
+		this.assigntile(3, 0, new TwoDirectionTile(2));
 		this.assigntile(3, 1, new OppositeDirectionTile(0));
 		this.assigntile(3, 2, new OppositeDirectionTile(0));
 		this.assigntile(3, 3, new ThreeDirectionTile(0, 1, 3));
-		this.assigntile(3, 4, new TwoDirectionTile(1, 2));
-		this.assigntile(3, 5, new TwoDirectionTile(0, 1));
+		this.assigntile(3, 4, new TwoDirectionTile(1));
+		this.assigntile(3, 5, new TwoDirectionTile(0));
 		this.assigntile(3, 6, new ThreeDirectionTile(0, 2, 3));
 
-		this.assigntile(4, 1, new TwoDirectionTile(0, 1));
+		this.assigntile(4, 1, new TwoDirectionTile(0));
 		this.assigntile(4, 3, new OppositeDirectionTile(1));
-		this.assigntile(4, 5, new TwoDirectionTile(2, 3));
+		this.assigntile(4, 5, new TwoDirectionTile(2));
 
-		this.assigntile(5, 0, new TwoDirectionTile(2, 3));
+		this.assigntile(5, 0, new TwoDirectionTile(2));
 		this.assigntile(5, 1, new ThreeDirectionTile(1, 2, 3));
-		this.assigntile(5, 2, new TwoDirectionTile(0, 1));
-		this.assigntile(5, 3, new TwoDirectionTile(2, 3));
+		this.assigntile(5, 2, new TwoDirectionTile(0));
+		this.assigntile(5, 3, new TwoDirectionTile(2));
 		this.assigntile(5, 4, new ThreeDirectionTile(0, 1, 2));
 		this.assigntile(5, 5, new OppositeDirectionTile(0));
-		this.assigntile(5, 6, new TwoDirectionTile(0, 3));
+		this.assigntile(5, 6, new TwoDirectionTile(3));
 
-		this.assigntile(6, 1, new TwoDirectionTile(0, 1));
-		this.assigntile(6, 3, new TwoDirectionTile(0, 3));
-		this.assigntile(6, 5, new TwoDirectionTile(0, 3));
+		this.assigntile(6, 1, new TwoDirectionTile(0));
+		this.assigntile(6, 3, new TwoDirectionTile(3));
+		this.assigntile(6, 5, new TwoDirectionTile(3));
 
 		// make the pawns on the board
 		_pawn1 = new Pawn(name1, 2, 3, 0);
@@ -816,7 +816,7 @@ public class Board {
 		_gameBoard[4][2].setPawns(name3);
 		_gameBoard[4][4].setPawns(name4);
 
-		_freetile = new TwoDirectionTile(2, 3);
+		_freetile = new TwoDirectionTile(2);
 	}
 
 }

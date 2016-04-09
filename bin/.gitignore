@@ -1,6 +1,6 @@
-/board/
-/gui/
-/pawn/
-/tests/
 /tile/
-/token/
+/board/
+/tests/
+/image/
+/pawn/
+/gui/

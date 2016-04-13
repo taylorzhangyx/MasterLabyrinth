@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,9 +16,12 @@ public class GameFunctionPanel extends JPanel {
 	private JPanel _pawnInfo;
 	private JPanel _movePanel;
 	private JPanel _freeTile;
+	private ArrayList<JButton> _buttons;
+	public static JLabel freeTile;
 	
 	
 	GameFunctionPanel(){
+		_buttons = new ArrayList<JButton>();
 		setPreferredSize(new Dimension(400,400));
 //		setLayout(new BorderLayout(10,10));
 		setLayout(new FlowLayout(FlowLayout.CENTER,5,5));
@@ -53,22 +57,33 @@ public class GameFunctionPanel extends JPanel {
 	private JPanel createMovePanel(){
 		JPanel jpl = new JPanel();
 		jpl.setLayout(new GridLayout(2,3,5,5));
-		jpl.add(new JButton(new ImageIcon(getClass().getResource("/image/functionpanel/check.png"))));
-		jpl.add(new JButton(new ImageIcon(getClass().getResource("/image/functionpanel/moveDirectionUp.png"))));
-		jpl.add(new JButton(new ImageIcon(getClass().getResource("/image/functionpanel/END.png"))));
-		jpl.add(new JButton(new ImageIcon(getClass().getResource("/image/functionpanel/moveDirectionLeft.png"))));
-		jpl.add(new JButton(new ImageIcon(getClass().getResource("/image/functionpanel/moveDirectionDown.png"))));
-		jpl.add(new JButton(new ImageIcon(getClass().getResource("/image/functionpanel/moveDirectionRight.png"))));
+		_buttons.add(new JButton(new ImageIcon(getClass().getResource("/image/functionpanel/check.png"))));
+		jpl.add(_buttons.get(0));
+		_buttons.add(new JButton(new ImageIcon(getClass().getResource("/image/functionpanel/moveDirectionUp.png"))));
+		jpl.add(_buttons.get(1));
+		_buttons.add(new JButton(new ImageIcon(getClass().getResource("/image/functionpanel/END.png"))));
+		jpl.add(_buttons.get(2));
+		_buttons.add(new JButton(new ImageIcon(getClass().getResource("/image/functionpanel/moveDirectionLeft.png"))));
+		jpl.add(_buttons.get(3));
+		_buttons.add(new JButton(new ImageIcon(getClass().getResource("/image/functionpanel/moveDirectionDown.png"))));
+		jpl.add(_buttons.get(4));
+		_buttons.add(new JButton(new ImageIcon(getClass().getResource("/image/functionpanel/moveDirectionRight.png"))));
+		jpl.add(_buttons.get(5));
 		return jpl;
 	}
 	
 	private JPanel createFreeTile(){
 		JPanel jpl = new JPanel();
 		jpl.setLayout(new FlowLayout(FlowLayout.CENTER,5,5));
-		jpl.add(new JButton(new ImageIcon(getClass().getResource("/image/functionpanel/AntiClockwise.png"))));
-		jpl.add(GameBoardPanel._board.getFreeTile().getImage());
-		jpl.add(new JButton(new ImageIcon(getClass().getResource("/image/functionpanel/Clockwise.png"))));
+		_buttons.add(new JButton(new ImageIcon(getClass().getResource("/image/functionpanel/AntiClockwise.png"))));
+		jpl.add(_buttons.get(6));
+		freeTile = new JLabel(GameBoardPanel._board.getFreeTile().getIcon());
+		jpl.add(freeTile);
+		_buttons.add(new JButton(new ImageIcon(getClass().getResource("/image/functionpanel/Clockwise.png"))));
+		jpl.add(_buttons.get(7));
 		return jpl;
 	}
-
+	public ArrayList<JButton> getButtons(){
+		return _buttons;
+	}
 }

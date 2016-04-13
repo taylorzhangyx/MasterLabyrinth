@@ -36,28 +36,33 @@ public class TwoDirectionTile extends Tile {
 				_e = true;
 				_s = false;
 				_w = false;
-				_image.setIcon(new ImageIcon(getClass().getResource("/image/tile/T01.png")));
+				//_image.setIcon(new ImageIcon(getClass().getResource("/image/tile/T01.png")));
+				_icon = new ImageIcon(getClass().getResource("/image/tile/T01.png"));
 				break;
 			case 1:
 				_n = false;
 				_e = true;
 				_s = true;
 				_w = false;
-				_image.setIcon(new ImageIcon(getClass().getResource("/image/tile/T12.png")));
+				//_image.setIcon(new ImageIcon(getClass().getResource("/image/tile/T12.png")));
+				_icon = new ImageIcon(getClass().getResource("/image/tile/T12.png"));
+			
 				break;
 			case 2:
 				_n = false;
 				_e = false;
 				_s = true;
 				_w = true;
-				_image.setIcon(new ImageIcon(getClass().getResource("/image/tile/T23.png")));
+				//_image.setIcon(new ImageIcon(getClass().getResource("/image/tile/T23.png")));
+				_icon = new ImageIcon(getClass().getResource("/image/tile/T23.png"));
 				break;
 			case 3:
 				_n = true;
 				_e = false;
 				_s = false;
 				_w = true;
-				_image.setIcon(new ImageIcon(getClass().getResource("/image/tile/T03.png")));
+				//_image.setIcon(new ImageIcon(getClass().getResource("/image/tile/T03.png")));
+				_icon = new ImageIcon(getClass().getResource("/image/tile/T03.png"));
 				break;
 			default:
 				break;

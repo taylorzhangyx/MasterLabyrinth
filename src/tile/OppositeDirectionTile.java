@@ -39,13 +39,15 @@ public class OppositeDirectionTile extends Tile {
 			_n = true;
 			_s = true;
 			//set image for north and south open
-			_image.setIcon(new ImageIcon(getClass().getResource("/image/tile/T02.png")));
+			//_image.setIcon(new ImageIcon(getClass().getResource("/image/tile/T02.png")));
+			_icon = new ImageIcon(getClass().getResource("/image/tile/T02.png"));
 			break;
 		case 1:
 			_e = true;
 			_w = true;
 			//set image for east and west open
-			_image.setIcon(new ImageIcon(getClass().getResource("/image/tile/T13.png")));
+			//_image.setIcon(new ImageIcon(getClass().getResource("/image/tile/T13.png")));
+			_icon = new ImageIcon(getClass().getResource("/image/tile/T13.png"));
 			break;
 		default:
 			break;

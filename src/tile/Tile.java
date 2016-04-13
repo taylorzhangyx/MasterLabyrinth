@@ -2,6 +2,7 @@ package tile;
 
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import pawn.Pawn;
@@ -28,7 +29,9 @@ public abstract class Tile {
 	protected int _x;
 	protected int _y;
 	private ArrayList<String> pawnsOnTile;
-	protected JLabel _image = new JLabel();
+	//protected JLabel _image = new JLabel();
+	protected ImageIcon _icon;
+	
 
 	/**
 	 * This is the constructor of the tile class. It assigns values to the
@@ -257,6 +260,7 @@ public abstract class Tile {
 		_s = _e;
 		_e = _n;
 		_n = TEMP;
+		refreshImage();		
 	}
 
 	/**
@@ -271,6 +275,7 @@ public abstract class Tile {
 		_s = _w;
 		_w = _n;
 		_n = TEMP;
+		refreshImage();
 	}
 
 	/*
@@ -289,8 +294,9 @@ public abstract class Tile {
 		}
 	}
 	
-	public JLabel getImage(){
-		return _image;
+	
+	public ImageIcon getIcon(){
+		return _icon;
 	}
 	
 	/**
@@ -301,6 +307,49 @@ public abstract class Tile {
 		if(_hasPawn == true){
 			
 		}
+	}
+	
+	public void refreshImage(){
+		String temp = "T";
+		if (_n) {temp = temp + 0;}
+		if (_e) {temp = temp + 1;}
+		if (_s) {temp = temp + 2;}
+		if (_w) {temp = temp + 3;}
+		
+		switch (temp) {
+
+		case "T01":
+			_icon = new ImageIcon(getClass().getResource("/image/tile/T01.png"));
+			break;
+		case "T012":
+			_icon = new ImageIcon(getClass().getResource("/image/tile/T012.png"));
+			break;
+		case "T013":
+			_icon = (new ImageIcon(getClass().getResource("/image/tile/T013.png")));
+			break;
+		case "T02":
+			_icon = (new ImageIcon(getClass().getResource("/image/tile/T02.png")));
+			break;
+		case "T023":
+			_icon = (new ImageIcon(getClass().getResource("/image/tile/T023.png")));
+			break;
+		case "T12":
+			_icon = (new ImageIcon(getClass().getResource("/image/tile/T12.png")));
+			break;
+		case "T123":
+			_icon = (new ImageIcon(getClass().getResource("/image/tile/T123.png")));
+			break;
+		case "T13":
+			_icon = (new ImageIcon(getClass().getResource("/image/tile/T13.png")));
+			break;
+		case "T23":
+			_icon = (new ImageIcon(getClass().getResource("/image/tile/T23.png")));
+			break;
+		case "T03":
+			_icon = (new ImageIcon(getClass().getResource("/image/tile/T03.png")));
+			break;
+		}
+	
 	}
 
 }

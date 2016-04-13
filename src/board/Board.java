@@ -36,9 +36,9 @@ public class Board {
 			return _pawn3;
 		case "white":
 			return _pawn4;
-
+		default:
+			return null;
 		}
-		return _pawn1;
 	}
 
 	public void createGameBoard() {
@@ -171,12 +171,12 @@ public class Board {
 		_pawn1 = new Pawn("red", 2, 2, 0);
 		_pawn2 = new Pawn("yellow", 2, 4, 0);
 		_pawn3 = new Pawn("blue", 4, 2, 0);
-		_pawn4 = new Pawn("white", 2, 2, 0);
+		_pawn4 = new Pawn("white", 4, 4, 0);
 		// set the pawns on corresponding tile
-		_gameBoard[2][2].setPawns("red");
-		_gameBoard[2][4].setPawns("yellow");
-		_gameBoard[4][2].setPawns("blue");
-		_gameBoard[4][4].setPawns("white");
+		_gameBoard[3][2].setPawns("red");
+		_gameBoard[3][2].setPawns("yellow");
+		_gameBoard[3][2].setPawns("blue");
+		_gameBoard[3][2].setPawns("white");
 
 		// This free tile will be passed off to the player to begin the game
 		if (_twoDirectionLeft == 1) {
@@ -193,10 +193,13 @@ public class Board {
 		for (int i = 0; i < _gameBoard.length; i++) {
 			for (int j = 0; j < _gameBoard.length; j++) {
 				_gameBoard[i][j].setCoordinates(i, j);
-
+				
 			}
 		}
-		_freetile = new TwoDirectionTile(2);
+		
+		//set Token on the Board
+		addTokensToBoard();
+		
 		return _freetile;
 
 	}

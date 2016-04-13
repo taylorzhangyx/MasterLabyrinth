@@ -69,16 +69,20 @@ public class ThreeDirectionTile extends Tile {
 	private void setImage(int n){
 		switch(n){
 		case 0:
-			_image.setIcon(new ImageIcon(getClass().getResource("/image/tile/T123.png")));
+			//_image.setIcon(new ImageIcon(getClass().getResource("/image/tile/T123.png")));
+			_icon = new ImageIcon(getClass().getResource("/image/tile/T123.png"));
 			break;
 		case 1:
-			_image.setIcon(new ImageIcon(getClass().getResource("/image/tile/T023.png")));
+			//_image.setIcon(new ImageIcon(getClass().getResource("/image/tile/T023.png")));
+			_icon = new ImageIcon(getClass().getResource("/image/tile/T023.png"));
 			break;
 		case 2:
-			_image.setIcon(new ImageIcon(getClass().getResource("/image/tile/T013.png")));
+			//_image.setIcon(new ImageIcon(getClass().getResource("/image/tile/T013.png")));
+			_icon = new ImageIcon(getClass().getResource("/image/tile/T013.png"));
 			break;
 		case 3:
-			_image.setIcon(new ImageIcon(getClass().getResource("/image/tile/T012.png")));
+			//_image.setIcon(new ImageIcon(getClass().getResource("/image/tile/T012.png")));
+			_icon = new ImageIcon(getClass().getResource("/image/tile/T012.png"));
 			break;
 		}
 	}

@@ -12,7 +12,7 @@ public class Token {
 
 	public Token(int tokenValue) {
 		_tokenValue = tokenValue;
-		_isPicked = true;
+		_isPicked = false;
 	}
 
 	public int getTokenValue() {

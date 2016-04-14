@@ -21,10 +21,9 @@ public class PawnMovingButtonHandler implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		_board.moveOneStep(_direction, _pawn);
-		_frameTest.update();
-		
+		if(_board.moveOneStep(_direction, _pawn)){
+			_frameTest.checkEndTurnButton();
+			_frameTest.update();
+		}
 	}
-	
-	
 }

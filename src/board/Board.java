@@ -14,13 +14,46 @@ public class Board {
 	public static int length = 7;
 	public Tile[][] _gameBoard;
 	public Tile _freetile;
-	private boolean ShiftingSuccess = false;
+	public boolean ShiftingSuccess = false;
 	private int lastPosition_x = 0; // index to remember where the last
 									// insertion occurred
 	private int lastPosition_y = 0;// index to remember where the last insertion
 									// occurred
 
+	public Board(){
+		
+	}
 	
+	/**
+	 * set pawn's name based on the command line arguments
+	 * 
+	 * @param names stores Strings of each pawn's name
+	 */
+	public void setPawnName(String[] names) {
+		
+		switch (names.length){
+			case 4:
+				//set pawn 4 info
+				_pawn4 = new Pawn("white", 4, 4, 0);
+				_pawn4.setName(names[3]);
+				_gameBoard[4][4].setPawns("white");
+			case 3:
+				//set pawn 3 info
+				_pawn3 = new Pawn("blue", 4, 2, 0);
+				_pawn3.setName(names[2]);
+				_gameBoard[4][2].setPawns("blue");
+			case 2:
+				//set pawn 2 info
+				_pawn2 = new Pawn("yellow", 2, 4, 0);
+				_pawn2.setName(names[1]);
+				_gameBoard[2][4].setPawns("yellow");
+				//set pawn1 info
+				_pawn1 = new Pawn("red", 2, 2, 0);
+				_pawn1.setName(names[0]);
+				_gameBoard[2][2].setPawns("red");
+				
+		}
+	}
 
 	public Pawn getPawn(String s) {
 
@@ -168,16 +201,7 @@ public class Board {
 			}
 		}
 
-		// make the pawns on the board
-		_pawn1 = new Pawn("red", 2, 2, 0);
-		_pawn2 = new Pawn("yellow", 2, 4, 0);
-		_pawn3 = new Pawn("blue", 4, 2, 0);
-		_pawn4 = new Pawn("white", 4, 4, 0);
-		// set the pawns on corresponding tile
-		_gameBoard[2][2].setPawns("red");
-		_gameBoard[4][2].setPawns("yellow");
-		_gameBoard[2][4].setPawns("blue");
-		_gameBoard[4][4].setPawns("white");
+		
 
 		// This free tile will be passed off to the player to begin the game
 		if (_twoDirectionLeft == 1) {

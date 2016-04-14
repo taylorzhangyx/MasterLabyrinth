@@ -29,33 +29,36 @@ public class GameBoardPanel extends JPanel{
 	//if we want to change the color of arrow with corresponding availability of insertion point
 	// we need to create unique button for each arrow and linked them with last insertion position
 	
-	public static Board _board = new Board();
+	public static Board _board;
 	
-	public GameBoardPanel() {
-		_buttons = new ArrayList<JButton>();
-		_labels = new ArrayList<JLabel>();
-		setLayout(new BorderLayout());
-		setPreferredSize(new Dimension(200, 0));
-		_board.createGameBoard();
-		_board.populateBoard();
-		
-		topPanel = topAndBottomPanel("North");
-		rightPanel = setArrowPanel("East");
-		
-		bottomPanel = topAndBottomPanel("South");
-		
-		leftPanel = setArrowPanel( "West");
-		centerPanel = setBoard();
-		
-		add(topPanel,BorderLayout.NORTH);
-		add(leftPanel,BorderLayout.WEST);
-		add(centerPanel,BorderLayout.CENTER);
-		add(rightPanel,BorderLayout.EAST);
-		add(bottomPanel,BorderLayout.SOUTH);
-		
-	  }
+
 	
-	  private JPanel topAndBottomPanel(String s) {
+	  public GameBoardPanel(String[] names) {
+		  _board = new Board();
+			_buttons = new ArrayList<JButton>();
+			_labels = new ArrayList<JLabel>();
+			setLayout(new BorderLayout());
+			setPreferredSize(new Dimension(200, 0));
+			_board.createGameBoard();
+			_board.populateBoard();
+			_board.setPawnName(names);
+			
+			topPanel = topAndBottomPanel("North");
+			rightPanel = setArrowPanel("East");
+			
+			bottomPanel = topAndBottomPanel("South");
+			
+			leftPanel = setArrowPanel( "West");
+			centerPanel = setBoard();
+			
+			add(topPanel,BorderLayout.NORTH);
+			add(leftPanel,BorderLayout.WEST);
+			add(centerPanel,BorderLayout.CENTER);
+			add(rightPanel,BorderLayout.EAST);
+			add(bottomPanel,BorderLayout.SOUTH);
+	}
+
+	private JPanel topAndBottomPanel(String s) {
 		JPanel p = new JPanel();
 		p.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 0));
 		for (int i =0;i<3;i++){
@@ -72,9 +75,6 @@ public class GameBoardPanel extends JPanel{
 		
 	}
 
-	public static void main(String[] args) {
-		  GameBoardPanel gb = new GameBoardPanel();
-	  }
 	  
 	  /**
 	   * set Board based on _board info
@@ -203,5 +203,23 @@ public class GameBoardPanel extends JPanel{
 	  }
 	  public ArrayList<JLabel> getLabels(){
 		  return _labels;
+	  }
+	  
+	  /**
+	   * disable the insertion buttons
+	   */
+	  public void disableInsertionButton(){
+		  for(int i=0; i<_buttons.size(); i++){
+			  _buttons.get(i).setEnabled(false);
+		  }
+	  }
+	  
+	  /**
+	   * enable the insertion buttons
+	   */
+	  public void enableInsertionButton(){
+		  for(int i=0; i<_buttons.size(); i++){
+			  _buttons.get(i).setEnabled(true);
+		  }
 	  }
 }

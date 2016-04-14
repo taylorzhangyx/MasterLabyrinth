@@ -19,7 +19,16 @@ public class InsertButtonHandler implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		_board.InsertTile(_row, _column, _board._freetile);
-		_frameTest.update();
+		//check the shiftsuccess in board, if true, do the next step
+		//other wise, do nothing
+		if(_board.ShiftingSuccess){
+			_frameTest.update();
+			_frameTest._gbp.disableInsertionButton();
+			_frameTest._gfp.enablePawnMovingButtons();
+			//reset ShiftingSuccess to false
+			_board.ShiftingSuccess = false;
+		}
+		
 	}
 
 }

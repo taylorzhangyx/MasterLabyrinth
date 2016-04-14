@@ -124,4 +124,34 @@ public class GameFunctionPanel extends JPanel {
 	public void setScore(){
 		this.pawnScore.setMessage("Score: " + _pawn.getScore());
 	}
+	
+	/**
+	 * this method runs when the game goes into the pawn moving part
+	 * enable five moving buttons except pick up button and disable rotation button
+	 */
+	public void enablePawnMovingButtons(){
+		for(int i=0; i<_buttons.size(); i++)
+			if(i<6){
+				_buttons.get(i).setEnabled(true);
+			}
+			else{
+				_buttons.get(i).setEnabled(false);
+			}
+				
+	}
+	
+	/**
+	 * this method runs when the game goes into the insertion part
+	 * disable six moving buttons includes pick up button and enable two rotation buttons
+	 */
+	public void disablePawnMovingButtons(){
+		for(int i=0; i<_buttons.size(); i++)
+			if(i<6){
+				_buttons.get(i).setEnabled(false);
+			}
+			else{
+				_buttons.get(i).setEnabled(true);
+			}
+				
+	}
 }

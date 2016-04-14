@@ -130,7 +130,7 @@ public class GameFunctionPanel extends JPanel {
 	 * enable five moving buttons except pick up button and disable rotation button
 	 */
 	public void enablePawnMovingButtons(){
-		for(int i=0; i<_buttons.size(); i++)
+		for(int i=1; i<_buttons.size(); i++)
 			if(i<6){
 				_buttons.get(i).setEnabled(true);
 			}

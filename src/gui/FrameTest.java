@@ -167,12 +167,27 @@ public class FrameTest {
 		_gfpb.get(4).addActionListener(new PawnMovingButtonHandler(_gbp._board,this,_pawn,"S"));
 		_gfpb.get(5).addActionListener(new PawnMovingButtonHandler(_gbp._board,this,_pawn,"E"));
 		_gfpb.get(0).addActionListener(new PawnPickUpTokenButtonHandler(_gbp._board,this,_pawn));
+		System.out.println(_pawn.getXpos());
+		System.out.println(_pawn.getYpos());
 		
 		
 	}
 	
-	public void checkPickUpTokenButton(){
+	public Void checkPickUpTokenButton(){
+		int pawn_x = _pawn.getXpos();
+		int pawn_y = _pawn.getYpos();
 		
+		if(pawn_x==this._pawn_x && pawn_x==this._pawn_y){
+			_gfpb.get(0).setEnabled(false);
+		}
+		else if(_gbp._board._gameBoard[pawn_x][pawn_y].hasToken()){
+			if(_nextToken == _gbp._board._gameBoard[pawn_x][pawn_y].getToken().getTokenValue()){
+				_gfpb.get(0).setEnabled(true);
+				return null;
+			}
+		}
+		_gfpb.get(0).setEnabled(false);
+		return null;
 	}
 	
 	public void checkEndTurnButton(){

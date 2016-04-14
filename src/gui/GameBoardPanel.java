@@ -42,6 +42,7 @@ public class GameBoardPanel extends JPanel{
 			_board.createGameBoard();
 			_board.populateBoard();
 			_board.setPawnName(names);
+			_board.updatePawnXYPosition();
 			
 			topPanel = topAndBottomPanel("North");
 			rightPanel = setArrowPanel("East");
@@ -120,18 +121,18 @@ public class GameBoardPanel extends JPanel{
 		  JLabel label = new JLabel();
 //		  Border border = BorderFactory.createLineBorder(Color.BLACK);
 		  int pawnNum = GameBoardPanel._board._gameBoard[x][y].numOfPawns();
-		  int tokenNum = 0;
-		  if(GameBoardPanel._board._gameBoard[x][y].hasToken()){
-			  tokenNum = 1;
-		  }
-		  
-		  if(pawnNum + tokenNum > 2){
-			  label.setLayout(new GridLayout(0,2,0,0));
-			  
-		  }
-		  else{
-			  label.setLayout(new GridBagLayout());
-		  }
+//		  int tokenNum = 0;
+//		  if(GameBoardPanel._board._gameBoard[x][y].hasToken()){
+//			  tokenNum = 1;
+//		  }
+//		  
+//		  if(pawnNum + tokenNum > 2){
+//			  label.setLayout(new GridLayout(0,2,0,0));
+//			  
+//		  }
+//		  else{
+//			  label.setLayout(new GridBagLayout());
+//		  }
 		  
 //		  label.setPreferredSize(new Dimension(0,90));
 //		  label.setLayout(new GridBagLayout());

@@ -11,45 +11,54 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import pawn.Pawn;
+
 
 public class GameFunctionPanel extends JPanel {
 	private JPanel _pawnInfo;
 	private JPanel _movePanel;
 	private JPanel _freeTile;
 	private ArrayList<JButton> _buttons;
+	private Pawn _pawn;
 	public static JLabel freeTile;
+
+	private MessagePanel pawnName;
+	private MessagePanel pawnColor;
+	private MessagePanel pawnScore;
+	private MessagePanel pawnFormularCard;
 	
 	
-	GameFunctionPanel(){
+	GameFunctionPanel(Pawn pawn){
 		_buttons = new ArrayList<JButton>();
+		_pawn = pawn;
 		setPreferredSize(new Dimension(400,400));
-//		setLayout(new BorderLayout(10,10));
 		setLayout(new FlowLayout(FlowLayout.CENTER,5,5));
 		_pawnInfo = createPawnInfo();
 		_movePanel = createMovePanel();
 		_freeTile = createFreeTile();
 		
+		
 		add(_pawnInfo);
 		add(_movePanel);
 		add(_freeTile);
-//		add(_pawnInfo, BorderLayout.NORTH);
-//		add(_movePanel, BorderLayout.CENTER);
-//		add(_freeTile, BorderLayout.SOUTH);
 	}
 	
 	private JPanel createPawnInfo(){
-		MessagePanel pawnName = new MessagePanel("Name: Pawn1");
-		MessagePanel pawnColor = new MessagePanel("Color: Red");
-		MessagePanel pawnScore = new MessagePanel("Score: 0");
-		MessagePanel pawnFormularCard = new MessagePanel("Card: NULL");
+		//name is passed by arg[]
+		this.pawnName = new MessagePanel("Name: " + _pawn.getName());
+		//color is the current pawn's color
+		this.pawnColor = new MessagePanel("Color: " + _pawn.getColor());
+		//score updates when pick up a token
+		this.pawnScore = new MessagePanel("Score: " + _pawn.getScore());
+		this.pawnFormularCard = new MessagePanel("Card: NULL");
 		
 		JPanel jpl = new JPanel();
 		jpl.setLayout(new GridLayout(4,1,5,5));
 		
-		jpl.add(pawnName);
-		jpl.add(pawnColor);
-		jpl.add(pawnScore);
-		jpl.add(pawnFormularCard);
+		jpl.add(this.pawnName);
+		jpl.add(this.pawnColor);
+		jpl.add(this.pawnScore);
+		jpl.add(this.pawnFormularCard);
 		
 		return jpl;
 	}
@@ -85,5 +94,24 @@ public class GameFunctionPanel extends JPanel {
 	}
 	public ArrayList<JButton> getButtons(){
 		return _buttons;
+	}
+	/**
+	 * used when the pawn switches to a new one 
+	 * 
+	 * @param newPawn 
+	 */
+	public void switchPawn(Pawn newPawn){
+		this._pawn = newPawn;
+		this.pawnColor.setMessage("Color: " + _pawn.getColor());
+		this.pawnName.setMessage("Name: " + _pawn.getName());
+		this.pawnScore.setMessage("Score: " + _pawn.getScore());
+		this.pawnFormularCard.setMessage("Card: NULL"); 
+	}
+	
+	/**
+	 * this method is used when a pawn has picked up a token
+	 */
+	public void setScore(){
+		this.pawnScore.setMessage("Score: " + _pawn.getScore());
 	}
 }

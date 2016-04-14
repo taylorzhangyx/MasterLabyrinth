@@ -17,6 +17,7 @@ import tile.*;
  */
 public class Pawn {
 	private String _color;
+	private String _name;
 	private boolean _onBoard;
 	private boolean _myTurn;
 	private int _score;
@@ -35,6 +36,9 @@ public class Pawn {
 	 */
 	public Pawn(String color, int xPos, int yPos, int _formulaCard) {
 		_color = color.toLowerCase();
+//		TODO
+//		ADD NAME TO THIS PAWN SO THAT EACH PAWN HAS NAME TO DISPLAY
+		_name = color.toLowerCase();
 		_x = xPos;
 		_y = yPos;
 		_score = 0;
@@ -83,6 +87,7 @@ public class Pawn {
 		return _color;
 	}
 
+	
 	/*
 	 * Getter method that says if a pawn in on the board
 	 *
@@ -192,4 +197,7 @@ public class Pawn {
 		return _image;
 	}
 
+	public String getName() {
+		return _name;
+	}
 }

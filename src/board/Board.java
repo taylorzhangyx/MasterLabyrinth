@@ -20,10 +20,7 @@ public class Board {
 	private int lastPosition_y = 0;// index to remember where the last insertion
 									// occurred
 
-	/**
-	 *
-	 * Method that creates the first board. uses an Array of Array of type tile.
-	 */
+	
 
 	public Pawn getPawn(String s) {
 
@@ -40,7 +37,11 @@ public class Board {
 			return null;
 		}
 	}
-
+	
+	/**
+	 *
+	 * Method that creates the first board. uses an Array of Array of type tile.
+	 */
 	public void createGameBoard() {
 		_gameBoard = new Tile[7][7];
 	}

@@ -175,9 +175,9 @@ public class Board {
 		_pawn4 = new Pawn("white", 4, 4, 0);
 		// set the pawns on corresponding tile
 		_gameBoard[2][2].setPawns("red");
-		_gameBoard[2][2].setPawns("yellow");
-		_gameBoard[3][2].setPawns("blue");
-		_gameBoard[3][2].setPawns("white");
+		_gameBoard[4][2].setPawns("yellow");
+		_gameBoard[2][4].setPawns("blue");
+		_gameBoard[4][4].setPawns("white");
 
 		// This free tile will be passed off to the player to begin the game
 		if (_twoDirectionLeft == 1) {

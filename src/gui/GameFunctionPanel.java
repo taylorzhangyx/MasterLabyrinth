@@ -3,6 +3,7 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
@@ -46,13 +47,22 @@ public class GameFunctionPanel extends JPanel {
 	private JPanel createPawnInfo(){
 		//name is passed by arg[]
 		this.pawnName = new MessagePanel("Name: " + _pawn.getName());
+		this.pawnName.setFont(new Font("Courier", Font.BOLD, 32));
+		this.pawnName.setCentered(true);
 		//color is the current pawn's color
 		this.pawnColor = new MessagePanel("Color: " + _pawn.getColor());
+		this.pawnColor.setFont(new Font("Courier", Font.BOLD, 32));
+		this.pawnColor.setCentered(true);
 		//score updates when pick up a token
 		this.pawnScore = new MessagePanel("Score: " + _pawn.getScore());
+		this.pawnScore.setFont(new Font("Courier", Font.BOLD, 32));
+		this.pawnScore.setCentered(true);
 		this.pawnFormularCard = new MessagePanel("Card: NULL");
+		this.pawnFormularCard.setFont(new Font("Courier", Font.BOLD, 32));
+		this.pawnFormularCard.setCentered(true);
 		
 		JPanel jpl = new JPanel();
+		jpl.setPreferredSize(new Dimension(300,300));
 		jpl.setLayout(new GridLayout(4,1,5,5));
 		
 		jpl.add(this.pawnName);

@@ -94,14 +94,8 @@ public class GameBoardPanel extends JPanel{
 				  //_board.add(this._board._gameBoard[i][j].getImage());
 				  JLabel label = new JLabel(GameBoardPanel._board._gameBoard[i][j].getIcon());
 				  
-				  
-//				  label.setLayout(new GridBagLayout());
-//				  label.add(setPawnAndTokenImageOnTile(i,j), new GridBagConstraints());
-				  
 				  label.setLayout(new GridLayout(0,1));
 				  label.add(setPawnAndTokenImageOnTile(i,j));
-				  
-				  
 				  _labels.add(label);
 				  _board.add(_labels.get(7*i+j));
 			  }
@@ -117,7 +111,7 @@ public class GameBoardPanel extends JPanel{
 	   * @param y
 	   * @return
 	   */
-	  private JLabel setPawnAndTokenImageOnTile(int x, int y){
+	  public static JLabel setPawnAndTokenImageOnTile(int x, int y){
 		  
 //		  JLabel Biglabel = new JLabel();
 //		  Biglabel.setLayout(new GridLayout(0,2,0,0));
@@ -125,13 +119,26 @@ public class GameBoardPanel extends JPanel{
 		  
 		  JLabel label = new JLabel();
 //		  Border border = BorderFactory.createLineBorder(Color.BLACK);
-		  label.setLayout(new GridLayout(0,2,0,0));
+		  int pawnNum = GameBoardPanel._board._gameBoard[x][y].numOfPawns();
+		  int tokenNum = 0;
+		  if(GameBoardPanel._board._gameBoard[x][y].hasToken()){
+			  tokenNum = 1;
+		  }
+		  
+		  if(pawnNum + tokenNum > 2){
+			  label.setLayout(new GridLayout(0,2,0,0));
+			  
+		  }
+		  else{
+			  label.setLayout(new GridBagLayout());
+		  }
+		  
 //		  label.setPreferredSize(new Dimension(0,90));
 //		  label.setLayout(new GridBagLayout());
 		  
 //		  label.setBorder(border);
 		  if(GameBoardPanel._board._gameBoard[x][y].hasPawn()){
-			  for(int i = 0; i < GameBoardPanel._board._gameBoard[x][y].numOfPawns(); i++){
+			  for(int i = 0; i < pawnNum; i++){
 				  label.add(GameBoardPanel._board.getPawn(GameBoardPanel._board.gameBoard()[x][y].pawnsOnTile().get(i)).getImage());
 			  }
 		  }

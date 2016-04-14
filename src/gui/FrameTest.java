@@ -59,13 +59,14 @@ public class FrameTest {
 	public static void update() {
 		for (int i=0; i<7;i++){
 			for(int o = 0;o<7;o++){
+				//clear all components on the JLabel
+				_gbp.getLabels().get(7*i+o).removeAll();
+				
 				_gbp.getLabels().get(7*i+o).setIcon(_gbp._board._gameBoard[i][o].getIcon());
-				if (_gbp._board._gameBoard[i][o].hasPawn()){
-					
-				}
-				if (_gbp._board._gameBoard[i][o].hasToken()){
-					
-				}
+				_gbp.getLabels().get(7*i+o).add(GameBoardPanel.setPawnAndTokenImageOnTile(i,o));
+				_gbp.getLabels().get(7*i+o).validate();
+				_gbp.getLabels().get(7*i+o).repaint();
+				
 			}
 		}
 		

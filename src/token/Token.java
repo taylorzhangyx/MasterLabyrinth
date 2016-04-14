@@ -4,7 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class Token {
-	final int _tokenValue; // this should never be modified
+	private int _tokenValue; // this should never be modified
 	private boolean _isPicked;
 	private int _xPos;
 	private int _yPos;

@@ -25,7 +25,6 @@ public abstract class Tile {
 	protected boolean _hasPawn;
 	protected int _numOfPawns;
 	protected boolean _hasToken;
-	protected int _tokenOnTile;
 	protected int _x;
 	protected int _y;
 	private ArrayList<String> pawnsOnTile;
@@ -47,7 +46,6 @@ public abstract class Tile {
 		_hasPawn = false;
 		// _pawnColors = null;
 		_hasToken = false;
-		_tokenOnTile = 0;
 		_numOfPawns = 0;
 		_x = 0;
 		_y = 0;
@@ -125,7 +123,7 @@ public abstract class Tile {
 	 * @return int value representing the value of the token.
 	 */
 	public int tokenOnTile() {
-		return _tokenOnTile;
+		return _token.getTokenValue();
 	}
 
 	/**
@@ -153,7 +151,7 @@ public abstract class Tile {
 	 */
 	public void eraseToken() {
 		_hasToken = false;
-		_tokenOnTile = 0;
+//		_tokenOnTile = 0;
 	}
 
 	/**

@@ -173,8 +173,8 @@ public class Board {
 		_pawn3 = new Pawn("blue", 4, 2, 0);
 		_pawn4 = new Pawn("white", 4, 4, 0);
 		// set the pawns on corresponding tile
-		_gameBoard[3][2].setPawns("red");
-		_gameBoard[3][2].setPawns("yellow");
+		_gameBoard[2][2].setPawns("red");
+		_gameBoard[2][2].setPawns("yellow");
 		_gameBoard[3][2].setPawns("blue");
 		_gameBoard[3][2].setPawns("white");
 
@@ -403,7 +403,6 @@ public class Board {
 		for (int i = 0; i < _gameBoard.length; i++) {
 			for (int j = 0; j < _gameBoard.length; j++) {
 				_gameBoard[i][j].setCoordinates(i, j);
-
 			}
 		}
 	}

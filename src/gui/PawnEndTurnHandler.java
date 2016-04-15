@@ -9,6 +9,10 @@ public class PawnEndTurnHandler implements ActionListener{
 	FrameTest _frameTest;
 	Pawn _pawn;
 	
+	/*
+	 * Constructor for PawnEndTurnHandler
+	 * 
+	 */
 	PawnEndTurnHandler(FrameTest frameTest, Pawn pawn){
 		_frameTest = frameTest;
 		_pawn = pawn;

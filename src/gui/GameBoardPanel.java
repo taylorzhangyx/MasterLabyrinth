@@ -32,7 +32,10 @@ public class GameBoardPanel extends JPanel{
 	public static Board _board;
 	
 
-	
+	/*
+	 * Constructor for GameBoardPanel; Instantiates board
+	 * 
+	 */
 	  public GameBoardPanel(String[] names) {
 		  _board = new Board();
 			_buttons = new ArrayList<JButton>();
@@ -58,7 +61,11 @@ public class GameBoardPanel extends JPanel{
 			add(rightPanel,BorderLayout.EAST);
 			add(bottomPanel,BorderLayout.SOUTH);
 	}
-
+/*
+ * Create JPanel
+ * 
+ * @return p of type JPanel
+ */
 	private JPanel topAndBottomPanel(String s) {
 		JPanel p = new JPanel();
 		p.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 0));
@@ -217,6 +224,8 @@ public class GameBoardPanel extends JPanel{
 	  
 	  /**
 	   * enable the insertion buttons
+	   * 
+	   * @return void
 	   */
 	  public void enableInsertionButton(){
 		  for(int i=0; i<_buttons.size(); i++){

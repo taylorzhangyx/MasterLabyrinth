@@ -11,7 +11,9 @@ public class PawnMovingButtonHandler implements ActionListener{
 	FrameTest _frameTest;
 	Pawn _pawn;
 	String _direction;
-	
+	/*
+	 * Constructor for PawnMovingButtonHandler
+	 */
 	PawnMovingButtonHandler(Board board, FrameTest frameTest, Pawn pawn, String direction){
 		_board = board;
 		_frameTest = frameTest;

@@ -8,7 +8,9 @@ import board.Board;
 public class RotateCounterClockwiseButtonHandler implements ActionListener {
 	private FrameTest _frameTest;
 	private Board _board;
-
+/*
+ * Constructor for RotateCounterClockwiseButtonHandler
+ */
 	public RotateCounterClockwiseButtonHandler(Board board, FrameTest frameTest) {
 		_frameTest = frameTest;
 		_board = board;

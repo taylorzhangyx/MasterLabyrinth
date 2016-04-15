@@ -16,6 +16,7 @@ public class InsertButtonHandler implements ActionListener{
 		_row = row;
 		_column = column;
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		_board.InsertTile(_row, _column, _board._freetile);

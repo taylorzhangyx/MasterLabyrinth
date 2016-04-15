@@ -28,7 +28,11 @@ public class GameFunctionPanel extends JPanel {
 	private MessagePanel pawnScore;
 	private MessagePanel pawnFormularCard;
 	
-	
+	/*
+	 * Constructor for the GameFunctionPanel
+	 * 
+	 * 
+	 */
 	GameFunctionPanel(Pawn pawn){
 		_buttons = new ArrayList<JButton>();
 		_pawn = pawn;
@@ -43,7 +47,11 @@ public class GameFunctionPanel extends JPanel {
 		add(_movePanel);
 		add(_freeTile);
 	}
-	
+	/*
+	 *Instantiates pawns,  
+	 * 
+	 * @return jpl of type JPanel
+	 */
 	private JPanel createPawnInfo(){
 		//name is passed by arg[]
 		this.pawnName = new MessagePanel("Name: " + _pawn.getName());
@@ -72,7 +80,11 @@ public class GameFunctionPanel extends JPanel {
 		
 		return jpl;
 	}
-	
+	/*
+	 * Creates Move panel
+	 * 
+	 * @return jpl of type JPanel 
+	 */
 	private JPanel createMovePanel(){
 		JPanel jpl = new JPanel();
 		jpl.setLayout(new GridLayout(2,3,5,5));
@@ -90,7 +102,11 @@ public class GameFunctionPanel extends JPanel {
 		jpl.add(_buttons.get(5));
 		return jpl;
 	}
-	
+	/*
+	 * Instantiates freeTile
+	 * 
+	 * @return jpl of type JPanel
+	 */
 	private JPanel createFreeTile(){
 		JPanel jpl = new JPanel();
 		jpl.setLayout(new FlowLayout(FlowLayout.CENTER,5,5));
@@ -128,6 +144,8 @@ public class GameFunctionPanel extends JPanel {
 	/**
 	 * this method runs when the game goes into the pawn moving part
 	 * enable five moving buttons except pick up button and disable rotation button
+	 * 
+	 * @return void
 	 */
 	public void enablePawnMovingButtons(){
 		for(int i=1; i<_buttons.size(); i++)
@@ -143,6 +161,8 @@ public class GameFunctionPanel extends JPanel {
 	/**
 	 * this method runs when the game goes into the insertion part
 	 * disable six moving buttons includes pick up button and enable two rotation buttons
+	 * 
+	 * @return void
 	 */
 	public void disablePawnMovingButtons(){
 		for(int i=0; i<_buttons.size(); i++)

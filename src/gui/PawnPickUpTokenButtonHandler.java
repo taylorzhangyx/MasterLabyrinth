@@ -11,6 +11,10 @@ public class PawnPickUpTokenButtonHandler implements ActionListener{
 	FrameTest _frameTest;
 	Pawn _pawn;
 	
+	/*
+	 * Constructor for PawnPickUpTokenButtonHandler
+	 * 
+	 */
 	PawnPickUpTokenButtonHandler(Board board, FrameTest frameTest, Pawn pawn){
 		_board = board;
 		_frameTest = frameTest;

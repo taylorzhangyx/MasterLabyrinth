@@ -26,6 +26,7 @@ public class PawnPickUpTokenButtonHandler implements ActionListener{
 		int x = _pawn.getXpos();
 		int y = _pawn.getYpos();
 		_board._gameBoard[x][y].pickUpToken(_pawn);
+		_frameTest.incrementNextToken();
 		_frameTest.updateScore();
 		_frameTest.update();
 		_frameTest._gbp.enableInsertionButton();

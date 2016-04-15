@@ -528,8 +528,27 @@ public class Board {
 					_gameBoard[insert_i][insert_j].setToken(temp);
 
 				}
-				lastPosition_x = insert_i;
-				lastPosition_y = insert_j;
+				switch (insert_i){
+				case 0:
+					lastPosition_x = 6;
+					lastPosition_y = insert_j;
+					break;
+				case 6:
+					lastPosition_x = 0;
+					lastPosition_y = insert_j;
+					break;
+				}
+				switch (insert_j){
+				case 0:
+					lastPosition_x = insert_i;
+					lastPosition_y = 6;
+					break;
+				case 6:
+					lastPosition_x = insert_i;
+					lastPosition_y = 0;
+					break;
+				}
+
 
 			} // else{return _freetile;}
 		}
@@ -558,21 +577,13 @@ public class Board {
 					// match pawns to update location for every pawn in the
 					// arraylist
 					for (int k = 0; k < temp.size(); k++) {
-						switch (temp.get(k)) {
-						case "red":
-							_pawn1.setCoordinates(i, o);
-						case "yellow":
-							_pawn2.setCoordinates(i, o);
-						case "blue":
-							_pawn3.setCoordinates(i, o);
-						case "white":
-							_pawn4.setCoordinates(i, o);
+						getPawn(temp.get(k)).setCoordinates(i,o);
 						}
 					}
 				}
 			}
 		}
-	}
+	
 
 	/**
 	 * accept the current pawn you want to move and the direction you want to

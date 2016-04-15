@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -156,7 +157,7 @@ public class FrameTest {
 		_gfp.switchPawn(_pawn);
 		_pawn_x = _pawn.getXpos();
 		_pawn_y = _pawn.getYpos();
-		refreshPanwMovingButton();
+		refreshPawnMovingButton();
 	}
 /*
  * Update player's score
@@ -220,6 +221,40 @@ public class FrameTest {
 			_gfpb.get(2).setEnabled(false);
 		} else {
 			_gfpb.get(2).setEnabled(true);
+		}
+	}
+	
+	/**
+	 * this method is called every time after picking up a token
+	 */
+	public void incrementNextToken(){
+		_nextToken++;
+		if(_nextToken==21){
+			_nextToken = 25;
+		}
+		gameOver();
+	}
+	
+	/**
+	 * this method is called after picking up a token to check if it's the end of game
+	 */
+	public void gameOver(){
+		if(_nextToken == 26){
+			JFrame over = new JFrame("The End");
+			over.setLayout(new GridLayout(0,1));
+			Pawn p1 = GameBoardPanel._board.getPawn("red");
+			Pawn p2 = GameBoardPanel._board.getPawn("yellow");
+			Pawn p3 = GameBoardPanel._board.getPawn("blue");
+			Pawn p4 = GameBoardPanel._board.getPawn("white");
+			
+			over.add(new MessagePanel(p1.getName()+ " : " + p1.getScore()));
+			over.add(new MessagePanel(p2.getName()+ " : " + p2.getScore()));
+			over.add(new MessagePanel(p3.getName()+ " : " + p3.getScore()));
+			over.add(new MessagePanel(p4.getName()+ " : " + p4.getScore()));
+			
+			over.setBounds(300, 300, 200, 200);
+			over.setVisible(true);
+			over.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		}
 	}
 }

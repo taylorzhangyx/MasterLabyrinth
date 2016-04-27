@@ -1,4 +1,4 @@
-package tests.abstracttile;
+lpackage tests.abstracttile;
 
 import static org.junit.Assert.*;
 import code.model.*;

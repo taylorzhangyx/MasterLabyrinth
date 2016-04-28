@@ -35,6 +35,8 @@ public class Player {
 	 * true if player has moved this turn; false otherwise
 	 */
 	private boolean _hasMovedThisTurn;
+	
+	private int[] _formula;
 
 	/**
 	 * String holding the current color of the player
@@ -50,6 +52,8 @@ public class Player {
 	 * reference to the gameboard object with which this player is associated
 	 */
 	private GameBoard _gb;
+	
+	
 
 	/**
 	 * ArrayList of Tokens; the tokens that this player has collected
@@ -67,6 +71,8 @@ public class Player {
 	 */
 	private int _score; // sum of token values
 	
+	private int _magicWand;
+	
 
 	/**
 	 * The constructor Player assigns the instance variable _color to the String
@@ -80,7 +86,12 @@ public class Player {
 		_color = c;
 		_myTokens = new ArrayList<Token>();
 		_score = 0;
+		_magicWand = 3;
 		
+	}
+	
+	public int getMagicWandCount(){
+		return _magicWand;
 	}
 
 	/**
@@ -135,95 +146,21 @@ public class Player {
 	 * Formula card the player is assigned
 	 * 
 	 */
-	private int[] _formula;
 
-	private ArrayList<int[]> _listOfFormulas;
 
-	public int[] assignFormula(int formula){
-		int[] _formulaCard;
-		
-		switch(formula) {
-	    case 1:
-	       return _formulaCard = {11,3,14};
-	        break;
-	    case 2:
-	       return _formulaCard = {19,7,15};
-	        break;
-	    case 3:
-		       return _formulaCard = {1,10,13};
-		        break;
-		case 4:
-		       return _formulaCard = {20,17,3};
-		        break; 
-		case 5: 
-			return _formulaCard = {9,20,11};
-	        break;
-		case 6:
-			return _formulaCard = {6,14,8};
-	        break;	
-		case 7:
-		       return _formulaCard = {14,4,10};
-		        break; 
-		case 8: 
-			return _formulaCard = {13,15,12};
-	        break;
-		case 9:
-			return _formulaCard = {15,2,4};
-	        break;
-		case 10:
-		       return _formulaCard = {4,13,20};
-		        break; 
-		case 11: 
-			return _formulaCard = {10,12,16};
-	        break;
-		case 12:
-			return _formulaCard = {16,9,7};
-	        break;
-		case 13:
-		       return _formulaCard = {2,8,17};
-		        break; 
-		case 14: 
-			return _formulaCard = {17,5,6};
-	        break;
-		case 15:
-			return _formulaCard = {8,19,5};
-	        break;
-		case 16:
-		    return _formulaCard = {3,18,1};
-		    break; 
-		case 17: 
-			return _formulaCard = {12,1,9};
-	        break;
-		case 18:
-			return _formulaCard = {18,11,19};
-	        break;
-		case 19:
-		    return _formulaCard = {25,16,2};
-		    break; 
-		case 20: 
-			return _formulaCard = {7,6,25};
-	        break;
-		case 21:
-			return _formulaCard = {5,25,18};
-	        break;	
-	}
+	
+
+	
 		/*
 		 * setter method for Formula
 		 * 
 		 */
-		public void setFormula(int[] formula){
-			_formula = formula;
-		}
+		
 	/*
 	 * Assign a random formula card to the player based on the random number generated
 	 */
-	public void assignFormula(){
-		int[] randomFormula = generateXuniqueNumber(21, int 21);
-		//Player1.setFormula(assignFormula(randomFormula[0]));
-		//Player2.setFormula(assignFormula(randomFormula[1]));
-		//Player3.setFormula(assignFormula(randomFormula[2]));
-		//Player4.setFormula(assignFormula(randomFormula[3]));
-	}
+	
+	
 		/**
 		 * Gets an array with size of n in the range from 0 to x-1
 		 * 
@@ -234,26 +171,20 @@ public class Player {
 		 * @return an integer array in the size of n contains n unique number range
 		 *         from 0 to x-1
 		 */
-		private int[] generateXuniqueNumber(int n, int x) {
-			int uniqueInt[] = new int[n];
-			ArrayList<Integer> list = new ArrayList<Integer>();
-			// we start at index 0 because we need integer 0 to be in our integer
-			// arraylist
-
-			for (int i = 0; i < x; i++) {
-				list.add(new Integer(i));
-			}
-
-			Collections.shuffle(list);
-			// we store the first n elements in the arraylist in the int array
-			for (int i = 0; i < n; i++) {
-				uniqueInt[i] = list.get(i);
-			}
-			return uniqueInt;
-		}		
-	
-	}
 		
+	
+	
+	public void assignFormula(){
+		int[] randomFormula = generateXuniqueNumber(21, 21);
+		//Player1.setFormula(assignFormula(randomFormula[0]));
+		//Player2.setFormula(assignFormula(randomFormula[1]));
+		//Player3.setFormula(assignFormula(randomFormula[2]));
+		//Player4.setFormula(assignFormula(randomFormula[3]));
+	}
+	
+	public void setFormula(int[] formula){
+		_formula = formula;
+	}
 	/**
 	 * This method tells you if you can insert a tile.
 	 * 
@@ -276,6 +207,23 @@ public class Player {
 		return canInsert;
 	}
 
+	private int[] generateXuniqueNumber(int n, int x) {
+		int uniqueInt[] = new int[n];
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		// we start at index 0 because we need integer 0 to be in our integer
+		// arraylist
+
+		for (int i = 0; i < x; i++) {
+			list.add(new Integer(i));
+		}
+
+		Collections.shuffle(list);
+		// we store the first n elements in the arraylist in the int array
+		for (int i = 0; i < n; i++) {
+			uniqueInt[i] = list.get(i);
+		}
+		return uniqueInt;
+	}		
 	/**
 	 * This method moves a player to the destination the player wants to go It
 	 * checks to see if the player can move to the destination then moves the
@@ -378,6 +326,10 @@ public class Player {
 			AbstractTile at = t.getTile();
 			at.removeToken();
 			// t.setTile(null);
+			
+			if (t.getValue()==_formula[0]||t.getValue()==_formula[1]||t.getValue()==_formula[2]){
+				_score = _score + 20;
+			}
 			_score = _score + t.getValue();
 			_gb.toggleNextToken();
 			_gb.playerHasAlteredBoard();
@@ -510,5 +462,10 @@ public class Player {
 	 */
 	public void addToken(Token t) {
 		_myTokens.add(t);
+	}
+
+	public String getCard() {
+		
+		return ""+_formula[0]+", "+_formula[1]+", "+_formula[2];
 	}
 }

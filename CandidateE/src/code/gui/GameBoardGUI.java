@@ -129,6 +129,7 @@ public class GameBoardGUI implements Runnable, Observer{
 	 * @param gb refers to GameBoard
 	 * @author Ian,Weijin
 	 */
+	private JButton _magicWandButton;
 	public GameBoardGUI(GameBoard gb){
 		_gb = gb;
 		_gb.setObserver(this);
@@ -162,7 +163,7 @@ public class GameBoardGUI implements Runnable, Observer{
 		_rightPanel.setBackground(new Color(245,245,220));
 		_leftPanel.setBackground(new Color(245,245,220));
 		_leftPanel.setSize(560,560);
-		_leftPanelBehind.setSize(720,720);
+		//_leftPanelBehind.setSize(720,720);
 		//_leftPanelBack.setSize(720,720);
 		_rightPanel.setSize(720,720);
 		
@@ -210,7 +211,7 @@ public class GameBoardGUI implements Runnable, Observer{
 						tokens = tokens + t.getValue() + " ";
 					}
 					_playerInfo.setText("\t\t\t\tPLAYER INFO\n\nCurrent Player (" + cp +"): " + p.getName() + " (" + 
-							p.getColor() + " Pawn) \n" /*Current Score: "+
+							p.getColor() + " Pawn{"+p.getCard()+"} Score: "+p.getScore()+" Magic Wand: "+p.getMagicWandCount()+"\n" /*Current Score: "+
 							p.getScore() + "\n" */+ "My Tokens Collected: " + tokens
 							+ "\n\n" + t1);
 					_playerInfo.setFont(new Font("Garamond", Font.BOLD, 14));
@@ -219,7 +220,8 @@ public class GameBoardGUI implements Runnable, Observer{
 		});
 		
 		_leftPanel.setLayout(new GridLayout(1,1));
-		_rightPanel.setLayout(new GridLayout(4,1));
+		
+		_rightPanel.setLayout(new GridLayout(5,1));
 		_leftPanelBehind.add(_leftPanel);
 		_leftPanelBehind.setLayout(new GridBagLayout());
 		_leftPanelBehind.setBackground(new Color(245,245,220));
@@ -247,8 +249,10 @@ public class GameBoardGUI implements Runnable, Observer{
 		_rightPanel.add(_playerInfoPanel);
 		_rightPanel.add(_shiftableTilePanel);
 		_rightPanel.add(_gameFeedbackPanel);
-		_rightPanel.add(_endTurnButton);
 		
+		_rightPanel.add(_endTurnButton);
+		_magicWandButton = new JButton();
+		_rightPanel.add(_magicWandButton);
 		_window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		_window.pack();
 		
@@ -268,6 +272,7 @@ public class GameBoardGUI implements Runnable, Observer{
 		_gameFeedbackPanel.setBackground(new Color(245,245,220));
 		_gameFeedbackPanel.setPreferredSize(new Dimension(720,180));
 		_gameFeedback = new JTextPane();
+		_gameFeedback.setEditable(false);
 		_gameFeedback.setPreferredSize(new Dimension(720,180));
 		_gameFeedbackPanel.add(_gameFeedback);
 		_gameFeedback.setBackground(new Color(245,245,220));
@@ -288,6 +293,7 @@ public class GameBoardGUI implements Runnable, Observer{
 		_playerInfoPanel.setPreferredSize(new Dimension(720,180));
 		_playerInfoPanel.setBackground(new Color(245,245,220));
 		_playerInfo = new JTextPane();
+		_playerInfo.setEditable(false);
 		_playerInfo.setPreferredSize(new Dimension(720,180));
 		_playerInfoPanel.add(_playerInfo);
 		_playerInfo.setBackground(new Color(245,245,220));
@@ -312,7 +318,7 @@ public class GameBoardGUI implements Runnable, Observer{
 			tokens = tokens + t.getValue() + " ";
 		}
 		_playerInfo.setText("\t\t\t\tPLAYER INFO\n\nCurrent Player (" + cp +"): " + p.getName() + " (" + 
-				p.getColor() + " Pawn) \n" /*Current Score: "+
+				p.getColor() + " Pawn{"+p.getCard()+"} Score: "+p.getScore()+" Magic Wand: "+p.getMagicWandCount()+"\n" /*Current Score: "+
 				p.getScore() + "\n" */+ "My Tokens Collected: " + tokens
 				+ "\n\n" + t1);
 		_playerInfo.setFont(new Font("Garamond", Font.BOLD, 14));
@@ -637,7 +643,7 @@ public class GameBoardGUI implements Runnable, Observer{
 			tokens = tokens + t.getValue() + " ";
 		}
 		_playerInfo.setText("\t\t\t\tPLAYER INFO\n\nCurrent Player (" + cp +"): " + p.getName() + " (" + 
-				p.getColor() + " Pawn) \n" /*Current Score: "+
+				p.getColor() + " Pawn{"+p.getCard()+"} Score: "+p.getScore()+" Magic Wand: "+p.getMagicWandCount()+"\n" /*Current Score: "+
 				p.getScore() + "\n" */+ "My Tokens Collected: " + tokens
 				+ "\n\n" + t1);
 		_playerInfo.setFont(new Font("Garamond", Font.BOLD, 14));

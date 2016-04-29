@@ -30,6 +30,7 @@ public class Player {
 	 * true if player has shifted this turn; false otherwise
 	 */
 	private boolean _hasInsertedThisTurn;
+	public boolean _hasUsedWandThisTurn;
 
 	/**
 	 * true if player has moved this turn; false otherwise
@@ -87,13 +88,16 @@ public class Player {
 		_myTokens = new ArrayList<Token>();
 		_score = 0;
 		_magicWand = 3;
-		
 	}
 	
 	public int getMagicWandCount(){
 		return _magicWand;
 	}
-
+	
+	public void decMagicWandCount(){
+		_magicWand = _magicWand-1;
+	}
+	
 	/**
 	 * This method assigns the value gb, an reference to the Gameboard object,
 	 * to the instance variable _gb. This allows for accessability of Gameboard
@@ -138,6 +142,10 @@ public class Player {
 	 */
 	public AbstractTile getCurrentTile() {
 		return _currentTile;
+	}
+	
+	public void setTurn(boolean b){
+		_hasMovedThisTurn = b;
 	}
 
 	
@@ -468,4 +476,6 @@ public class Player {
 		
 		return ""+_formula[0]+", "+_formula[1]+", "+_formula[2];
 	}
+	
+	
 }

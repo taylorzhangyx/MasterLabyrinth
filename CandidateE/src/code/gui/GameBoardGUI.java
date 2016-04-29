@@ -161,6 +161,7 @@ public class GameBoardGUI implements Runnable, Observer{
 		
 		_rightPanel = new JPanel();
 		_rightPanel.setBackground(new Color(245,245,220));
+		_rightPanel.setPreferredSize(new Dimension(720,720));
 		_leftPanel.setBackground(new Color(245,245,220));
 		_leftPanel.setSize(560,560);
 		//_leftPanelBehind.setSize(720,720);
@@ -183,6 +184,7 @@ public class GameBoardGUI implements Runnable, Observer{
 			 */
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				GameBoard.CURRENTPLAYER._hasUsedWandThisTurn = false;
 				if(GameBoard.CURRENTPLAYER.getHasInsertedThisTurn()){
 					GameBoard.CURRENTPLAYER.endMyTurn();
 					_gb.toggleNextPlayer();
@@ -243,7 +245,6 @@ public class GameBoardGUI implements Runnable, Observer{
 		
 		_leftPanel.add(_boardPanel);
 		_boardPanel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-		_boardPanel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 		
 		
 		_rightPanel.add(_playerInfoPanel);
@@ -251,8 +252,24 @@ public class GameBoardGUI implements Runnable, Observer{
 		_rightPanel.add(_gameFeedbackPanel);
 		
 		_rightPanel.add(_endTurnButton);
-		_magicWandButton = new JButton();
+		_magicWandButton = new JButton("Use Magic Wand");
 		_rightPanel.add(_magicWandButton);
+		_magicWandButton.setFont(new Font("Garamond", Font.BOLD, 40));
+		_magicWandButton.setForeground(new Color(255,201,14));
+		_magicWandButton.setPreferredSize(new Dimension(720,180));
+		_magicWandButton.setBackground(new Color(0,0,0));
+		_magicWandButton.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if (GameBoard.CURRENTPLAYER._hasUsedWandThisTurn==false&&GameBoard.CURRENTPLAYER.getMagicWandCount()>0){
+				GameBoard.CURRENTPLAYER.setTurn(false);
+				GameBoard.CURRENTPLAYER.decMagicWandCount();
+				GameBoard.CURRENTPLAYER._hasUsedWandThisTurn=true;
+				update();
+				}
+			}});
+		
 		_window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		_window.pack();
 		

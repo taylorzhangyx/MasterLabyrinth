@@ -213,7 +213,7 @@ public class GameBoardGUI implements Runnable, Observer{
 						tokens = tokens + t.getValue() + " ";
 					}
 					_playerInfo.setText("\t\t\t\tPLAYER INFO\n\nCurrent Player (" + cp +"): " + p.getName() + " (" + 
-							p.getColor() + " Pawn{"+p.getCard()+"} Score: "+p.getScore()+" Magic Wand: "+p.getMagicWandCount()+"\n" /*Current Score: "+
+							p.getColor() + " Pawn){"+p.getCard()+"} Score: "+p.getScore()+" Magic Wand: "+p.getMagicWandCount()+"\n" /*Current Score: "+
 							p.getScore() + "\n" */+ "My Tokens Collected: " + tokens
 							+ "\n\n" + t1);
 					_playerInfo.setFont(new Font("Garamond", Font.BOLD, 14));
@@ -335,7 +335,7 @@ public class GameBoardGUI implements Runnable, Observer{
 			tokens = tokens + t.getValue() + " ";
 		}
 		_playerInfo.setText("\t\t\t\tPLAYER INFO\n\nCurrent Player (" + cp +"): " + p.getName() + " (" + 
-				p.getColor() + " Pawn{"+p.getCard()+"} Score: "+p.getScore()+" Magic Wand: "+p.getMagicWandCount()+"\n" /*Current Score: "+
+				p.getColor() + " Pawn){"+p.getCard()+"} Score: "+p.getScore()+" Magic Wand: "+p.getMagicWandCount()+"\n" /*Current Score: "+
 				p.getScore() + "\n" */+ "My Tokens Collected: " + tokens
 				+ "\n\n" + t1);
 		_playerInfo.setFont(new Font("Garamond", Font.BOLD, 14));
@@ -660,7 +660,7 @@ public class GameBoardGUI implements Runnable, Observer{
 			tokens = tokens + t.getValue() + " ";
 		}
 		_playerInfo.setText("\t\t\t\tPLAYER INFO\n\nCurrent Player (" + cp +"): " + p.getName() + " (" + 
-				p.getColor() + " Pawn{"+p.getCard()+"} Score: "+p.getScore()+" Magic Wand: "+p.getMagicWandCount()+"\n" /*Current Score: "+
+				p.getColor() + " Pawn){"+p.getCard()+"} Score: "+p.getScore()+" Magic Wand: "+p.getMagicWandCount()+"\n" /*Current Score: "+
 				p.getScore() + "\n" */+ "My Tokens Collected: " + tokens
 				+ "\n\n" + t1);
 		_playerInfo.setFont(new Font("Garamond", Font.BOLD, 14));
@@ -755,7 +755,7 @@ public class GameBoardGUI implements Runnable, Observer{
 			tokens = tokens + t.getValue() + " ";
 		}
 		_playerInfo.setText("\t\t\t\tPLAYER INFO\n\nCurrent Player (" + cp +"): " + p.getName() + " (" + 
-				p.getColor() + " Pawn) \n" /*Current Score: "+
+				p.getColor() + " Pawn){"+p.getCard()+"} Score: "+p.getScore()+" Magic Wand: "+p.getMagicWandCount()+"\n" /*Current Score: "+
 				p.getScore() + "\n" */+ "My Tokens Collected: " + tokens
 				+ "\n\n" + t1);
 		_playerInfo.setFont(new Font("Garamond", Font.BOLD, 14));

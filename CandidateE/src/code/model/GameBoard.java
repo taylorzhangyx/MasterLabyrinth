@@ -1,5 +1,6 @@
 package code.model;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -1193,6 +1194,37 @@ public class GameBoard {
 			System.out.println("The old taget token number was: " + _tokens.get(index).getValue());
 			System.out.println("The new target token is token number: " + _currentTargetToken.getValue());
 		}
+	}
+	
+	public void saveGame(){
+		String playerInfo = new String();
+		String tilesInfo = new String();
+		int illegalPoint;
+		
+		playerInfo = savePlayers();
+		tilesInfo = saveTiles();
+		illegalPoint = saveIllegalPoint();
+		
+		PrintWriter output = new PrintWriter("save.txt");
+		output.println(playerInfo);
+		output.println(tilesInfo);
+		output.println(illegalPoint);
+		output.close();
+	}
+
+	private int saveIllegalPoint() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	private String saveTiles() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private String savePlayers() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 } // end of Game Board class definition

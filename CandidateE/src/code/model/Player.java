@@ -403,13 +403,18 @@ public class Player {
 	public int getScore() {
 		return _score;
 	}
+	
+	/**
+	 * This method calculate the final score includes both score and magic wand
+	 * @return	integer
+	 */
+	public int getFinalScore(){
+		return _score+3*_magicWand;
+	}
 
 	/**
-	 * This method returns the player's tokens that he/she picked up
-	 * 
-	 * @return toekns of the player
-	 * 
-	 * @author satya, Josh 04-15-16
+	 * set the score based on score
+	 * @param score
 	 */
 	public void setScore(int score) {
 		_score = score;
@@ -474,7 +479,39 @@ public class Player {
 
 	public String getCard() {
 		
-		return ""+_formula[0]+", "+_formula[1]+", "+_formula[2];
+		return ""+_formula[0]+","+_formula[1]+","+_formula[2];
+	}
+
+	/**
+	 * print all info of this player out as a String
+	 * used for saving game
+	 * @return String with info of this player
+	 */
+	public String printInfo() {
+		String s = new String();
+//		[name, pawn color, wands remaining, secret recipe ingredients, tokens collected]
+//		[River,BLUE,3,[3,12,14],[1,3,4,11]]
+		s = "[" + _playerName + "," + _color + "," + _magicWand + ",["+ getCard() +"]," + getToken() + "]";
+		return s;
+	}
+
+	/**
+	 * Print all token out
+	 * @return
+	 */
+	private String getToken() {
+		String s = new String();
+		s += "[";
+		for(Token _token : _myTokens){
+			s += _token.getValue() + ",";
+		}
+		//current String = "[Value1,Value2,...ValueN,"
+		s += "]"; 
+		//current String = "[Value1,Value2,...ValueN,]"
+		s.replaceFirst(",", "");
+		//current String = "[Value1,Value2,...ValueN]"
+		
+		return s;
 	}
 	
 	

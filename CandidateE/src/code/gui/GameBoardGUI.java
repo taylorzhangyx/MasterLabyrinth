@@ -14,6 +14,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -130,6 +131,7 @@ public class GameBoardGUI implements Runnable, Observer{
 	 * @author Ian,Weijin
 	 */
 	private JButton _magicWandButton;
+	private JButton _saveButton;
 	public GameBoardGUI(GameBoard gb){
 		_gb = gb;
 		_gb.setObserver(this);
@@ -172,7 +174,7 @@ public class GameBoardGUI implements Runnable, Observer{
 		_endTurnButton.setFont(new Font("Garamond", Font.BOLD, 40));
 		_endTurnButton.setForeground(new Color(255,201,14));
 		_endTurnButton.setPreferredSize(new Dimension(720,180));
-		_endTurnButton.setBackground(new Color(0,0,0));
+		_endTurnButton.setBackground(new Color(50,50,50));
 		_endTurnButton.addActionListener(new ActionListener(){
 			
 			/**
@@ -212,18 +214,42 @@ public class GameBoardGUI implements Runnable, Observer{
 					for(Token t: p.getTokens()){
 						tokens = tokens + t.getValue() + " ";
 					}
-					_playerInfo.setText("\t\t\t\tPLAYER INFO\n\nCurrent Player (" + cp +"): " + p.getName() + " (" + 
+					_playerInfo.setText("\t\t\t\tPLAYER INFO\nCurrent Player (" + cp +"): " + p.getName() + " (" + 
 							p.getColor() + " Pawn){"+p.getCard()+"} Score: "+p.getScore()+" Magic Wand: "+p.getMagicWandCount()+"\n" /*Current Score: "+
 							p.getScore() + "\n" */+ "My Tokens Collected: " + tokens
-							+ "\n\n" + t1);
+							+ "\n" + t1);
 					_playerInfo.setFont(new Font("Garamond", Font.BOLD, 14));
+					
+					//enable save button and disable magic wand button
+					_saveButton.setEnabled(true);
+					_magicWandButton.setEnabled(false);
 				}
 			}	
 		});
 		
+		_saveButton = new JButton("Save Game");
+		_saveButton.setFont(new Font("Garamond", Font.BOLD, 40));
+		_saveButton.setForeground(new Color(255,201,14));
+		_saveButton.setPreferredSize(new Dimension(720,180));
+		_saveButton.setBackground(new Color(50,50,50));
+		_saveButton.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if (GameBoard.CURRENTPLAYER._hasUsedWandThisTurn==false&&GameBoard.CURRENTPLAYER.getMagicWandCount()>0){
+				try {
+					_gb.saveGame();
+					_window.dispose();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				}
+			}});
+		
 		_leftPanel.setLayout(new GridLayout(1,1));
 		
-		_rightPanel.setLayout(new GridLayout(5,1));
+		_rightPanel.setLayout(new GridLayout(6,1));
 		_leftPanelBehind.add(_leftPanel);
 		_leftPanelBehind.setLayout(new GridBagLayout());
 		_leftPanelBehind.setBackground(new Color(245,245,220));
@@ -251,24 +277,35 @@ public class GameBoardGUI implements Runnable, Observer{
 		_rightPanel.add(_shiftableTilePanel);
 		_rightPanel.add(_gameFeedbackPanel);
 		
+		_rightPanel.add(_saveButton);
 		_rightPanel.add(_endTurnButton);
 		_magicWandButton = new JButton("Use Magic Wand");
 		_rightPanel.add(_magicWandButton);
+		_magicWandButton.setEnabled(false);
 		_magicWandButton.setFont(new Font("Garamond", Font.BOLD, 40));
 		_magicWandButton.setForeground(new Color(255,201,14));
 		_magicWandButton.setPreferredSize(new Dimension(720,180));
-		_magicWandButton.setBackground(new Color(0,0,0));
+		_magicWandButton.setBackground(new Color(50,50,50));
 		_magicWandButton.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (GameBoard.CURRENTPLAYER._hasUsedWandThisTurn==false&&GameBoard.CURRENTPLAYER.getMagicWandCount()>0){
-				GameBoard.CURRENTPLAYER.setTurn(false);
+				GameBoard.CURRENTPLAYER.endMyTurn();
 				GameBoard.CURRENTPLAYER.decMagicWandCount();
 				GameBoard.CURRENTPLAYER._hasUsedWandThisTurn=true;
 				update();
 				}
+				else{
+				_gameFeedback.setText("\t\t\t\tGAME INFO\n\nIt is now " + GameBoard.CURRENTPLAYER.getName() +
+						"'s (" + GameBoard.CURRENTPLAYER.getColor() + " pawn) turn."+
+								"\nCurrent Collectible Token Number: " + _gb.getCurrentTargetTokenValue()
+								+ "\n\nYou are not allowed to use Magic Wand now!");
+				_gameFeedback.setFont(new Font("Garamond", Font.BOLD, 14));
+				}
 			}});
+		
+		
 		
 		_window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		_window.pack();
@@ -334,10 +371,10 @@ public class GameBoardGUI implements Runnable, Observer{
 		for(Token t: p.getTokens()){
 			tokens = tokens + t.getValue() + " ";
 		}
-		_playerInfo.setText("\t\t\t\tPLAYER INFO\n\nCurrent Player (" + cp +"): " + p.getName() + " (" + 
+		_playerInfo.setText("\t\t\t\tPLAYER INFO\nCurrent Player (" + cp +"): " + p.getName() + " (" + 
 				p.getColor() + " Pawn){"+p.getCard()+"} Score: "+p.getScore()+" Magic Wand: "+p.getMagicWandCount()+"\n" /*Current Score: "+
 				p.getScore() + "\n" */+ "My Tokens Collected: " + tokens
-				+ "\n\n" + t1);
+				+ "\n" + t1);
 		_playerInfo.setFont(new Font("Garamond", Font.BOLD, 14));
 	}
 	
@@ -659,10 +696,10 @@ public class GameBoardGUI implements Runnable, Observer{
 		for(Token t: p.getTokens()){
 			tokens = tokens + t.getValue() + " ";
 		}
-		_playerInfo.setText("\t\t\t\tPLAYER INFO\n\nCurrent Player (" + cp +"): " + p.getName() + " (" + 
+		_playerInfo.setText("\t\t\t\tPLAYER INFO\nCurrent Player (" + cp +"): " + p.getName() + " (" + 
 				p.getColor() + " Pawn){"+p.getCard()+"} Score: "+p.getScore()+" Magic Wand: "+p.getMagicWandCount()+"\n" /*Current Score: "+
 				p.getScore() + "\n" */+ "My Tokens Collected: " + tokens
-				+ "\n\n" + t1);
+				+ "\n" + t1);
 		_playerInfo.setFont(new Font("Garamond", Font.BOLD, 14));
 		
 		MoveableTile shiftableTile = _gb.getMoveableTileArray().get(0);
@@ -754,10 +791,10 @@ public class GameBoardGUI implements Runnable, Observer{
 		for(Token t: p.getTokens()){
 			tokens = tokens + t.getValue() + " ";
 		}
-		_playerInfo.setText("\t\t\t\tPLAYER INFO\n\nCurrent Player (" + cp +"): " + p.getName() + " (" + 
+		_playerInfo.setText("\t\t\t\tPLAYER INFO\nCurrent Player (" + cp +"): " + p.getName() + " (" + 
 				p.getColor() + " Pawn){"+p.getCard()+"} Score: "+p.getScore()+" Magic Wand: "+p.getMagicWandCount()+"\n" /*Current Score: "+
 				p.getScore() + "\n" */+ "My Tokens Collected: " + tokens
-				+ "\n\n" + t1);
+				+ "\n" + t1);
 		_playerInfo.setFont(new Font("Garamond", Font.BOLD, 14));
 		
 		MoveableTile shiftableTile = _gb.getMoveableTileArray().get(0);
@@ -815,19 +852,19 @@ public class GameBoardGUI implements Runnable, Observer{
 		String s4 = "Fourth place: ";
 		
 		if(length == 2){
-			s1 = s1 + temp[0].getName() + " with " + temp[0].getScore() + " points!";
-			s2 = s2 + temp[1].getName() + " with " + temp[1].getScore() + " points.";
+			s1 = s1 + temp[0].getName() + " with " + temp[0].getFinalScore() + " points!";
+			s2 = s2 + temp[1].getName() + " with " + temp[1].getFinalScore() + " points.";
 		}
 		if(length == 3){
-			s1 = s1 + temp[0].getName() + " with " + temp[0].getScore() + " points!";
-			s2 = s2 + temp[1].getName() + " with " + temp[1].getScore() + " points.";
-			s3 = s3 + temp[2].getName() + " with " + temp[2].getScore() + " points.";
+			s1 = s1 + temp[0].getName() + " with " + temp[0].getFinalScore() + " points!";
+			s2 = s2 + temp[1].getName() + " with " + temp[1].getFinalScore() + " points.";
+			s3 = s3 + temp[2].getName() + " with " + temp[2].getFinalScore() + " points.";
 		}
 		if(length == 4){
-			s1 = s1 + temp[0].getName() + " with " + temp[0].getScore() + " points!";
-			s2 = s2 + temp[1].getName() + " with " + temp[1].getScore() + " points.";
-			s3 = s3 + temp[2].getName() + " with " + temp[2].getScore() + " points.";
-			s4 = s4 + temp[3].getName() + " with " + temp[3].getScore() + " points.";
+			s1 = s1 + temp[0].getName() + " with " + temp[0].getFinalScore() + " points!";
+			s2 = s2 + temp[1].getName() + " with " + temp[1].getFinalScore() + " points.";
+			s3 = s3 + temp[2].getName() + " with " + temp[2].getFinalScore() + " points.";
+			s4 = s4 + temp[3].getName() + " with " + temp[3].getFinalScore() + " points.";
 		}
 		
 		if(length == 2){
@@ -842,6 +879,19 @@ public class GameBoardGUI implements Runnable, Observer{
 			_gameFeedback.setText("\t\t\t\t***GAME OVER!***\n\n" + s1 + "\n" + s2 + "\n" + s3 + "\n" + s4);	
 			_gameFeedback.setFont(new Font("Garamond", Font.BOLD, 14));
 		}
+	}
+
+
+	/**
+	 * this method is used when insertion happens
+	 * used to disable save button so that palyer can 
+	 * only save game at the beginning of each turn
+	 * and enable the magic wand button so that palyer
+	 * can use magic wand after they do the insertion
+	 */
+	public void setButtonAfterInsertion() {
+		_saveButton.setEnabled(false);
+		_magicWandButton.setEnabled(true);
 	}
 	
 	

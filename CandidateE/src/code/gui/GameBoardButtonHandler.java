@@ -64,6 +64,7 @@ public class GameBoardButtonHandler implements ActionListener{
 				&& GameBoard.CURRENTPLAYER.getHasMovedThisTurn() == false){
 			int tileNum = _row * 7 + _col;
 			GameBoard.CURRENTPLAYER.insertShiftableTile(tileNum);
+			_gbGUI.setButtonAfterInsertion();
 		}
 		else if(GameBoard.CURRENTPLAYER.getHasInsertedThisTurn() == true
 				&& GameBoard.CURRENTPLAYER.getHasMovedThisTurn() == false){

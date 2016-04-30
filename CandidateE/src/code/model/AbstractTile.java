@@ -12,6 +12,7 @@ import code.model.Token;
  * FixedTile classes. 
  * 
  * @author Satya, Ian (03-15-16)
+ * @update By Yuxin Zhang (04-29-16) add _tileType and _orientation
  */
 
 public abstract class AbstractTile {
@@ -55,6 +56,10 @@ public abstract class AbstractTile {
 	 */
 	protected boolean _initialized;
 	
+	protected String _tileType;
+	
+	protected int _orientation;
+	
 	//protected int _rotationTotal;
 	
 	/**
@@ -82,14 +87,18 @@ public abstract class AbstractTile {
 	 */
 	public AbstractTile(String identity){
 		_players = new ArrayList<Player>();
+		_tileType = identity;
 		if (identity == "T"){
 			setDirections(1,0,1,1);
+			_orientation = 2;
 		}
 		if (identity == "L"){
 			setDirections(1,0,0,1);
+			_orientation = 3;
 		}
 		if (identity == "I"){
 			setDirections(0,0,1,1);
+			_orientation =1;
 		}
 	}
 	
@@ -172,6 +181,7 @@ public abstract class AbstractTile {
 	 * @return true if the directions were successfully set for the tile and false if not
 	 * 
 	 * @author Satya, Ian (03-15-16)
+	 * @comment This method is only allowed to run once because of checking of _initializaed
 	 */
 	public boolean setDirections(int t, int b, int l, int r){
 		if(checkLegalDirectionsInput(t,b,l,r) && !_initialized){	
@@ -184,6 +194,7 @@ public abstract class AbstractTile {
 		}
 		return false;
 	}
+	
 	
 	/**
 	 * This method checks if the parameters t, b, l, and r correspond to
@@ -271,6 +282,14 @@ public abstract class AbstractTile {
 			_left = _top;
 			_top = temp;
 			
+			//change orientation counter-clockwise rotation
+			_orientation = _orientation +4 -1 ;
+			if(_tileType.equals("I")){
+				_orientation = _orientation%2;
+			}
+			else{
+				_orientation = _orientation%4;
+			}
 		}
 		else if(r==-90 || r==270){
 			int temp = _left;
@@ -278,7 +297,14 @@ public abstract class AbstractTile {
 			_bottom = _right;
 			_right = _top;
 			_top = temp;
-			
+			//change orientation clockwise rotation
+			_orientation  += 1 ;
+			if(_tileType.equals("I")){
+				_orientation = _orientation%2;
+			}
+			else{
+				_orientation = _orientation%4;
+			}
 		}
 		else if(r==180 || r==-180) {
 			int temp = _left;
@@ -287,7 +313,13 @@ public abstract class AbstractTile {
 			temp = _top;
 			_top = _bottom;
 			_bottom = temp;
-			
+			if(_tileType.equals("I")){
+//				remains the same
+//				_orientation = (_orientation+1)%2;
+			}
+			else{
+				_orientation = (_orientation+2)%4;
+			}
 		}
 		else {} // d%90!=0;
 	}
@@ -329,6 +361,56 @@ public abstract class AbstractTile {
 	 */
 	public ArrayList<Player> getPlayers(){
 		return _players;
+	}
+	
+	/**
+	 * Print all info
+	 */
+	public String printInfo() {
+		String info = new String();
+//		[Tile Type Orientation, token value, [Pawn list]]
+//		[T0,0,[BLUE,GREEN]]
+		info = "["+ printTile() + "," + printToken() + "," + printPlayer() + "]";
+		
+		
+		
+		return info;
+	}
+
+	private String printToken() {
+		if(hasToken()){
+			return ""+_token.getValue();
+		}
+		else{
+			return ""+0;
+		}
+	}
+
+	/**
+	 * print out the player info based on Arraylist of String _players
+	 * under the format "[ColorPawn1,ColorPawn2,ColorPawn3]"
+	 * @return a String contains color lists
+	 */
+	private String printPlayer() {
+		String colorList = new String();
+		//The example format [BLUE,GREEN]
+		colorList = "[";
+		for(Player p : _players){
+			colorList += "," + p.getColor().toUpperCase();
+		}
+		colorList += "]";
+		//current String [,BLUE,GREEN]
+		colorList = colorList.replaceFirst(",", "");
+		//current String [BLUE,GREEN]
+		return colorList;
+	}
+
+	/**
+	 * Print current tile type and orientation based on description in stage 3
+	 * @return a String contains tile type and orientation
+	 */
+	private String printTile() {
+		return ""+_tileType+_orientation;
 	}
 	
 } //end class definition

@@ -1,5 +1,6 @@
 package code.model;
 
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -1196,7 +1197,7 @@ public class GameBoard {
 		}
 	}
 	
-	public void saveGame(){
+	public void saveGame() throws FileNotFoundException{
 		String playerInfo = new String();
 		String tilesInfo = new String();
 		int illegalPoint;
@@ -1214,17 +1215,50 @@ public class GameBoard {
 
 	private int saveIllegalPoint() {
 		// TODO Auto-generated method stub
-		return 0;
+		int lastPosition = _arrayOfMoveTiles.get(0).getLastTileNum();
+		switch (lastPosition){
+		case 1:
+			return 1;
+		case 3:
+			return 2;
+		case 5: return 3;
+		case 13: return 4;
+		case 27: return 5;
+		case 41: return 6;
+		case 47: return 7;
+		case 45: return 8;
+		case 43: return 9;
+		case 35: return 10;
+		case 21: return 11;
+		case 7: return 12;
+		//lastPosition is initialized as 100, only after insertion this number will change
+		default: return 0;
+		}
 	}
 
 	private String saveTiles() {
-		// TODO Auto-generated method stub
-		return null;
+		String info = new String();
+		AbstractTile _tile;
+		for(int i = 0; i<7; i++){
+			for(int j = 0; j<7; j++){
+				_tile = _board[i][j];
+				info += "," + _tile.printInfo();
+			}
+		}
+		info = info.replaceFirst(",","");
+		return info;
 	}
 
 	private String savePlayers() {
-		// TODO Auto-generated method stub
-		return null;
+		String info = new String();
+		int numPlayer = _players.length;
+		for(int i = 0; i<numPlayer; i++ ){
+			//get player in order
+			Player _player = _players[(i+currentPlayerIndex)%numPlayer];
+			info += "," + _player.printInfo();
+		}
+		info = info.replaceFirst(",", "");
+		return info;
 	}
 
 } // end of Game Board class definition

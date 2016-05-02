@@ -469,12 +469,12 @@ public class GameBoard {
 	public void createAndPlacePlayers() {
 		AbstractTile[] at = { _board[2][2], _board[2][4], _board[4][2], _board[4][4] };
 		ArrayList<Integer> list = new ArrayList<Integer>();
-		for (int k = 1; k<22;k++){
+		for (int k = 1; k < 22; k++) {
 			list.add(k);
 		}
 		Collections.shuffle(list);
 		for (int i = 0; i < _numOfPlayers; i++) {
-			
+
 			Player p = new Player(Player._validColors[i]);
 			p.setFormula(assignFormula(list.get(i)));
 			p.setCurrentTile(at[i]);
@@ -485,7 +485,6 @@ public class GameBoard {
 	}
 
 	public int[] assignFormula(int formula) {
-		
 
 		switch (formula) {
 		case 1:
@@ -495,7 +494,7 @@ public class GameBoard {
 			return new int[] { 19, 7, 15 };
 
 		case 3:
-			return  new int[] { 1, 10, 13 };
+			return new int[] { 1, 10, 13 };
 
 		case 4:
 			return new int[] { 20, 17, 3 };
@@ -519,7 +518,7 @@ public class GameBoard {
 			return new int[] { 4, 13, 20 };
 
 		case 11:
-			return  new int[] { 10, 12, 16 };
+			return new int[] { 10, 12, 16 };
 
 		case 12:
 			return new int[] { 16, 9, 7 };
@@ -528,10 +527,10 @@ public class GameBoard {
 			return new int[] { 2, 8, 17 };
 
 		case 14:
-			return  new int[] { 17, 5, 6 };
+			return new int[] { 17, 5, 6 };
 
 		case 15:
-			return  new int[] { 8, 19, 5 };
+			return new int[] { 8, 19, 5 };
 
 		case 16:
 			return new int[] { 3, 18, 1 };
@@ -994,15 +993,7 @@ public class GameBoard {
 			}
 
 		}
-		// System.out.println("The origin tile number is: "+originTileNum+"\nThe
-		// destination tile number is: "+
-		// destinationTileNum);
-		// System.out.println("\nThe tile numbers of the destination tiles are:
-		// ");
-		// for(AbstractTile aT: possibleDestinations){
-		// System.out.println(getTileNumFromTileReference(aT));
-		// }
-		// System.out.print("\n");
+
 		if (possibleDestinations.contains(destinationTile)) {
 			// System.out.println("Valid Move: There exists a path between
 			// origin and destination!");
@@ -1025,20 +1016,6 @@ public class GameBoard {
 		return _players;
 	}
 
-	/**
-	 * This method sets the players using parameter passed into the method
-	 * 
-	 * @param players
-	 *            array
-	 * @author weijin,Satya 04-03-16 5:28pm
-	 */
-	// public void setPlayers(Player[] players){
-	// _players = players;
-	// }
-
-	// OUR STAGE 1 CODE DOES NOT NEED THIS PRINTBOARD METHOD -- IT WAS USEFUL IN
-	// DEBUGGING,
-	// AND MAY BE USEFUL LATER, SO WE LEAVE IT IN.
 	/**
 	 * The method just creates a version of the board that prints to the console
 	 * -- the board that can be used to check if everything is working correctly
@@ -1137,36 +1114,6 @@ public class GameBoard {
 	// }
 
 	/**
-	 * This method keeps each player's order of his/her turn
-	 * 
-	 * @param turns
-	 * @author ken,Josh (April 3,2016)(8:20pm)
-	 */
-	// This is just a basic and maybe stupid structure for counting the player
-	// turns
-	// large code needs to be updated
-	// public void Turns(String s){
-	//
-	// GameBoard gb = new GameBoard(4);
-	// int _p = gb._numOfPlayers;
-	// int state = 0;
-	//
-	// if (_p == 2){
-	// switch(state){
-	// case 0:
-	// }
-	// }
-	//
-	// if (_p == 3){
-	// switch(state){}
-	// }
-	//
-	// if (_p == 4){
-	// switch(state){}
-	// }
-	// }
-
-	/**
 	 * This method changes currentPlayer to the next currentPlayer (i.e., if
 	 * player 1 ends turn, now it is player 2's turn)
 	 * 
@@ -1185,7 +1132,6 @@ public class GameBoard {
 	public void toggleNextToken() {
 		if (_currentTargetToken.getValue() == 25) {
 			GAMEOVER = true;
-			
 
 			_observer.gameOver();
 
@@ -1196,16 +1142,22 @@ public class GameBoard {
 			System.out.println("The new target token is token number: " + _currentTargetToken.getValue());
 		}
 	}
-	
-	public void saveGame() throws FileNotFoundException{
+
+	/*
+	 * Saves the game for the player. Writes all of the necessary data to a text
+	 * file that can then be read from in order to restart game play.
+	 * 
+	 * File to be saved to is named "save.txt"
+	 */
+	public void saveGame() throws FileNotFoundException {
 		String playerInfo = new String();
 		String tilesInfo = new String();
 		int illegalPoint;
-		
+
 		playerInfo = savePlayers();
 		tilesInfo = saveTiles();
 		illegalPoint = saveIllegalPoint();
-		
+
 		PrintWriter output = new PrintWriter("save.txt");
 		output.println(playerInfo);
 		output.println(tilesInfo);
@@ -1213,52 +1165,121 @@ public class GameBoard {
 		output.close();
 	}
 
+	/*
+	 * Returns the only illegal point on the board- the one spot that a player
+	 * CANNOT put a tile when restarting the game. Prof. Alphonce wants the game
+	 * board to be described by a ring of numbers, 1-12 starting with the top
+	 * left and progressing clockwise. The int returned is the corresponding
+	 * illegal point. If gameplay was stopped before the first tile was
+	 * inserted, return a 0.
+	 * 
+	 * @return illegal position of the gameboard
+	 */
 	private int saveIllegalPoint() {
-		// TODO Auto-generated method stub
 		int lastPosition = _arrayOfMoveTiles.get(0).getLastTileNum();
-		switch (lastPosition){
+		switch (lastPosition) {
 		case 1:
 			return 1;
 		case 3:
 			return 2;
-		case 5: return 3;
-		case 13: return 4;
-		case 27: return 5;
-		case 41: return 6;
-		case 47: return 7;
-		case 45: return 8;
-		case 43: return 9;
-		case 35: return 10;
-		case 21: return 11;
-		case 7: return 12;
-		//lastPosition is initialized as 100, only after insertion this number will change
-		default: return 0;
+		case 5:
+			return 3;
+		case 13:
+			return 4;
+		case 27:
+			return 5;
+		case 41:
+			return 6;
+		case 47:
+			return 7;
+		case 45:
+			return 8;
+		case 43:
+			return 9;
+		case 35:
+			return 10;
+		case 21:
+			return 11;
+		case 7:
+			return 12;
+		// lastPosition is initialized as 100, only after insertion this number
+		// will change
+		default:
+			return 0;
 		}
 	}
 
+	/*
+	 * Saves the current setup and orientation of the tiles on the game board by
+	 * writing all of the data to a concatentated string that will be used to
+	 * restart the game.
+	 * 
+	 * @return info - data about the tile configuration
+	 */
 	private String saveTiles() {
 		String info = new String();
 		AbstractTile _tile;
-		for(int i = 0; i<7; i++){
-			for(int j = 0; j<7; j++){
+		for (int i = 0; i < 7; i++) {
+			for (int j = 0; j < 7; j++) {
 				_tile = _board[i][j];
 				info += "," + _tile.printInfo();
 			}
 		}
-		info = info.replaceFirst(",","");
+		info = info.replaceFirst(",", "");
 		return info;
 	}
 
+	/*
+	 * Saves the players' information by creating a concantenated string with
+	 * all of the data. This method will be called within a save game method.
+	 * The string of data will be used to restart the game.
+	 * 
+	 * @return info - the saved String of player's info
+	 * 
+	 */
 	private String savePlayers() {
 		String info = new String();
 		int numPlayer = _players.length;
-		for(int i = 0; i<numPlayer; i++ ){
-			//get player in order
-			Player _player = _players[(i+currentPlayerIndex)%numPlayer];
+		for (int i = 0; i < numPlayer; i++) {
+			// get player in order
+			Player _player = _players[(i + currentPlayerIndex) % numPlayer];
 			info += "," + _player.printInfo();
 		}
 		info = info.replaceFirst(",", "");
 		return info;
+	}
+
+	/*
+	 * Restart a previously saved game by accepting a string that is a filepath
+	 * to a text file that can be parsed for the required data to set up the
+	 * previous game.
+	 * 
+	 */
+	private void restartGame(String savedGameTextFile) {
+
+		if (savedGameTextFile.exists()) {
+			try {
+				BufferedReader savedFile = new BufferedReader(new FileReader(savedGameTextFile));
+			} catch (FileNotFoundException e) {
+				// add functionality if the file isn't available
+			}
+
+			// read the 3 strings in from the file
+			String firstLine = savedFile.readLine();
+			String secondLine = savedFile.readLine();
+			String thirdLine = savedFile.readLine();
+			
+			// set up board as before
+			
+			//GameBoard gb = new GameBoard(????????????);
+			//gb.populateBoardWithFixedTiles();
+			
+			//for(int i = 0; i < secondLine.length(); i++){
+			
+		//}
+			
+
+		}
 	}
 
 } // end of Game Board class definition

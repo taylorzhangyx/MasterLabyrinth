@@ -1260,30 +1260,35 @@ public class GameBoard {
 	 */
 	private void restartGame(String savedGameTextFile) throws IOException {
 
-	
-			try {
-				BufferedReader savedFile = new BufferedReader(new FileReader(savedGameTextFile));
-				String firstLine = savedFile.readLine();
-				String secondLine = savedFile.readLine();
-				String thirdLine = savedFile.readLine();
-			} catch (FileNotFoundException e) {
-				// add functionality if the file isn't available
+		try {
+			BufferedReader savedFile = new BufferedReader(new FileReader(savedGameTextFile));
+			String firstLine = savedFile.readLine();
+			String secondLine = savedFile.readLine();
+			String thirdLine = savedFile.readLine();
+			int numberOfBrackets = 0;
+			// count the # of brackets in the first string to determine # of
+			// players
+			for (int i = 0; i < firstLine.length(); i++) {
+				if (firstLine.charAt(i) == '[') {
+					numberOfBrackets++;
+				}
 			}
+			// format of save file requires there be (3) open brackets '[' per
+			// player when the data is saved.
+			int numberOfPlayers = numberOfBrackets / 3;
+			GameBoard gb = new GameBoard(numberOfPlayers);
+			for (int i = 0; i < 7; i++) {
+				for (int j = 0; j < 7; j++) {
+					// The smallest block that needs to be parsed is [tile type
+					// and orientation, tokens on it, [player]
+					// therefore we check the delimiters the '[' and ']'
+					// characters and use that to set up the board
+				}
 
-			// read the 3 strings in from the file
-			
+			}
+		} catch (FileNotFoundException e) {
+			// add functionality if the file isn't available
+		}
 
-			// set up board as before
-			
-			 
-			/*   need to figure out how many players the previous game had.
-			 * 
-			 * GameBoard gb = new GameBoard(????????????);
-			 * gb.populateBoardWithFixedTiles();
-			 * 
-			 * for(int i = 0; i < secondLine.length(); i++){
-			 * 
-			 * }
-			 */
 	}
 } // end of Game Board class definition

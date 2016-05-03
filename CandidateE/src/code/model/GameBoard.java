@@ -1,6 +1,9 @@
 package code.model;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -1255,31 +1258,32 @@ public class GameBoard {
 	 * previous game.
 	 * 
 	 */
-	private void restartGame(String savedGameTextFile) {
+	private void restartGame(String savedGameTextFile) throws IOException {
 
-		if (savedGameTextFile.exists()) {
+	
 			try {
 				BufferedReader savedFile = new BufferedReader(new FileReader(savedGameTextFile));
+				String firstLine = savedFile.readLine();
+				String secondLine = savedFile.readLine();
+				String thirdLine = savedFile.readLine();
 			} catch (FileNotFoundException e) {
 				// add functionality if the file isn't available
 			}
 
 			// read the 3 strings in from the file
-			String firstLine = savedFile.readLine();
-			String secondLine = savedFile.readLine();
-			String thirdLine = savedFile.readLine();
 			
+
 			// set up board as before
 			
-			//GameBoard gb = new GameBoard(????????????);
-			//gb.populateBoardWithFixedTiles();
-			
-			//for(int i = 0; i < secondLine.length(); i++){
-			
-		//}
-			
-
-		}
+			 
+			/*   need to figure out how many players the previous game had.
+			 * 
+			 * GameBoard gb = new GameBoard(????????????);
+			 * gb.populateBoardWithFixedTiles();
+			 * 
+			 * for(int i = 0; i < secondLine.length(); i++){
+			 * 
+			 * }
+			 */
 	}
-
 } // end of Game Board class definition

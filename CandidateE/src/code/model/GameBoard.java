@@ -1277,13 +1277,60 @@ public class GameBoard {
 			// player when the data is saved.
 			int numberOfPlayers = numberOfBrackets / 3;
 			GameBoard gb = new GameBoard(numberOfPlayers);
+			populateTokenArray();
+			int k = 0;
 			for (int i = 0; i < 7; i++) {
 				for (int j = 0; j < 7; j++) {
 					// The smallest block that needs to be parsed is [tile type
 					// and orientation, tokens on it, [player]
 					// therefore we check the delimiters the '[' and ']'
 					// characters and use that to set up the board
+					if (secondLine.charAt(k) == '[') {
+						char tile = secondLine.charAt(k + 1);
+						char orientation = secondLine.charAt(k + 2);
+						// assign a tile to the space
+						switch (tile) {
+						case 'T':
+							_board[i][j] = new FixedTile("T");
+							break;
+						case 'L':
+							_board[i][j] = new FixedTile("L");
+							break;
+						case 'I':
+							_board[i][j] = new FixedTile("T");
+							break;
+
+						}
+
+						// TODO proper orientation needs to be determined
+						switch (orientation) {
+						case '0': //////
+							_board[i][j].rotate(-90);
+							break;
+						case '1': ///// ???
+							_board[i][j].rotate(-90);
+							break;
+						case '2': ///// ??/
+							_board[i][j].rotate(-90);
+							break;
+						case '3': ////// ???
+							_board[i][j].rotate(-90);
+							break;
+						}
+						// parse out token from string, assign it
+						char t = secondLine.charAt(k + 4);
+						if ((t != 0) && (t != 25)) {
+							//adjust for the indexing of the token array
+							_board[i][j].setToken(_tokens.get(t - 1));
+						}
+						if(t == 25){
+							//adjust for the indexing of the token array
+							_board[i][j].setToken(_tokens.get( t-5 ));
+						}
+					}
+
 				}
+				k = k + 10;
 
 			}
 		} catch (FileNotFoundException e) {

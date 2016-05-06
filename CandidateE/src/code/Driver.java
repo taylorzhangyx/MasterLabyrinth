@@ -1,7 +1,8 @@
 package code;
 import code.model.*;
 
-
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.SwingUtilities;
@@ -24,12 +25,19 @@ public class Driver {
 	  * For example you would type in: Tom Ben Jerry 
 	  * Which would give you 3 players and be counted in the for loop by the in countNumOfPlayers
 	  * @author Josh,Ken
+	 * @throws IOException 
 	  */
 	 public static void main(String[] args){
-	 
+		
 		 int countNumOfPlayers = 0;
 		 for (String s: args){
 			 countNumOfPlayers ++;
+		 }
+		 
+		 if(args[0] == "save.txt"){
+			 GameBoard gb = new GameBoard(countNumOfPlayers)；
+			gb.restartGame（args）；
+					 
 		 }
 	
 		 if(countNumOfPlayers > 1 && countNumOfPlayers < 5 ){
@@ -170,5 +178,6 @@ public class Driver {
 		 else{
 			  System.out.println("You should only have 2-4 player for this game.");
 		 }
+		
 	 }
 }

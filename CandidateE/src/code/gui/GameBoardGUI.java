@@ -291,7 +291,8 @@ public class GameBoardGUI implements Runnable, Observer{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (GameBoard.CURRENTPLAYER._hasUsedWandThisTurn==false&&GameBoard.CURRENTPLAYER.getMagicWandCount()>0){
-				GameBoard.CURRENTPLAYER.endMyTurn();
+				//GameBoard.CURRENTPLAYER.endMyTurn();
+				GameBoard.CURRENTPLAYER.setTurn(false);
 				GameBoard.CURRENTPLAYER.decMagicWandCount();
 				GameBoard.CURRENTPLAYER._hasUsedWandThisTurn=true;
 				update();

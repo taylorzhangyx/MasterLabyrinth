@@ -91,6 +91,9 @@ public class GameBoard {
 	private GameBoardGUI _observer;
 
 	// private int _turns;
+	
+	private int _numCount;
+	
 
 	/**
 	 * Constructor of GameBoard class with the int numPlayers as a parameter.
@@ -114,6 +117,17 @@ public class GameBoard {
 		_arrayOfMoveTiles = new ArrayList<MoveableTile>();
 		_numOfPlayers = numPlayers;
 		_players = new Player[_numOfPlayers];
+		_tokens = new ArrayList<Token>();
+		currentPlayerIndex = 0;
+	}
+	
+	
+	public GameBoard() {
+		
+		_board = new AbstractTile[7][7];
+		_arrayOfMoveTiles = new ArrayList<MoveableTile>();
+		_numOfPlayers = 0;
+		//_players = new Player[_numOfPlayers]; need to do this!
 		_tokens = new ArrayList<Token>();
 		currentPlayerIndex = 0;
 	}
@@ -1258,7 +1272,7 @@ public class GameBoard {
 	 * previous game.
 	 * 
 	 */
-	private void restartGame(String savedGameTextFile) throws IOException {
+	public void restartGame(String savedGameTextFile) throws IOException {
 
 		try {
 			BufferedReader savedFile = new BufferedReader(new FileReader(savedGameTextFile));
@@ -1321,21 +1335,57 @@ public class GameBoard {
 						char t = secondLine.charAt(k + 4);
 						if ((t != 0) && (t != 25)) {
 							//adjust for the indexing of the token array
-							_board[i][j].setToken(_tokens.get(t - 1));
+							_board[i][j].setToken(_tokens.get(t-'0')); // -1
 						}
 						if(t == 25){
 							//adjust for the indexing of the token array
-							_board[i][j].setToken(_tokens.get( t-5 ));
+							_board[i][j].setToken(_tokens.get( t-'0'-5 ));
 						}
+						
+						char p = secondLine.charAt(k+7);
+						_numCount = 10;
+						int incr = 0;
+						String temp = "";
+						while (p != ']'){
+							temp = temp + p;
+							
+							_numCount++;
+							incr++;
+							p = secondLine.charAt(k+7+incr);
+						}
+						if (!temp.equals("")){restorePlayersToTile(temp, _board[i][j]);}
+						
 					}
 
 				}
-				k = k + 10;
+				k = k + _numCount;
 
 			}
 		} catch (FileNotFoundException e) {
 			// add functionality if the file isn't available
 		}
 
+	}
+
+	private void restorePlayersToTile(String temp, AbstractTile currentTile) {
+		int state = 0;
+		String p = "";
+		for (int i = 0; i<temp.length();i++){
+		char ch = temp.charAt(i);
+		switch (state){
+		case 0:
+			if (ch !=','){p = p +ch;}
+			else {state = 1;}
+		case 1:
+			currentTile.addPlayer(new Player(p));
+			_numOfPlayers++;
+			p = "";
+			state = 0;
+			break;
+		
+			
+		}
+		}
+		
 	}
 } // end of Game Board class definition

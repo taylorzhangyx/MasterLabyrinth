@@ -110,7 +110,7 @@ public class GameBoard {
 	 * @author Ian, Satya 04-10-16
 	 */
 	public GameBoard(int numPlayers) {
-		if (numPlayers < 0 || numPlayers > Player.maxNumberOfPlayers) {
+		if (numPlayers < 2 || numPlayers > Player.maxNumberOfPlayers) {
 			numPlayers = 4;
 		}
 		_board = new AbstractTile[7][7];

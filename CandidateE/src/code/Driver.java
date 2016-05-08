@@ -27,7 +27,7 @@ public class Driver {
 	  * @author Josh,Ken
 	 * @throws IOException 
 	  */
-	 public static void main(String[] args){
+	 public static void main(String[] args) throws IOException{
 		
 		 int countNumOfPlayers = 0;
 		 for (String s: args){
@@ -35,8 +35,8 @@ public class Driver {
 		 }
 		 
 		 if(args[0] == "save.txt"){
-			 GameBoard gb = new GameBoard(countNumOfPlayers)；
-			gb.restartGame（args）；
+			 GameBoard gb = new GameBoard(2);
+			 gb.restartGame(args[0]);
 					 
 		 }
 	

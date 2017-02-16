@@ -1,8 +1,10 @@
 /board/
+/code/
 /gui/
 /image/
 /pawn/
+/resources/
+/tests/
 /tile/
 /token/
-/code/
-/tests/
+/tileTest/

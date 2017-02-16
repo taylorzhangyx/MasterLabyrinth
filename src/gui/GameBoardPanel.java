@@ -14,12 +14,19 @@ import javax.swing.JPanel;
 
 import board.Board;
 
+/**
+ * a JPanel holds a fully functional board and 4 surrounding panel as insertion point
+ * This JPanel is the main game board area that will represent on game window
+ * 
+ * @author Yuxin Zhang
+ */
 public class GameBoardPanel extends JPanel{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	public JPanel centerPanel; //hold the board
 	public ArrayList<JLabel> _labels;
 	
@@ -68,11 +75,7 @@ public class GameBoardPanel extends JPanel{
 	 * @param s
 	 */
 	private void buildBoard(String[] s) {
-	_board = new Board();
-	_board.createGameBoard();
-	_board.populateBoard();
-	_board.setPawnName(s);
-	_board.updatePawnXYPosition();
+	_board = new Board(s);
 	}
 	/*
  * Create JPanel

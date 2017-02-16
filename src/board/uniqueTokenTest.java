@@ -15,10 +15,15 @@ public class uniqueTokenTest {
 	public void test() {
 		Board test = new Board();
 		int[] actual = test.uniqueTokens();
+		boolean[] table = new boolean[26];
 		for (int i = 0; i < actual.length; i++) {
-			System.out.println(actual[i]);
+			if(table[actual[i]]){
+				assertTrue("Has duplicate num", false);
+			}
+			else table[actual[i]] = true;
+			
 		}
-		assertTrue("", true);
+		assertTrue("all unique", true);
 	}
 
 }

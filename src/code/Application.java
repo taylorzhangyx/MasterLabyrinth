@@ -4,7 +4,7 @@ import gui.MainFrame;
 
 public class Application implements Runnable{
 	public Application(String[] args){
-		MainFrame f = new MainFrame(args);
+		new MainFrame(args);
 	}
 	
 	public void run() {

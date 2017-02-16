@@ -3,11 +3,14 @@ package token;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+/**
+ * This token class construct a token with value and corresponding image
+ * @author Yuxin Zhang
+ * @time 上午11:34:002017年2月16日2017
+ */
 public class Token {
 	private int _tokenValue; // this should never be modified
 	private boolean _isPicked;
-	private int _xPos;
-	private int _yPos;
 	private JLabel _image = new JLabel();
 
 	public Token(int tokenValue) {
@@ -18,15 +21,7 @@ public class Token {
 	public int getTokenValue() {
 		return _tokenValue;
 	}
-
-	public void changeXpos(int x) {
-		_xPos = x;
-	}
-
-	public void changeYpos(int y) {
-		_yPos = y;
-	}
-
+	
 	public void showyourself() {
 		System.out.println("Token" + _tokenValue);
 	}
@@ -45,6 +40,7 @@ public class Token {
 	}
 	
 	/**
+	 * extract Image on the token
 	 * 
 	 * @return get current icon on this Token
 	 */

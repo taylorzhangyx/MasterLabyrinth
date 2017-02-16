@@ -4,6 +4,11 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
+/**
+ * 
+ * @author Yuxin Zhang
+ * @update 上午10:40:452017年2月16日2017
+ */
 public class MessagePanel extends JPanel {
   /**
 	 * 
@@ -25,61 +30,95 @@ public class MessagePanel extends JPanel {
   /** The interval for moving the message horizontally and vertically */
   private int interval = 10;
 
-  /** Construct a message panel with a specified message */
+  /** Construct a message panel with a specified message
+   * 
+   * @param message messages will show on this panel
+   */
   public MessagePanel(String message) {
 	this.message = message;
   }
 
-  /** Return message */
+  /** Return message 
+   * 
+   * @return the message holds in this panel
+   */
   public String getMessage() {
 	return message;
   }
 
-  /** Set a new message */
+  /** Set a new message 
+   * 
+   * @param message new message appear on this panel
+   * */
   public void setMessage(String message) {
 	this.message = message;
 	repaint();
   }
 
-  /** Return xCoordinator */
+  /** Return xCoordinator 
+   * 
+   * @return xCoordinate
+   * */
+  
   public int getXCoordinate() {
 	return xCoordinate;
   }
 
-  /** Set a new xCoordinator */
+  /** Set a new xCoordinator
+   * 
+   * @param x the new X coordinator
+   */
   public void setXCoordinate(int x) {
 	this.xCoordinate = x;
 	repaint();
   }
 
-  /** Return yCoordinator */
+  /** Return yCoordinator 
+   * 
+   * @return current Y coordinate
+   */
   public int getYCoordinate() {
 	return yCoordinate;
   }
 
-  /** Set a new yCoordinator */
+  /** Set a new yCoordinator 
+   * 
+   * @param y new coordinate you want to set
+   */
   public void setYCoordinate(int y) {
 	this.yCoordinate = y;
 	repaint();
   }
 
-  /** Return centered */
+  /** Return centered
+   * 
+   * @return boolean specified that is this panel is centered
+   */
   public boolean isCentered() {
 	return centered;
   }
 
-  /** Set a new centered */
+  /** Set a new centered
+   * 
+   * @param centered boolean specify if this panel is centered
+   */
   public void setCentered(boolean centered) {
 	this.centered = centered;
 	repaint();
   }
 
-  /** Return interval */
+  /** Return interval
+   * 
+   * @return the interval value in this class
+   */
   public int getInterval() {
 	return interval;
   }
 
-  /** Set a new interval */
+  /** Set a new interval
+   * 
+   * @param interval the new interval value inside this panel
+   */
   public void setInterval(int interval) {
 	this.interval = interval;
 	repaint();

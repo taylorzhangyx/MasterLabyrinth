@@ -1,18 +1,12 @@
 package pawn;
 
-import java.util.ArrayList;
-
-import java.util.Collections;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import tile.*;
-
 /**
  * Class for the Pawn that the player will use.
- * 
- *@author Aaron Schwab, Samuel White
+ * @edit Yuxin Zhang Feb.2017
+ * @author Aaron Schwab, Samuel White
  * 
  */
 public class Pawn {
@@ -53,29 +47,7 @@ public class Pawn {
 		path = "/image/pawn/pawn" + _color + ".png";
 		_image.setIcon(new ImageIcon(getClass().getResource(path)));
 	}
-
-	/*
-	 * get unique number from 1 to x
-	 * Generates a unique number from 1 to user provided bound. Utilizes an
-	 * ArrayList to store values temporarily and then the values are inserted
-	 * into an int[] that is then returned
-	 * 
-	 * @return uniqueInt[]
-	 * 
-	 */
-//	private int[] generateXuniqueNumber(int n, int x) {
-//		int uniqueInt[] = new int[n];
-//		ArrayList<Integer> list = new ArrayList<Integer>();
-//		for (int i = 1; i <= x; i++) {
-//			list.add(new Integer(i));
-//		}
-//		Collections.shuffle(list);
-//		for (int i = 0; i < n; i++) {
-//			uniqueInt[i] = list.get(i);
-//		}
-//		return uniqueInt;
-//	}
-
+	
 	/*
 	 * Getter method for the current value of the color field
 	 * 

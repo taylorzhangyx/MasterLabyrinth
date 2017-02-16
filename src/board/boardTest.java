@@ -7,6 +7,11 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import static org.hamcrest.CoreMatchers.instanceOf;
 
+/**
+ * A collection of test that test all the methods and edge cases Board class
+ * 
+ * @author Wilson Zheng
+ */
 public class boardTest {
 
 	@Test
@@ -1419,7 +1424,7 @@ public class boardTest {
 		assertTrue("", (Nexpected == Nactual && Eexpected == Eactual && Sexpected == Sactual && Wexpected == Wactual));
 	}
 
-	private void commonTestCShiftTest(int x, int y, int c, int d, boolean Nexpected, boolean Eexpected, boolean Sexpected,
+	private static void commonTestCShiftTest(int x, int y, int c, int d, boolean Nexpected, boolean Eexpected, boolean Sexpected,
 			boolean Wexpected) {
 		Board b = new Board();
 		b.createGameBoard();
@@ -1463,7 +1468,6 @@ public class boardTest {
 		Board b = new Board();
 		b.createGameBoard();
 		b.populateTestBoard();
-		Tile[][] temp = b.gameBoard();
 		Tile compare = b.InsertTile(0, 5, b.getFreeTile());
 		boolean nExpected = compare.isNopen();
 		boolean eExpected = compare.isEopen();

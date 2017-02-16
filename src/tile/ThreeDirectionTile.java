@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
  * create a 3 direction tile, and getter/setter methods to return/modify
  * values of objects in this class
  * 
- * 
+ * @author Yuxin Zhang
  * */
 public class ThreeDirectionTile extends Tile {
 	

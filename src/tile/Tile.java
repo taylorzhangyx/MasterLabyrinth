@@ -3,8 +3,6 @@ package tile;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-
 import pawn.Pawn;
 import token.Token;
 
@@ -14,6 +12,9 @@ import token.Token;
  * tile has a pawn, token, and its directions. There are instance variables of
  * type integer to keep track of the number of pawns and the token number. The
  * tile class also has x and y positions.
+ * 
+ * @author Yuxin Zhang
+ * @edit Feb.16.2017
  */
 public abstract class Tile {
 
@@ -130,7 +131,7 @@ public abstract class Tile {
 	 * Setter method that sets the value of the token on the tile, sets the has
 	 * token boolean to true.
 	 * 
-	 * @param token
+	 * @param tokenValue
 	 *            sets the token on the tile to the integer in the parameter.
 	 */
 	public void setToken(int tokenValue) {
@@ -298,15 +299,8 @@ public abstract class Tile {
 	}
 	
 	/**
-	 * TODO 
-	 * refresh the token image and pawn image on tile
+	 * basted on current 4 direction value, change the icon on this tile 
 	 */
-	public void addComponent(){
-		if(_hasPawn == true){
-			
-		}
-	}
-	
 	public void refreshImage(){
 		String temp = "T";
 		if (_n) {temp = temp + 0;}

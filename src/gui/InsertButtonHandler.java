@@ -5,6 +5,11 @@ import java.awt.event.ActionListener;
 
 import board.Board;
 
+/**
+ * 
+ * @author Yuxin Zhang
+ * @update 上午10:40:052017年2月16日2017
+ */
 public class InsertButtonHandler implements ActionListener{
 	private Board _board;
 	private MainFrame _frame;

@@ -14,19 +14,22 @@ import javax.swing.JPanel;
 import pawn.Pawn;
 import tile.Tile;
 
-
+/**
+ * 
+ * @author Yuxin Zhang
+ * @time 上午10:20:212017年2月16日2017
+ */
 public class GameFunctionPanel extends JPanel {
-	/**
-	 * 
-	 */
+
+	public JLabel freeTile;//will pass from game board panel
+	
 	private static final long serialVersionUID = 1L;
+	
 	private JPanel _pawnInfo;
 	private JPanel _movePanel;
 	private JPanel _freeTile;
 	private ArrayList<JButton> _buttons;
 	private Pawn _pawn;
-	public JLabel freeTile;
-
 	private MessagePanel pawnName;
 	private MessagePanel pawnColor;
 	private MessagePanel pawnScore;

@@ -1,14 +1,10 @@
 package board;
 
-import tile.*;
-
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
 import pawn.Pawn;
-
-import static org.hamcrest.CoreMatchers.instanceOf;
 
 public class OneStepMovementTest {
 	

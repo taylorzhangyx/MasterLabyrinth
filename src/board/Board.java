@@ -1,17 +1,25 @@
 package board;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
+import java.util.Random;
+
 import pawn.*;
 import tile.*;
-import token.*;
 
+/**
+ * Board is the main part of the game, which holds tiles, pawns, and tokens.
+ * This is the place that the game taken place. Do insertion, shift, move and pick for players.
+ * 
+ * @author Yuxin Zhang, Wilson Zheng, Aaron Schwab, Samuel White
+ * @time 上午11:33:202017年2月16日2017
+ */
 public class Board {
 	private Pawn _pawn1;
 	private Pawn _pawn2;
 	private Pawn _pawn3;
 	private Pawn _pawn4;
-	public static int length = 7;
+	public static final int length = 7;
 	public Tile[][] _gameBoard;
 	public Tile _freetile;
 	public boolean ShiftingSuccess = false;
@@ -19,11 +27,19 @@ public class Board {
 									// insertion occurred
 	private int lastPosition_y = 0;// index to remember where the last insertion
 									// occurred
-
+	private static Random random = new Random();
 	public Board(){
 		
 	}
 	
+	public Board(String[] s) {
+
+		this.createGameBoard();
+		this.populateBoard();
+		this.setPawnName(s);
+		this.updatePawnXYPosition();
+	}
+
 	/**
 	 * set pawn's name based on the command line arguments
 	 * 
@@ -112,38 +128,23 @@ public class Board {
 		// S is 2
 		// W is 3
 
-		// This creates the 4 corner pieces
-
-		this.assigntile(0, 0, new TwoDirectionTile(1));
-		this.assigntile(0, 6, new TwoDirectionTile(2));
-		this.assigntile(6, 6, new TwoDirectionTile(3));
-		this.assigntile(6, 0, new TwoDirectionTile(0));
-
-		// This creates the 2 top row fixed pieces
-		this.assigntile(0, 2, new ThreeDirectionTile(1, 2, 3));
-		this.assigntile(0, 4, new ThreeDirectionTile(1, 2, 3));
-
-		// This creates the 2nd row fixed pieces
-		this.assigntile(2, 0, new ThreeDirectionTile(0, 1, 2));
-		this.assigntile(2, 2, new ThreeDirectionTile(0, 1, 2));
-		this.assigntile(2, 4, new ThreeDirectionTile(1, 2, 3));
-		this.assigntile(2, 6, new ThreeDirectionTile(0, 2, 3));
-
-		// This creates the 4th row fixed pieces
-		this.assigntile(4, 0, new ThreeDirectionTile(0, 1, 2));
-		this.assigntile(4, 2, new ThreeDirectionTile(0, 1, 3));
-		this.assigntile(4, 4, new ThreeDirectionTile(0, 2, 3));
-		this.assigntile(4, 6, new ThreeDirectionTile(0, 2, 3));
-
-		// This creates the 6th row fixed pieces
-		this.assigntile(6, 2, new ThreeDirectionTile(0, 1, 3));
-		this.assigntile(6, 4, new ThreeDirectionTile(0, 1, 3));
+		placeFixedTiles();
 
 		// these variables hold the amount of tiles left over
 		int _twoDirectionLeft = 14;
 		int _oppositeDirectionLeft = 13;
 		int _threeDirectionLeft = 7;
 
+		//3 types of tile and corresponding code
+		int _twoDir = 0;
+		int _oppDir = 1;
+		int _threeDir = 2;
+		
+		//current index points to next tile to add
+		int currIndex = 0;
+		
+		int[] randomSequence = getRandomsequence(_twoDir, _twoDirectionLeft, _oppDir, _oppositeDirectionLeft, _threeDir, _threeDirectionLeft);
+		
 		// fills every (empty) place in the array with a different, randomized
 		// tile
 		for (int i = 0; i < length; i++) {
@@ -152,9 +153,6 @@ public class Board {
 				if (_gameBoard[i][j] == null) {
 
 					// System.out.println("2");
-					int _twoDir = 0;
-					int _oppDir = 1;
-					int _threeDir = 2;
 					// generates an array of ints that are unique so they can be
 					// used to set the directions
 					int[] XYZ = generateXuniqueNumber(3, 4);
@@ -163,54 +161,32 @@ public class Board {
 					int y = XYZ[1];
 					int z = XYZ[2];
 
-					int randomTile = randomTile();
-
 					// while there is an empty place in the gameBoard, make a
 					// random tile, check if that tile is free to be used, and
 					// fill the spot in the array
-					while (_gameBoard[i][j] == null) {
 
-						if (randomTile == _twoDir) {
-							if (_twoDirectionLeft > 0) {
-								// the current object is assigned the value of a
-								// randomized twoDirectionTile
-								this.assigntile(i, j, new TwoDirectionTile(x));
+					if (randomSequence[currIndex] == _twoDir) {
 
-								_twoDirectionLeft--;
+						// the current object is assigned the value of a
+						// randomized twoDirectionTile
+						this.assigntile(i, j, new TwoDirectionTile(x));
+					
+					} else if (randomSequence[currIndex] == _oppDir) {
 
-							} else {
-								randomTile = randomTile();
-							}
-
-						} else if (randomTile == _oppDir) {
-							if (_oppositeDirectionLeft > 0) {
-								// the current object is assigned the value of a
-								// randomized OppositeDirectionTile
-								this.assigntile(i, j, new OppositeDirectionTile(x));
-								_oppositeDirectionLeft--;
-							} else {
-								randomTile = randomTile();
-							}
-						}
-
-						else if (randomTile == _threeDir) {
-							if (_threeDirectionLeft > 0) {
-								// the current object is assigned the value of a
-								// randomized ThreeDirectionTile
-								this.assigntile(i, j, new ThreeDirectionTile(x, y, z));
-								_threeDirectionLeft--;
-							} else {
-								randomTile = randomTile();
-							}
-						} else {
-							randomTile = randomTile();
-						}
+						// the current object is assigned the value of a
+						// randomized OppositeDirectionTile
+						this.assigntile(i, j, new OppositeDirectionTile(x));
 					}
+					else if (randomSequence[currIndex] == _threeDir) {
+
+						// the current object is assigned the value of a
+						// randomized ThreeDirectionTile
+						this.assigntile(i, j, new ThreeDirectionTile(x, y, z));
+					}
+					currIndex++;
 				}
 			}
 		}
-
-		
 
 		// This free tile will be passed off to the player to begin the game
 		if (_twoDirectionLeft == 1) {
@@ -238,6 +214,71 @@ public class Board {
 
 	}
 
+	/**
+	 * generate an array with size of numA + numB + numC, fill in a in range of 0 and numA, fill in b in range of numA and numA + numB,
+	 * fill in c in range of numA + numB and numA + numB + numC.
+	 * begin index is inclusive and  end index is exclusive.
+	 * @param a
+	 * @param numA
+	 * @param b
+	 * @param numB
+	 * @param c
+	 * @param numC
+	 * @return an array in random order
+	 */
+	private static int[] getRandomsequence(int a, int numA, int b, int numB, int c, int numC) {
+		int[] arr = new int[numA + numB + numC];
+		Arrays.fill(arr, 0, numA, a);
+		Arrays.fill(arr, numA, numA + numB, b);
+		Arrays.fill(arr, numA + numB, numA + numB + numC, c);
+		randomizeArray(arr);
+		return arr;
+	}
+
+	private static void randomizeArray(int[] arr) {
+		int temp = 0;
+		for(int i = 0; i < arr.length; i++){
+			temp = arr[i];
+			int next = random.nextInt(i+1);
+			arr[i] = arr[next];
+			arr[next] = temp;
+		}
+		
+	}
+
+	/**
+	 * For every board, there are 16 fixed tiles that doesn't move. It's direction, location and type are fixed.
+	 * This method pace those tiles on the board.
+	 */
+	private void placeFixedTiles() {
+		// This creates the 4 corner pieces
+
+		this.assigntile(0, 0, new TwoDirectionTile(1));
+		this.assigntile(0, 6, new TwoDirectionTile(2));
+		this.assigntile(6, 6, new TwoDirectionTile(3));
+		this.assigntile(6, 0, new TwoDirectionTile(0));
+
+		// This creates the 2 top row fixed pieces
+		this.assigntile(0, 2, new ThreeDirectionTile(1, 2, 3));
+		this.assigntile(0, 4, new ThreeDirectionTile(1, 2, 3));
+
+		// This creates the 2nd row fixed pieces
+		this.assigntile(2, 0, new ThreeDirectionTile(0, 1, 2));
+		this.assigntile(2, 2, new ThreeDirectionTile(0, 1, 2));
+		this.assigntile(2, 4, new ThreeDirectionTile(1, 2, 3));
+		this.assigntile(2, 6, new ThreeDirectionTile(0, 2, 3));
+
+		// This creates the 4th row fixed pieces
+		this.assigntile(4, 0, new ThreeDirectionTile(0, 1, 2));
+		this.assigntile(4, 2, new ThreeDirectionTile(0, 1, 3));
+		this.assigntile(4, 4, new ThreeDirectionTile(0, 2, 3));
+		this.assigntile(4, 6, new ThreeDirectionTile(0, 2, 3));
+
+		// This creates the 6th row fixed pieces
+		this.assigntile(6, 2, new ThreeDirectionTile(0, 1, 3));
+		this.assigntile(6, 4, new ThreeDirectionTile(0, 1, 3));
+	}
+
 	/*
 	 * Generate the 21 unique tokens that will go on the board
 	 * 
@@ -249,9 +290,8 @@ public class Board {
 		int[] temp = generateXuniqueNumber(26, 26);
 		int j = 0;
 		for (int i = 0; i < temp.length; i++) {
-			if (temp[i] != 0 && temp[i] != 21 && temp[i] != 22 && temp[i] != 23 && temp[i] != 24) {
-				tokenArray[j] = temp[i];
-				j++;
+			if (temp[i] != 0 && (temp[i] < 21 || temp[i] > 24)) {
+				tokenArray[j++] = temp[i];
 			}
 		}
 		return tokenArray;
@@ -266,33 +306,22 @@ public class Board {
 
 	public void addTokensToBoard() {
 		int[] tokensToBeAdded = uniqueTokens();
-		_gameBoard[1][1].setToken(tokensToBeAdded[0]);
-		_gameBoard[1][2].setToken(tokensToBeAdded[1]);
-		_gameBoard[1][3].setToken(tokensToBeAdded[2]);
-		_gameBoard[1][4].setToken(tokensToBeAdded[3]);
-		_gameBoard[1][5].setToken(tokensToBeAdded[4]);
-		_gameBoard[2][1].setToken(tokensToBeAdded[5]);
-		_gameBoard[2][3].setToken(tokensToBeAdded[6]);
-		_gameBoard[2][5].setToken(tokensToBeAdded[7]);
-		_gameBoard[3][1].setToken(tokensToBeAdded[8]);
-		_gameBoard[3][2].setToken(tokensToBeAdded[9]);
-		_gameBoard[3][3].setToken(tokensToBeAdded[10]);
-		_gameBoard[3][4].setToken(tokensToBeAdded[11]);
-		_gameBoard[3][5].setToken(tokensToBeAdded[12]);
-		_gameBoard[4][1].setToken(tokensToBeAdded[13]);
-		_gameBoard[4][3].setToken(tokensToBeAdded[14]);
-		_gameBoard[4][5].setToken(tokensToBeAdded[15]);
-		_gameBoard[5][1].setToken(tokensToBeAdded[16]);
-		_gameBoard[5][2].setToken(tokensToBeAdded[17]);
-		_gameBoard[5][3].setToken(tokensToBeAdded[18]);
-		_gameBoard[5][4].setToken(tokensToBeAdded[19]);
-		_gameBoard[5][5].setToken(tokensToBeAdded[20]);
-
+		int id = 0;
+		for(int i = 1; i <=5; i++){
+			for(int j = 1; j <= 5; j++){
+				if((i == 2 || i == 4) && (j == 2 || j == 4)){
+					continue;
+				}
+				else{
+					_gameBoard[i][j].setToken(tokensToBeAdded[id++]);
+				}
+			}
+		}
 	}
 
 	/**
 	 * Gets an array with size of n in the range from 0 to x-1
-	 * 
+	 * @update Feb.16.2017 reduce time complexity to O(x)
 	 * @param n
 	 *            the number of unique numbers you want
 	 * @param x
@@ -300,35 +329,23 @@ public class Board {
 	 * @return an integer array in the size of n contains n unique number range
 	 *         from 0 to x-1
 	 */
-	private int[] generateXuniqueNumber(int n, int x) {
-		int uniqueInt[] = new int[n];
-		ArrayList<Integer> list = new ArrayList<Integer>();
+	private static int[] generateXuniqueNumber(int n, int x) {
+		//x must bigger than or equal to n, so that there are at least n number can be return
+		if(n > x) return null;
+		int[] uniqueInt = new int[n];
+		int[] sequence = new int[x];
 		// we start at index 0 because we need integer 0 to be in our integer
-		// arraylist
-
+		// the idea is first push x numbers into sequence in random order, then extract n number out to uniqueInt
 		for (int i = 0; i < x; i++) {
-			list.add(new Integer(i));
+			int nexti = random.nextInt(i+1);
+			sequence[i] = sequence[nexti];
+			sequence[nexti] = i;
 		}
 
-		Collections.shuffle(list);
-		// we store the first n elements in the arraylist in the int array
 		for (int i = 0; i < n; i++) {
-			uniqueInt[i] = list.get(i);
+			uniqueInt[i] = sequence[i];
 		}
 		return uniqueInt;
-	}
-
-	/**
-	 * This method is used to randomize an integer, which is used to randomize a
-	 * tile in another method. It returns an integer that is mapped to a tile. 0
-	 * is twoDirection, 1 is opposite direction, 2 is three direction.
-	 * 
-	 * @return int Returns an integer that is mapped to a tile in another
-	 *         method.
-	 */
-	private static int randomTile() {
-		int randomTile = (int) (Math.random() * 3);
-		return randomTile;
 	}
 
 	/**
@@ -363,7 +380,8 @@ public class Board {
 	/**
 	 * Method to check if the North direction in the path is available at
 	 * location x and y.
-	 * 
+	 * @param x the x coordinate of checked point
+	 * @param y the y coordinate of checked point
 	 * @return boolean true if open. false otherwise.
 	 */
 	public boolean isNopen(int x, int y) {
@@ -375,7 +393,8 @@ public class Board {
 	/**
 	 * Method to check if the East direction in the path is available at
 	 * location x and y.
-	 * 
+	 * @param x the x coordinate of checked point
+	 * @param y the y coordinate of checked point
 	 * @return boolean true if open. false otherwise.
 	 */
 
@@ -388,7 +407,8 @@ public class Board {
 	/**
 	 * Method to check if the South direction in the path is available at
 	 * location x and y.
-	 * 
+	 * @param x the x coordinate of checked point
+	 * @param y the y coordinate of checked point
 	 * @return boolean true if open. false otherwise.
 	 */
 
@@ -401,7 +421,8 @@ public class Board {
 	/**
 	 * Method to check if the West direction in the path is available at
 	 * location x and y.
-	 * 
+	 * @param x the x coordinate of checked point
+	 * @param y the y coordinate of checked point
 	 * @return boolean true if open. false otherwise.
 	 */
 
@@ -413,7 +434,8 @@ public class Board {
 
 	/**
 	 * Method to check if the tile at location x and y has pawn.
-	 * 
+	 * @param x the x coordinate of checked point
+	 * @param y the y coordinate of checked point
 	 * @return boolean true if has. false otherwise.
 	 */
 	public boolean hasPawn(int x, int y) {
@@ -422,7 +444,8 @@ public class Board {
 
 	/**
 	 * Method to check if the tile at location x and y has pawn.
-	 * 
+	 * @param x the x coordinate of checked point
+	 * @param y the y coordinate of checked point
 	 * @return boolean true if has. false otherwise.
 	 */
 	public ArrayList<String> pawnsOnTile(int x, int y) {
@@ -521,11 +544,9 @@ public class Board {
 						_gameBoard[insert_i][insert_j].setPawns(temp.get(i));
 
 					}
-
-					_freetile.erasePawn("red");
-					_freetile.erasePawn("yellow");
-					_freetile.erasePawn("blue");
-					_freetile.erasePawn("white");
+					for(String pawnID : _freetile.pawnsOnTile()){
+						_freetile.erasePawn(pawnID);
+					}
 				}
 
 				updatePawnXYPosition();
@@ -570,7 +591,7 @@ public class Board {
 	}
 
 	/**
-	 * This method loops through the 2D array and updates all the pawns location
+	 * This method loops through 2D array and updates all the pawns location
 	 * 
 	 * @return void
 	 */
@@ -782,6 +803,11 @@ public class Board {
 
 	/**
 	 * This method is used only to test one step movement method.
+	 * 
+	 * @param name1 the 1st player's name
+	 * @param name2 the 2nd player's name
+	 * @param name3 the 3rd player's name
+	 * @param name4 the 4th player's name
 	 * 
 	 * @return void
 	 */

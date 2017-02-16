@@ -1,12 +1,12 @@
 package tile;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 
 /**
  * This class is a sub class of Tile. It has a constructor method to 
  * create a opposite direction tile, and getter/setter methods to return/modify
  * values of objects in this class
+ * @author Yuxin Zhang
  */
 public class OppositeDirectionTile extends Tile {
 	
@@ -38,15 +38,11 @@ public class OppositeDirectionTile extends Tile {
 		case 0:
 			_n = true;
 			_s = true;
-			//set image for north and south open
-			//_image.setIcon(new ImageIcon(getClass().getResource("/image/tile/T02.png")));
 			_icon = new ImageIcon(getClass().getResource("/image/tile/T02.png"));
 			break;
 		case 1:
 			_e = true;
 			_w = true;
-			//set image for east and west open
-			//_image.setIcon(new ImageIcon(getClass().getResource("/image/tile/T13.png")));
 			_icon = new ImageIcon(getClass().getResource("/image/tile/T13.png"));
 			break;
 		default:

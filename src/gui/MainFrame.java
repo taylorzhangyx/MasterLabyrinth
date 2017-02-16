@@ -10,6 +10,11 @@ import javax.swing.JLabel;
 
 import pawn.Pawn;
 
+/**
+ * 
+ * @author Yuxin Zhang
+ * @update 上午10:40:302017年2月16日2017
+ */
 public class MainFrame {
 	public GameFunctionPanel _gfp;
 	public GameBoardPanel _gbp;

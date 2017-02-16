@@ -6,20 +6,20 @@ import java.awt.event.ActionListener;
 import board.Board;
 
 public class RotateCounterClockwiseButtonHandler implements ActionListener {
-	private FrameTest _frameTest;
+	private MainFrame _frame;
 	private Board _board;
 /*
  * Constructor for RotateCounterClockwiseButtonHandler
  */
-	public RotateCounterClockwiseButtonHandler(Board board, FrameTest frameTest) {
-		_frameTest = frameTest;
+	public RotateCounterClockwiseButtonHandler(Board board, MainFrame frame) {
+		_frame = frame;
 		_board = board;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		_board._freetile.rotateCounterClockwise();
-		_frameTest.update();
+		_frame.update();
 	}
 
 }

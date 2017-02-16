@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -13,62 +12,57 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import pawn.Pawn;
+import tile.Tile;
 
 
 public class GameFunctionPanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel _pawnInfo;
 	private JPanel _movePanel;
 	private JPanel _freeTile;
 	private ArrayList<JButton> _buttons;
 	private Pawn _pawn;
-	public static JLabel freeTile;
+	public JLabel freeTile;
 
 	private MessagePanel pawnName;
 	private MessagePanel pawnColor;
 	private MessagePanel pawnScore;
 	private MessagePanel pawnFormularCard;
 	
-	/*
+	/**
 	 * Constructor for the GameFunctionPanel
+	 * @param _gbp 
 	 * 
 	 * 
 	 */
-	GameFunctionPanel(Pawn pawn){
-		_buttons = new ArrayList<JButton>();
+	GameFunctionPanel(Pawn pawn, GameBoardPanel _gbp){
 		_pawn = pawn;
 		setPreferredSize(new Dimension(400,400));
 		setLayout(new FlowLayout(FlowLayout.CENTER,5,5));
 		_pawnInfo = createPawnInfo();
 		_movePanel = createMovePanel();
-		_freeTile = createFreeTile();
+		_freeTile = createFreeTile(_gbp._board._freetile);
 		
 		
 		add(_pawnInfo);
 		add(_movePanel);
 		add(_freeTile);
 	}
+	
 	/*
 	 *Instantiates pawns,  
 	 * 
 	 * @return jpl of type JPanel
 	 */
 	private JPanel createPawnInfo(){
-		//name is passed by arg[]
-		this.pawnName = new MessagePanel("Name: " + _pawn.getName());
-		this.pawnName.setFont(new Font("Courier", Font.BOLD, 32));
-		this.pawnName.setCentered(true);
-		//color is the current pawn's color
-		this.pawnColor = new MessagePanel("Color: " + _pawn.getColor());
-		this.pawnColor.setFont(new Font("Courier", Font.BOLD, 32));
-		this.pawnColor.setCentered(true);
-		//score updates when pick up a token
-		this.pawnScore = new MessagePanel("Score: " + _pawn.getScore());
-		this.pawnScore.setFont(new Font("Courier", Font.BOLD, 32));
-		this.pawnScore.setCentered(true);
-		this.pawnFormularCard = new MessagePanel("Card: NULL");
-		this.pawnFormularCard.setFont(new Font("Courier", Font.BOLD, 32));
-		this.pawnFormularCard.setCentered(true);
 		
+		//initialize pawn
+		initPawn();
+		
+		//create panel and add infos
 		JPanel jpl = new JPanel();
 		jpl.setPreferredSize(new Dimension(300,300));
 		jpl.setLayout(new GridLayout(4,1,5,5));
@@ -80,6 +74,35 @@ public class GameFunctionPanel extends JPanel {
 		
 		return jpl;
 	}
+	
+	/**
+	 * initialize pawn name, color, score, card
+	 */
+	private void initPawn() {
+		//name is passed by arg[]
+		this.pawnName = produceMessagePanel("Name: " + _pawn.getName());
+		//color is the current pawn's color
+		this.pawnColor = produceMessagePanel("Color: " + _pawn.getColor());
+		//score updates when pick up a token
+		this.pawnScore = produceMessagePanel("Score: " + _pawn.getScore());
+		//magic card park for further extension
+		this.pawnFormularCard = produceMessagePanel("Card: NULL");
+		
+	}
+
+	/**
+	 * create a message panel based on given string s
+	 * @param s words appears on the message panel
+	 * @return
+	 */
+	private MessagePanel produceMessagePanel(String s){
+		MessagePanel mp = new MessagePanel(s);
+		this.pawnFormularCard.setFont(new Font("Courier", Font.BOLD, 32));
+		this.pawnFormularCard.setCentered(true);
+		return mp;
+	}
+	
+	
 	/*
 	 * Creates Move panel
 	 * 
@@ -88,18 +111,17 @@ public class GameFunctionPanel extends JPanel {
 	private JPanel createMovePanel(){
 		JPanel jpl = new JPanel();
 		jpl.setLayout(new GridLayout(2,3,5,5));
-		_buttons.add(new JButton(new ImageIcon(getClass().getResource("/image/functionpanel/check.png"))));
-		jpl.add(_buttons.get(0));
-		_buttons.add(new JButton(new ImageIcon(getClass().getResource("/image/functionpanel/moveDirectionUp.png"))));
-		jpl.add(_buttons.get(1));
-		_buttons.add(new JButton(new ImageIcon(getClass().getResource("/image/functionpanel/END.png"))));
-		jpl.add(_buttons.get(2));
-		_buttons.add(new JButton(new ImageIcon(getClass().getResource("/image/functionpanel/moveDirectionLeft.png"))));
-		jpl.add(_buttons.get(3));
-		_buttons.add(new JButton(new ImageIcon(getClass().getResource("/image/functionpanel/moveDirectionDown.png"))));
-		jpl.add(_buttons.get(4));
-		_buttons.add(new JButton(new ImageIcon(getClass().getResource("/image/functionpanel/moveDirectionRight.png"))));
-		jpl.add(_buttons.get(5));
+		//initial buttons icon
+		_buttons = new ArrayList<JButton>(8);
+		_buttons.add(new JButton(new ImageIcon(getClass().getResource("/image/functionpanel/check.png"))));//check
+		_buttons.add(new JButton(new ImageIcon(getClass().getResource("/image/functionpanel/moveDirectionUp.png"))));//move up
+		_buttons.add(new JButton(new ImageIcon(getClass().getResource("/image/functionpanel/END.png"))));//end
+		_buttons.add(new JButton(new ImageIcon(getClass().getResource("/image/functionpanel/moveDirectionLeft.png"))));//move left
+		_buttons.add(new JButton(new ImageIcon(getClass().getResource("/image/functionpanel/moveDirectionDown.png"))));//move down
+		_buttons.add(new JButton(new ImageIcon(getClass().getResource("/image/functionpanel/moveDirectionRight.png"))));//move right
+		for(int i = 0; i < 6; i++)
+			jpl.add(_buttons.get(i));
+		
 		return jpl;
 	}
 	/*
@@ -107,17 +129,19 @@ public class GameFunctionPanel extends JPanel {
 	 * 
 	 * @return jpl of type JPanel
 	 */
-	private JPanel createFreeTile(){
+	private JPanel createFreeTile(Tile _freetile){
 		JPanel jpl = new JPanel();
 		jpl.setLayout(new FlowLayout(FlowLayout.CENTER,5,5));
 		_buttons.add(new JButton(new ImageIcon(getClass().getResource("/image/functionpanel/AntiClockwise.png"))));
 		jpl.add(_buttons.get(6));
-		freeTile = new JLabel(GameBoardPanel._board.getFreeTile().getIcon());
+		freeTile = new JLabel(_freetile.getIcon());
 		jpl.add(freeTile);
 		_buttons.add(new JButton(new ImageIcon(getClass().getResource("/image/functionpanel/Clockwise.png"))));
 		jpl.add(_buttons.get(7));
 		return jpl;
 	}
+	
+	//return the buttons inside panel
 	public ArrayList<JButton> getButtons(){
 		return _buttons;
 	}
@@ -148,14 +172,14 @@ public class GameFunctionPanel extends JPanel {
 	 * @return void
 	 */
 	public void enablePawnMovingButtons(){
-		for(int i=1; i<_buttons.size(); i++)
+		for(int i=1; i<_buttons.size(); i++){
 			if(i<6){
 				_buttons.get(i).setEnabled(true);
 			}
 			else{
 				_buttons.get(i).setEnabled(false);
 			}
-				
+		}
 	}
 	
 	/**

@@ -1,4 +1,7 @@
-/README.txt
+/board/
+/gui/
+/image/
+/pawn/
+/tile/
+/token/
 /code/
-/resources/
-/tests/

@@ -55,6 +55,11 @@ public class Board {
 		}
 	}
 
+	/**
+	 * extract the pawn with corresponding name/color
+	 * @param s
+	 * @return
+	 */
 	public Pawn getPawn(String s) {
 
 		switch (s.toLowerCase()) {
@@ -79,6 +84,10 @@ public class Board {
 		_gameBoard = new Tile[7][7];
 	}
 
+	/**
+	 * extract Game Board
+	 * @return
+	 */
 	public Tile[][] gameBoard() {
 		return _gameBoard;
 	}

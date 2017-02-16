@@ -8,15 +8,15 @@ import pawn.Pawn;
 
 public class PawnMovingButtonHandler implements ActionListener{
 	Board _board;
-	FrameTest _frameTest;
+	MainFrame _frame;
 	Pawn _pawn;
 	String _direction;
 	/*
 	 * Constructor for PawnMovingButtonHandler
 	 */
-	PawnMovingButtonHandler(Board board, FrameTest frameTest, Pawn pawn, String direction){
+	PawnMovingButtonHandler(Board board, MainFrame frame, Pawn pawn, String direction){
 		_board = board;
-		_frameTest = frameTest;
+		_frame = frame;
 		_pawn = pawn;
 		_direction = direction;
 	}
@@ -24,9 +24,9 @@ public class PawnMovingButtonHandler implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if(_board.moveOneStep(_direction, _pawn)){
-			_frameTest.checkPickUpTokenButton();
-			_frameTest.checkEndTurnButton();
-			_frameTest.update();
+			_frame.checkPickUpTokenButton();
+			_frame.checkEndTurnButton();
+			_frame.update();
 			System.out.println(_pawn.getXpos());
 			System.out.println(_pawn.getYpos());
 		}

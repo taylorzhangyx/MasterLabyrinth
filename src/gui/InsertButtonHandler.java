@@ -7,12 +7,12 @@ import board.Board;
 
 public class InsertButtonHandler implements ActionListener{
 	private Board _board;
-	private FrameTest _frameTest;
+	private MainFrame _frame;
 	private int _row;
 	private int _column;
-	public InsertButtonHandler(Board board, FrameTest frameTest, int row , int column) {
+	public InsertButtonHandler(Board board, MainFrame frameTest, int row , int column) {
 		_board = board;
-		_frameTest = frameTest;
+		_frame = frameTest;
 		_row = row;
 		_column = column;
 	}
@@ -23,9 +23,9 @@ public class InsertButtonHandler implements ActionListener{
 		//check the shiftsuccess in board, if true, do the next step
 		//other wise, do nothing
 		if(_board.ShiftingSuccess){
-			_frameTest.update();
-			_frameTest._gbp.disableInsertionButton();
-			_frameTest._gfp.enablePawnMovingButtons();
+			_frame.update();
+			_frame._gbp.disableInsertionButton();
+			_frame._gfp.enablePawnMovingButtons();
 			//reset ShiftingSuccess to false
 			_board.ShiftingSuccess = false;
 		}

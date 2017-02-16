@@ -1,10 +1,10 @@
 package code;
 
-import gui.FrameTest;
+import gui.MainFrame;
 
 public class Application implements Runnable{
 	public Application(String[] args){
-		FrameTest f = new FrameTest(args);
+		MainFrame f = new MainFrame(args);
 	}
 	
 	public void run() {

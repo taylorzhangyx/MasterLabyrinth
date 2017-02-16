@@ -5,7 +5,12 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 public class MessagePanel extends JPanel {
-  /** The message to be displayed */
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+/** The message to be displayed */
   private String message = "Welcome to Java";
 
   /** The x coordinate where the message is displayed */
@@ -19,10 +24,6 @@ public class MessagePanel extends JPanel {
 
   /** The interval for moving the message horizontally and vertically */
   private int interval = 10;
-
-  /** Construct with default properties */
-  public MessagePanel() {
-  }
 
   /** Construct a message panel with a specified message */
   public MessagePanel(String message) {

@@ -25,7 +25,7 @@ public class Pawn {
 	private int _y;
 	private int _wand;
 	private int _formulaCard;
-	private static Pawn[] _pawnlist;
+//	private static Pawn[] _pawnlist;
 	private JLabel _image = new JLabel();
 
 	/*
@@ -36,7 +36,6 @@ public class Pawn {
 	 */
 	public Pawn(String color, int xPos, int yPos, int _formulaCard) {
 		_color = color.toLowerCase();
-//		TODO
 //		ADD NAME TO THIS PAWN SO THAT EACH PAWN HAS NAME TO DISPLAY
 		_name = color.toLowerCase();
 		_x = xPos;
@@ -56,6 +55,7 @@ public class Pawn {
 	}
 
 	/*
+	 * get unique number from 1 to x
 	 * Generates a unique number from 1 to user provided bound. Utilizes an
 	 * ArrayList to store values temporarily and then the values are inserted
 	 * into an int[] that is then returned
@@ -63,19 +63,18 @@ public class Pawn {
 	 * @return uniqueInt[]
 	 * 
 	 */
-	// get unique number from 1 to x
-	private int[] generateXuniqueNumber(int n, int x) {
-		int uniqueInt[] = new int[n];
-		ArrayList<Integer> list = new ArrayList<Integer>();
-		for (int i = 1; i <= x; i++) {
-			list.add(new Integer(i));
-		}
-		Collections.shuffle(list);
-		for (int i = 0; i < n; i++) {
-			uniqueInt[i] = list.get(i);
-		}
-		return uniqueInt;
-	}
+//	private int[] generateXuniqueNumber(int n, int x) {
+//		int uniqueInt[] = new int[n];
+//		ArrayList<Integer> list = new ArrayList<Integer>();
+//		for (int i = 1; i <= x; i++) {
+//			list.add(new Integer(i));
+//		}
+//		Collections.shuffle(list);
+//		for (int i = 0; i < n; i++) {
+//			uniqueInt[i] = list.get(i);
+//		}
+//		return uniqueInt;
+//	}
 
 	/*
 	 * Getter method for the current value of the color field

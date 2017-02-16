@@ -8,16 +8,16 @@ import pawn.Pawn;
 
 public class PawnPickUpTokenButtonHandler implements ActionListener{
 	Board _board;
-	FrameTest _frameTest;
+	MainFrame _frame;
 	Pawn _pawn;
 	
 	/*
 	 * Constructor for PawnPickUpTokenButtonHandler
 	 * 
 	 */
-	PawnPickUpTokenButtonHandler(Board board, FrameTest frameTest, Pawn pawn){
+	PawnPickUpTokenButtonHandler(Board board, MainFrame frame, Pawn pawn){
 		_board = board;
-		_frameTest = frameTest;
+		_frame = frame;
 		_pawn = pawn;
 	}
 
@@ -26,11 +26,11 @@ public class PawnPickUpTokenButtonHandler implements ActionListener{
 		int x = _pawn.getXpos();
 		int y = _pawn.getYpos();
 		_board._gameBoard[x][y].pickUpToken(_pawn);
-		_frameTest.incrementNextToken();
-		_frameTest.updateScore();
-		_frameTest.update();
-		_frameTest._gbp.enableInsertionButton();
-		_frameTest._gfp.disablePawnMovingButtons();
-		_frameTest.nextPawn();
+		_frame.incrementNextToken();
+		_frame.updateScore();
+		_frame.update();
+		_frame._gbp.enableInsertionButton();
+		_frame._gfp.disablePawnMovingButtons();
+		_frame.nextPawn();
 	}
 }

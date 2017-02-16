@@ -192,6 +192,10 @@ public class Pawn {
 
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public JLabel getImage(){
 		return _image;
 	}
